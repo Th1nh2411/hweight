@@ -1,0 +1,29 @@
+$primary-color :rgb(37, 76, 249);
+$error-color :rgba(249, 37, 37, 0.751);
+$warning-color :rgb(249, 199, 37);
+%white-text {
+    color: #fff;
+}
+
+.btn{
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8
+    }
+}
+
+.primary{
+    background-color: $primary-color;
+    @extend %white-text
+}
+.error {
+    background-color: $error-color;
+    @extend %white-text
+}
+.warning {
+    background-color: $warning-color;
+    @extend %white-text
+}

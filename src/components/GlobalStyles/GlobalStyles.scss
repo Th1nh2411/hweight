@@ -1,0 +1,30 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #fe2c55;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+.d-flex {
+    display: flex;
+}
+.jusContentCenter {
+    justify-content: center;
+}
+.mr-16 {
+    margin-right: 16px;
+}
