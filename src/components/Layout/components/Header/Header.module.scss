@@ -17,10 +17,18 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.search-result,
+.search {
+    width: 361px;
+}
+.search-title {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 2px 16px;
+}
 .search {
     position: relative;
-    width: 361px;
     height: var(--search-height);
     background-color: #f1f1f2;
     border-radius: var(--search-border-radius);
@@ -76,4 +84,8 @@
     }
 }
 .actions {
+    display: flex;
+}
+.custom-btn {
+    color: #4a4a4a !important;
 }

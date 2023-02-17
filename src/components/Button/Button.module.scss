@@ -1,29 +1,58 @@
-$primary-color :rgb(37, 76, 249);
-$error-color :rgba(249, 37, 37, 0.751);
-$warning-color :rgb(249, 199, 37);
-%white-text {
-    color: #fff;
-}
-
-.btn{
-    padding: 10px 20px;
-    border: 1px solid #ccc;
+.wrapper {
+    font-weight: 700;
+    min-width: 100px;
+    padding: 6px 16px;
+    font-size: 1.6rem;
     border-radius: 4px;
+    text-align: center;
+    display: block;
     cursor: pointer;
+    background-color: white;
+    border: 1px solid transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(22, 24, 35, 0.12);
     &:hover {
-        opacity: 0.8
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+    + .wrapper {
+        margin-left: 8px;
+    }
+    &.disable {
+        // pointer-events: none;
+        opacity: 0.5;
     }
 }
-
-.primary{
-    background-color: $primary-color;
-    @extend %white-text
+.rounded {
+    border-radius: 99999px;
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
 }
-.error {
-    background-color: $error-color;
-    @extend %white-text
+.primary {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: white;
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+    }
 }
-.warning {
-    background-color: $warning-color;
-    @extend %white-text
+.outline {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+.small {
+    padding: 2px 16px;
+    min-width: 88px;
+}
+.large {
+    padding: 12px 16px;
+    min-width: 136px;
+}
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
 }
