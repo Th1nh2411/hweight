@@ -1,0 +1,36 @@
+// Menu Wrapper & item
+.menu-list {
+    width: 224px;
+    .custom-menu-item {
+        padding: 9px 16px;
+        font-weight: 500;
+        border-radius: 0;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 0;
+        border: none;
+        width: 100%;
+    }
+    .separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+}
+
+// Menu header
+.menu-header {
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+}
+.menu-header__back {
+    background-color: transparent;
+    height: 100%;
+    width: 50px;
+    cursor: pointer;
+}
+.menu-header__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

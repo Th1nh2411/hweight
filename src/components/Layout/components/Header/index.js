@@ -1,27 +1,102 @@
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import images from '../../../../assets/images';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
+import {
+    AiFillCloseCircle,
+    AiOutlineCloudUpload,
+    AiOutlineDollarCircle,
+    AiOutlineLoading3Quarters,
+    AiOutlineMessage,
+    AiOutlinePlus,
+    AiOutlineQuestionCircle,
+    AiOutlineUser,
+} from 'react-icons/ai';
+import {
+    IoEarthOutline,
+    IoEllipsisVerticalSharp,
+    IoLogOutOutline,
+    IoPaperPlaneOutline,
+    IoSearch,
+    IoSettingsOutline,
+} from 'react-icons/io5';
+import { CgKeyboard } from 'react-icons/cg';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 import { useEffect, useState } from 'react';
 import { Wrapper as PopperWrapper } from '../../../Popper';
 import AccountItem from '../../../AccountItem';
 import Button from '../../../Button';
+import Menu from '../../../Popper/Menu';
 const cx = classNames.bind(styles);
+
+const MENU_ITEMS = [
+    {
+        icon: <IoEarthOutline />,
+        title: 'English',
+        children: {
+            title: 'Languages',
+            data: [
+                { type: 'language', code: 'vi', title: 'English' },
+                { type: 'language', code: 'en', title: 'Tiếng Việt' },
+                { type: 'language', code: 'ja', title: 'Japanese' },
+            ],
+        },
+    },
+    {
+        icon: <AiOutlineQuestionCircle />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    { type: 'shortcuts', icon: <CgKeyboard />, title: 'Keyboard shortcuts' },
+];
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
+    const currentUser = true;
+    const USER_MENU = [
+        {
+            icon: <AiOutlineUser />,
+            title: 'View profile',
+            to: '/@hoaa',
+        },
+        {
+            icon: <AiOutlineDollarCircle />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <IoSettingsOutline />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ,
+        ...MENU_ITEMS,
+        {
+            icon: <IoLogOutOutline />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
     useEffect(() => {
         setTimeout(() => {
             setSearchResult([1, 2, 3]);
         }, 1000);
     });
 
+    const handleOnchangeMenu = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                //change language
+                console.log(menuItem);
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="tiktok" />
-                <Tippy
+                <div className={cx('logo-wrapper')}>
+                    <img src={images.logo} alt="tiktok" />
+                </div>
+                <HeadlessTippy
                     interactive
                     visible={searchResult.length > 0}
                     render={(attrs) => (
@@ -38,27 +113,58 @@ function Header() {
                     <div className={cx('search')}>
                         <input placeholder="Search accounts and videos" />
                         <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
+                            <AiFillCloseCircle />
                         </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+                        <AiOutlineLoading3Quarters className={cx('loading')} />
 
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <IoSearch />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 <div className={cx('actions')}>
-                    <Button
-                        leftIcon={<FontAwesomeIcon icon={faPlus} />}
-                        className={cx('custom-btn')}
-                        rounded
-                        target="_blank"
-                    >
-                        Upload
-                    </Button>
-                    <Button outline rounded target="_blank">
-                        Log in
-                    </Button>
+                    {currentUser ? (
+                        <>
+                            <Tippy interactive content="Upload" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <AiOutlineCloudUpload />
+                                </button>
+                            </Tippy>
+                            <Tippy interactive content="Tin nhắn" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <IoPaperPlaneOutline />
+                                </button>
+                            </Tippy>
+
+                            <Tippy delay={[0, 200]} interactive content="Hộp thư" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <AiOutlineMessage />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button leftIcon={<AiOutlinePlus />} className={cx('custom-btn')} target="_blank">
+                                Upload
+                            </Button>
+                            <Button primary target="_blank">
+                                Log in
+                            </Button>
+                        </>
+                    )}
+                    <Menu items={currentUser ? USER_MENU : MENU_ITEMS} onChange={handleOnchangeMenu}>
+                        {currentUser ? (
+                            <img
+                                src="https://i.mydramalist.com/66L5p_5_c.jpg"
+                                className={cx('user-avatar')}
+                                alt="Nguyen Van A"
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <IoEllipsisVerticalSharp />
+                            </button>
+                        )}
+                    </Menu>
                 </div>
             </div>
         </header>

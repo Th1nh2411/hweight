@@ -5,6 +5,7 @@
     --primary-color: #fe2c55;
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
+    --default-layout-horizontal-spacer: 20px;
     --black: #000;
     --white: #fff;
     --text-color: #333;
@@ -44,4 +45,23 @@ a[href] {
 }
 .mr-16 {
     margin-right: 16px;
+}
+
+// Custom tippy tool tip
+body {
+    .tippy-box {
+        padding: 8px;
+        border-radius: 8px;
+        line-height: 2.2rem;
+        background-color: rgba(84, 84, 84, 0.92);
+        font-weight: 500;
+        color: white;
+    }
+    .tippy-arrow {
+        top: -6px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+
+        border-bottom: 6px solid rgba(84, 84, 84, 0.92);
+    }
 }
