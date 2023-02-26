@@ -2,10 +2,8 @@ import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import images from '../../../../assets/images';
 import {
-    AiFillCloseCircle,
     AiOutlineCloudUpload,
     AiOutlineDollarCircle,
-    AiOutlineLoading3Quarters,
     AiOutlineMessage,
     AiOutlinePlus,
     AiOutlineQuestionCircle,
@@ -16,17 +14,14 @@ import {
     IoEllipsisVerticalSharp,
     IoLogOutOutline,
     IoPaperPlaneOutline,
-    IoSearch,
     IoSettingsOutline,
 } from 'react-icons/io5';
 import { CgKeyboard } from 'react-icons/cg';
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
-import { useEffect, useState } from 'react';
-import { Wrapper as PopperWrapper } from '../../../Popper';
-import AccountItem from '../../../AccountItem';
 import Button from '../../../Button';
 import Menu from '../../../Popper/Menu';
+import Image from '../../../Image';
+import Search from '../Search';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -50,7 +45,6 @@ const MENU_ITEMS = [
     { type: 'shortcuts', icon: <CgKeyboard />, title: 'Keyboard shortcuts' },
 ];
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
     const currentUser = true;
     const USER_MENU = [
         {
@@ -77,11 +71,6 @@ function Header() {
             separate: true,
         },
     ];
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 1000);
-    });
 
     const handleOnchangeMenu = (menuItem) => {
         switch (menuItem.type) {
@@ -96,47 +85,29 @@ function Header() {
                 <div className={cx('logo-wrapper')}>
                     <img src={images.logo} alt="tiktok" />
                 </div>
-                <HeadlessTippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1">
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" />
-                        <button className={cx('clear')}>
-                            <AiFillCloseCircle />
-                        </button>
-                        <AiOutlineLoading3Quarters className={cx('loading')} />
-
-                        <button className={cx('search-btn')}>
-                            <IoSearch />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                {/* Search */}
+                <Search />
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy interactive content="Upload" placement="bottom">
+                            <Tippy duration={[100, 100]} interactive content="Upload" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <AiOutlineCloudUpload />
                                 </button>
                             </Tippy>
-                            <Tippy interactive content="Tin nhắn" placement="bottom">
+                            <Tippy duration={[100, 100]} interactive content="Tin nhắn" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <IoPaperPlaneOutline />
                                 </button>
                             </Tippy>
 
-                            <Tippy delay={[0, 200]} interactive content="Hộp thư" placement="bottom">
+                            <Tippy
+                                duration={[100, 100]}
+                                delay={[0, 200]}
+                                interactive
+                                content="Hộp thư"
+                                placement="bottom"
+                            >
                                 <button className={cx('action-btn')}>
                                     <AiOutlineMessage />
                                 </button>
@@ -154,8 +125,8 @@ function Header() {
                     )}
                     <Menu items={currentUser ? USER_MENU : MENU_ITEMS} onChange={handleOnchangeMenu}>
                         {currentUser ? (
-                            <img
-                                src="https://i.mydramalist.com/66L5p_5_c.jpg"
+                            <Image
+                                src="https://i.mydramalist.om/66L5p_5_c.jpg"
                                 className={cx('user-avatar')}
                                 alt="Nguyen Van A"
                             />

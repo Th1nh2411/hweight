@@ -7,7 +7,7 @@ import UploadLayout from '../components/Layout/UploadLayout';
 export const publicRoutes = [
     { path: '/', component: Home },
     { path: '/following', component: Following },
-    { path: '/profile', component: Profile, layout: null },
+    { path: '/@/:nickname', component: Profile },
     { path: '/upload', component: Upload, layout: UploadLayout },
 ];
 export const privateRoutes = [];
