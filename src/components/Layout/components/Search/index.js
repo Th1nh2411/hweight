@@ -40,6 +40,13 @@ function Search() {
     const handleHideResult = () => {
         setShowResult(false);
     };
+    const handleChangeInput = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+    const handleSubmit = (e) => {};
     return (
         <HeadlessTippy
             interactive
@@ -59,7 +66,7 @@ function Search() {
             <div className={cx('search')}>
                 <input
                     ref={inputRef}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChangeInput}
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     onFocus={() => setShowResult(true)}
@@ -73,7 +80,7 @@ function Search() {
 
                 {loading && <AiOutlineLoading3Quarters className={cx('loading')} />}
 
-                <button className={cx('search-btn')}>
+                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                     <IoSearch />
                 </button>
             </div>

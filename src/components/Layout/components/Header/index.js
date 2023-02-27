@@ -22,6 +22,8 @@ import Button from '../../../Button';
 import Menu from '../../../Popper/Menu';
 import Image from '../../../Image';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
+import configRoutes from '../../../../config/routes';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -50,7 +52,7 @@ function Header() {
         {
             icon: <AiOutlineUser />,
             title: 'View profile',
-            to: '/@hoaa',
+            to: configRoutes.profile,
         },
         {
             icon: <AiOutlineDollarCircle />,
@@ -82,9 +84,11 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo-wrapper')}>
-                    <img src={images.logo} alt="tiktok" />
-                </div>
+                <Link to={configRoutes.home}>
+                    <div className={cx('logo-wrapper')}>
+                        <img src={images.logo} alt="tiktok" />
+                    </div>
+                </Link>
                 {/* Search */}
                 <Search />
                 <div className={cx('actions')}>

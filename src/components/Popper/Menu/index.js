@@ -7,7 +7,7 @@ import MenuHeader from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
 const defaultFc = () => {};
-function Menu({ children, items = [], onChange = defaultFc }) {
+function Menu({ children, items = [], hideonClick = false, onChange = defaultFc }) {
     const [history, setHistory] = useState([{ data: items }]);
 
     const current = history[history.length - 1];
@@ -35,6 +35,7 @@ function Menu({ children, items = [], onChange = defaultFc }) {
         <Tippy
             offset={[10, 6]}
             delay={[0, 400]}
+            hideOnClick={hideonClick}
             interactive
             placement="top-end"
             render={(attrs) => (
