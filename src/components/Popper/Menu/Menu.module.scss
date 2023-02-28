@@ -21,6 +21,10 @@
     position: relative;
     height: 50px;
     margin-top: -8px;
+    flex-shrink: 0;
+}
+.menu-body {
+    overflow-y: auto;
 }
 .menu-header__back {
     background-color: transparent;
@@ -33,4 +37,5 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-weight: 600;
 }

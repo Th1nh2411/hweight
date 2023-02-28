@@ -36,6 +36,29 @@ const MENU_ITEMS = [
                 { type: 'language', code: 'vi', title: 'English' },
                 { type: 'language', code: 'en', title: 'Tiếng Việt' },
                 { type: 'language', code: 'ja', title: 'Japanese' },
+                { type: 'language', code: 'ja', title: 'Korean' },
+                { type: 'language', code: 'ja', title: 'Brazil' },
+                { type: 'language', code: 'ja', title: 'Spain' },
+                { type: 'language', code: 'ja', title: 'Russia' },
+                { type: 'language', code: 'ja', title: 'hehe' },
+                { type: 'language', code: 'ja', title: 'Japanese1' },
+                { type: 'language', code: 'ja', title: 'Korean1' },
+                { type: 'language', code: 'ja', title: 'Brazil1' },
+                { type: 'language', code: 'ja', title: 'Spain1' },
+                { type: 'language', code: 'ja', title: 'Russia1' },
+                { type: 'language', code: 'ja', title: 'hehe1' },
+                { type: 'language', code: 'ja', title: 'Japanese2' },
+                { type: 'language', code: 'ja', title: 'Korean2' },
+                { type: 'language', code: 'ja', title: 'Brazil2' },
+                { type: 'language', code: 'ja', title: 'Spain2' },
+                { type: 'language', code: 'ja', title: 'Russia2' },
+                { type: 'language', code: 'ja', title: 'hehe2' },
+                { type: 'language', code: 'ja', title: 'Japanese3' },
+                { type: 'language', code: 'ja', title: 'Korean3' },
+                { type: 'language', code: 'ja', title: 'Brazil3' },
+                { type: 'language', code: 'ja', title: 'Spain3' },
+                { type: 'language', code: 'ja', title: 'Russia3' },
+                { type: 'language', code: 'ja', title: 'hehe3' },
             ],
         },
     },
@@ -130,7 +153,7 @@ function Header() {
                     <Menu items={currentUser ? USER_MENU : MENU_ITEMS} onChange={handleOnchangeMenu}>
                         {currentUser ? (
                             <Image
-                                src="https://i.mydramalist.om/66L5p_5_c.jpg"
+                                src="https://i.mydramalist.com/66L5p_5_c.jpg"
                                 className={cx('user-avatar')}
                                 alt="Nguyen Van A"
                             />
