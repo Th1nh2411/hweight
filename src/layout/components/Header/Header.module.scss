@@ -38,6 +38,18 @@
     padding: 4px 12px;
     display: flex;
     cursor: pointer;
+    position: relative;
+}
+.notification {
+    position: absolute;
+    top: -1px;
+    right: 1px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    font-size: 1.3rem;
+    color: white;
+    line-height: 1.5rem;
+    width: 22px;
 }
 .user-avatar {
     height: 32px;

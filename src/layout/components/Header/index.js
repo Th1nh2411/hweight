@@ -1,6 +1,6 @@
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
-import images from '../../../../assets/images';
+import images from '../../../assets/images';
 import {
     AiOutlineCloudUpload,
     AiOutlineDollarCircle,
@@ -18,12 +18,12 @@ import {
 } from 'react-icons/io5';
 import { CgKeyboard } from 'react-icons/cg';
 import Tippy from '@tippyjs/react';
-import Button from '../../../Button';
-import Menu from '../../../Popper/Menu';
-import Image from '../../../Image';
+import Button from '../../../components/Button';
+import Menu from '../../../components/Popper/Menu';
+import Image from '../../../components/Image';
 import Search from '../Search';
 import { Link } from 'react-router-dom';
-import configRoutes from '../../../../config/routes';
+import config from '../../../config';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -75,7 +75,7 @@ function Header() {
         {
             icon: <AiOutlineUser />,
             title: 'View profile',
-            to: configRoutes.profile,
+            to: config.routes.profile,
         },
         {
             icon: <AiOutlineDollarCircle />,
@@ -107,7 +107,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={configRoutes.home}>
+                <Link to={config.routes.home}>
                     <div className={cx('logo-wrapper')}>
                         <img src={images.logo} alt="tiktok" />
                     </div>
@@ -136,7 +136,8 @@ function Header() {
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
-                                    <AiOutlineMessage />
+                                    <img src={images.mailBox} />
+                                    <div className={cx('notification')}>12</div>
                                 </button>
                             </Tippy>
                         </>

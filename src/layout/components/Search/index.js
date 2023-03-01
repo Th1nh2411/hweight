@@ -4,10 +4,10 @@ import classNames from 'classnames/bind';
 import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { IoSearch } from 'react-icons/io5';
-import { Wrapper as PopperWrapper } from '../../../Popper';
-import AccountItem from '../../../AccountItem';
-import { useDebounce } from '../../../../hooks';
-import * as searchServices from '../../../../apiServices/searchServices';
+import { Wrapper as PopperWrapper } from '../../../components/Popper';
+import AccountItem from '../../../components/AccountItem';
+import { useDebounce } from '../../../hooks';
+import * as searchServices from '../../../services/searchService';
 
 const cx = classNames.bind(styles);
 function Search() {

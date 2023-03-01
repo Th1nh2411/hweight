@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { publicRoutes } from './Routes';
-import DefaultLayout from './components/Layout/DefautLayout';
+import DefaultLayout from './layout/DefautLayout';
 import { Fragment } from 'react';
 function App() {
     return (
