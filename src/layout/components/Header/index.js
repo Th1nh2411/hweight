@@ -4,7 +4,6 @@ import images from '../../../assets/images';
 import {
     AiOutlineCloudUpload,
     AiOutlineDollarCircle,
-    AiOutlineMessage,
     AiOutlinePlus,
     AiOutlineQuestionCircle,
     AiOutlineUser,
@@ -102,6 +101,9 @@ function Header() {
             case 'language':
                 //change language
                 console.log(menuItem);
+                break;
+            default:
+                console.log('default');
         }
     };
     return (
@@ -136,7 +138,7 @@ function Header() {
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
-                                    <img src={images.mailBox} />
+                                    <img src={images.mailBox} alt="mailbox" />
                                     <div className={cx('notification')}>12</div>
                                 </button>
                             </Tippy>

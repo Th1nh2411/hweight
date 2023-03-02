@@ -1,4 +1,5 @@
 import styles from './Menu.module.scss';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '../index';
@@ -7,7 +8,7 @@ import MenuHeader from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
 const defaultFc = () => {};
-function Menu({ children, items = [], hideonClick = false, onChange = defaultFc }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFc }) {
     const [history, setHistory] = useState([{ data: items }]);
 
     const current = history[history.length - 1];
@@ -35,7 +36,7 @@ function Menu({ children, items = [], hideonClick = false, onChange = defaultFc 
         <Tippy
             offset={[10, 6]}
             delay={[0, 400]}
-            hideOnClick={hideonClick}
+            hideOnClick={hideOnClick}
             interactive
             placement="top-end"
             render={(attrs) => (
@@ -59,5 +60,10 @@ function Menu({ children, items = [], hideonClick = false, onChange = defaultFc 
         </Tippy>
     );
 }
-
+Menu.propTypes = {
+    children: PropTypes.node.isRequired,
+    items: PropTypes.array,
+    hideOnClick: PropTypes.bool,
+    onChange: PropTypes.func,
+};
 export default Menu;
