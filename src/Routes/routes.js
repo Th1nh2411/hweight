@@ -4,11 +4,13 @@ import Profile from '../Pages/Profile';
 import Upload from '../Pages/Upload';
 import UploadLayout from '../layout/UploadLayout';
 import config from '../config';
+import Live from '../Pages/Live';
 
 export const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.following, component: Following },
     { path: config.routes.profile, component: Profile },
+    { path: config.routes.live, component: Live },
     { path: config.routes.upload, component: Upload, layout: UploadLayout },
 ];
 export const privateRoutes = [];
