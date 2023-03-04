@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     padding: 8px 16px;
+    border-radius: 4px;
     &:hover {
         background-color: rgba(22, 24, 35, 0.05);
         cursor: pointer;
@@ -24,13 +25,13 @@
 }
 .name {
     font-size: 1.6rem;
-    font-weight: 500;
-    line-height: 2rem;
+    font-weight: 600;
+    line-height: 2.2rem;
     color: var(--text-color);
 }
 .username {
     font-weight: 400;
     font-size: 1.4rem;
     color: rgba(22, 24, 35, 0.5);
-    line-height: 1.8rem;
+    line-height: 2rem;
 }

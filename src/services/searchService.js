@@ -14,3 +14,17 @@ export const search = async (q, type = 'less') => {
         return [];
     }
 };
+export const suggest = async (type = 'more') => {
+    try {
+        const res = await httpRequest.get(`users/search`, {
+            params: {
+                q: 'h',
+                type,
+            },
+        });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
