@@ -1,10 +1,10 @@
 import * as httpRequest from '../utils/httpRequest';
 
-export const search = async (q, type = 'less') => {
+export const suggest = async (type = 'more') => {
     try {
         const res = await httpRequest.get(`users/search`, {
             params: {
-                q,
+                q: 'hoa',
                 type,
             },
         });

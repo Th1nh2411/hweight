@@ -7,7 +7,7 @@ import { IoSearch } from 'react-icons/io5';
 import PopperWrapper from '../../../components/Popper';
 import AccountItem from '../../../components/AccountItem';
 import { useDebounce } from '../../../hooks';
-import * as services from '../../../services/searchService';
+import * as searchServices from '../../../services/searchService';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -24,7 +24,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const results = await services.search(debouncedValue);
+            const results = await searchServices.search(debouncedValue);
             setSearchResult(results);
 
             setLoading(false);

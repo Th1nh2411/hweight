@@ -1,0 +1,52 @@
+.preview-wrapper {
+    width: 320px;
+    padding: 20px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2.2rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+}
+.check {
+    margin-left: 4px;
+    color: #29d6ed;
+    font-size: 1.4rem;
+}
+.name {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: rgba(22, 24, 35, 0.5);
+    line-height: 2rem;
+}
+.interact-wrapper {
+    margin-top: 8px;
+    display: flex;
+    .interact {
+        line-height: 2.2rem;
+        font-size: 1.7rem;
+        span {
+            margin-left: 6px;
+            color: rgba(22, 24, 35, 0.75);
+            font-weight: 400;
+        }
+    }
+    .interact + .interact {
+        margin-left: 12px;
+    }
+}

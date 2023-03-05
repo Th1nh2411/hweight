@@ -3,6 +3,9 @@ import classNames from 'classnames/bind';
 import Menu from './Menu';
 import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
+import * as suggestServices from '../../../services/suggestService';
+import * as followingServices from '../../../services/followingService';
+
 import {
     UserGroupIcon,
     HomeIcon,
@@ -11,10 +14,24 @@ import {
     UserGroupActiveIcon,
     LiveActiveIcon,
 } from '../../../components/Icons/Icons';
-import SuggestedAccount from '../../../components/SuggestedAccount/SuggestedAccount';
+import AccountList from '../../../components/AccountList';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 function SideBar() {
+    const [suggestResult, setSuggestResult] = useState([]);
+    const [followingResult, setFollowingResult] = useState([]);
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            const suggestResults = await suggestServices.suggest();
+            const followingResults = await followingServices.following();
+
+            setSuggestResult(suggestResults);
+            setFollowingResult(followingResults);
+        };
+        fetchApi();
+    }, []);
     return (
         <aside className={cx('wrapper')}>
             <Menu>
@@ -27,7 +44,8 @@ function SideBar() {
                 />
                 <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
             </Menu>
-            <SuggestedAccount title="Suggested account" />
+            <AccountList title="Suggested accounts" numShow="5" accountResult={suggestResult} />
+            <AccountList title="Following accounts" numShow="7" accountResult={followingResult} />
         </aside>
     );
 }

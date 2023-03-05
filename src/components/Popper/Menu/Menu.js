@@ -1,7 +1,7 @@
 import styles from './Menu.module.scss';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
+import TippyHeadless from '@tippyjs/react/headless';
 import Popper from '../index';
 import MenuItem from './MenuItem';
 import MenuHeader from './Header';
@@ -46,7 +46,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFc 
     );
 
     return (
-        <Tippy
+        <TippyHeadless
             offset={[10, 6]}
             delay={[0, 400]}
             hideOnClick={hideOnClick}
@@ -56,7 +56,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFc 
             onHide={handleResetLv1}
         >
             {children}
-        </Tippy>
+        </TippyHeadless>
     );
 }
 Menu.propTypes = {
