@@ -1,0 +1,147 @@
+/* Styles for the input container */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+}
+.bg-wrapper {
+    margin-right: 100px;
+}
+
+.bg-img {
+    width: 300px;
+    object-fit: cover;
+}
+.form-container {
+    padding: 50px 40px 25px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 2px;
+    margin-bottom: 10px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+.form-body {
+    margin-top: 40px;
+}
+.logo {
+    width: 200px;
+    object-fit: cover;
+    margin: auto;
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 16px;
+    div {
+        position: relative;
+    }
+
+    input {
+        border: 1px solid lightgray;
+        padding: 10px;
+        transition: 0.4s;
+        background: transparent;
+        color: var(--primary-color);
+        border-radius: 4px;
+        font-size: 1.4rem;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input ~ span:before,
+    input ~ span:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background-color: var(--primary-color);
+        transition: 0.4s;
+    }
+
+    input ~ span:after {
+        top: auto;
+        bottom: 0;
+    }
+
+    input ~ span i:before,
+    input ~ span i:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 1px;
+        height: 0;
+        background-color: var(--primary-color);
+        transition: 0.6s;
+    }
+
+    input ~ span i:after {
+        left: auto;
+        right: 0;
+    }
+
+    input:focus ~ span:before,
+    input:focus ~ span:after {
+        left: 0;
+        width: 100%;
+        transition: 0.4s;
+    }
+
+    input:focus ~ span i:before,
+    input:focus ~ span i:after {
+        top: -1px;
+        height: 100%;
+        transition: 0.6s;
+    }
+
+    input ~ p {
+        position: absolute;
+        left: 14px;
+        width: 100%;
+        top: 6px;
+        transition: 0.3s;
+        z-index: -1;
+        letter-spacing: 0.5px;
+    }
+
+    input:focus ~ p,
+    input:valid ~ p {
+        top: -18px;
+        left: 0;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        transition: 0.3s;
+    }
+
+    input:not(:focus) ~ p {
+        color: #aaa;
+    }
+}
+
+/* Styles for the input when focused */
+input:focus {
+    outline: none;
+    border-bottom: 1px solid #3897f0;
+}
+
+/* Styles for the button */
+button {
+    background-color: #3897f0;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Styles for the button when hovered */
+button:hover {
+    background-color: #38a1f0;
+}
