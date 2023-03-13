@@ -1,71 +1,50 @@
-/* Styles for the input container */
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
 }
-.bg-wrapper {
-    margin-right: 50px;
+.card-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    width: 600px;
+    padding: 20px 50px;
+    border: 1px solid var(--secondary-color);
+    margin: 30px 0 30px 80px;
+    border-radius: 4px;
 }
-
-.bg-img {
-    width: 400px;
-    object-fit: cover;
-    text-align: center;
-}
-.slogan {
-    margin-top: 10px;
+.title {
     color: var(--secondary-color);
-    font-weight: 600;
-    font-size: 2rem;
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 10px 0;
 }
-.form-wrapper {
-}
-.form-container {
-    padding: 50px 40px 25px;
-    border: 1px solid rgb(219, 219, 219);
-    border-radius: 2px;
-    margin-bottom: 10px;
-    width: 400px;
+.body-index {
     display: flex;
-    flex-direction: column;
-}
-.form-body {
-    margin-top: 32px;
-}
-.logo {
-    width: 200px;
-    object-fit: cover;
-    margin: auto;
+    justify-content: space-between;
+    .input-container {
+        flex: 1;
+        max-width: 48%;
+    }
 }
 .input-container {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 12px;
     font-weight: 600;
-
+    margin-bottom: 12px;
     input {
         border: 1px solid lightgray;
         padding: 16px;
         transition: 0.4s;
-        background: transparent;
         color: var(--secondary-color);
+        font-size: 2rem;
         font-weight: 600;
-        font-size: 1.6rem;
     }
-    input.error {
-        border: 1px solid red !important;
-    }
+
     input:focus {
         outline: none;
     }
     .hasValue {
-        padding: 24px 10px 8px;
+        padding: 28px 12px 8px;
     }
     input ~ span:before,
     input ~ span:after {
@@ -125,55 +104,66 @@
         color: #aaa;
         transition: 0.2s;
         letter-spacing: 0.5px;
-        font-size: 1.6rem;
+        font-size: 2rem;
         pointer-events: none;
     }
 
     .hasValue ~ p {
-        top: 4px;
-        left: 10px;
-        font-size: 1.2rem;
+        top: 5px;
+        left: 12px;
+        font-size: 1.3rem;
         color: var(--secondary-color);
         transition: 0.2s;
         color: #a8a8a8;
     }
-
+    .unit {
+        display: none;
+    }
+    .hasValue ~ .unit {
+        position: absolute;
+        display: block;
+        bottom: 5px;
+        right: 10px;
+        font-size: 2rem;
+        color: var(--secondary-color);
+        transition: 0.2s;
+        color: #a8a8a8;
+    }
     input:not(:focus) ~ p {
         color: #aaa;
     }
 }
+.gender-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 1.8rem;
+    .gender-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        color: var(--secondary-color);
+        border: 2px solid var(--secondary-color);
+        border-radius: 4px;
+        width: 48%;
+        height: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    .gender-icon {
+        font-size: 2.2rem;
+        margin-right: 4px;
+    }
 
-/* Styles for the input when focused */
-.error-message {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 10px 0 0;
-}
-.custom-btn {
-    width: 100%;
-    border-radius: 6px;
-    height: 40px;
-    margin-top: 15px;
-}
-.forgot-pw {
-    text-align: center;
-    margin-top: 15px;
-    color: var(--primary-color);
-    font-size: 1.4rem;
-    display: block;
-}
-/* Styles for the button when hovered */
-.sign-up {
-    margin-top: 10px;
-    border: 1px solid rgb(219, 219, 219);
-    padding: 18px;
-    border-radius: 2px;
-    font-size: 1.4rem;
-    text-align: center;
-}
-.sign-up-label {
-    margin-left: 8px;
+    .gender-button.selected {
+        background-color: var(--secondary-color);
+        color: #fff;
+    }
 
-    color: var(--primary-color);
+    .gender-button input[type='radio'] {
+        display: none;
+    }
 }

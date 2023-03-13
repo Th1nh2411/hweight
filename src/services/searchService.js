@@ -8,7 +8,7 @@ export const search = async (q, type = 'less') => {
                 type,
             },
         });
-        return res.data;
+        return res;
     } catch (error) {
         console.log(error);
         return [];

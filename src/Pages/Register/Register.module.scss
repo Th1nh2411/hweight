@@ -20,8 +20,9 @@
 .slogan {
     margin-top: 10px;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 2rem;
+    text-align: center;
 }
 .form-wrapper {
 }
@@ -42,6 +43,14 @@
     object-fit: cover;
     margin: auto;
 }
+.form-title {
+    margin-top: 10px;
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -58,7 +67,7 @@
         font-weight: 600;
         font-size: 1.6rem;
     }
-    input.error {
+    input.error:focus {
         border: 1px solid red !important;
     }
     input:focus {
@@ -98,13 +107,6 @@
         transition: 0.4s;
     }
 
-    input ~ span i:after {
-        left: auto;
-        right: 0;
-        top: auto;
-        bottom: 0;
-    }
-
     input:focus ~ span:before,
     input:focus ~ span:after {
         width: 100%;
@@ -137,24 +139,63 @@
         transition: 0.2s;
         color: #a8a8a8;
     }
-
+    input.error ~ span i:before,
+    input.error ~ span i:after,
+    input.error ~ span:before,
+    input.error ~ span:after {
+        background-color: red;
+    }
     input:not(:focus) ~ p {
         color: #aaa;
     }
 }
+.gender-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+    align-items: center;
+    .gender-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        color: var(--secondary-color);
+        border: 2px solid var(--secondary-color);
+        border-radius: 4px;
+        width: 48%;
+        height: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        font-size: 1.8rem;
+    }
+    .gender-icon {
+        font-size: 2.2rem;
+        margin-right: 4px;
+    }
+
+    .gender-button.selected {
+        background-color: var(--secondary-color);
+        color: #fff;
+    }
+
+    .gender-button input[type='radio'] {
+        display: none;
+    }
+}
 
 /* Styles for the input when focused */
-.error-message {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 10px 0 0;
-}
+
 .custom-btn {
     width: 100%;
     border-radius: 6px;
-    height: 40px;
     margin-top: 15px;
+    height: 40px;
+}
+.error-message {
+    color: red;
+    font-size: 1.3rem;
+    margin: 12px 0;
 }
 .forgot-pw {
     text-align: center;

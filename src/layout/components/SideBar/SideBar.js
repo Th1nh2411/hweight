@@ -3,49 +3,44 @@ import classNames from 'classnames/bind';
 import Menu from './Menu';
 import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
-import * as suggestServices from '../../../services/suggestService';
-import * as followingServices from '../../../services/followingService';
 
-import {
-    UserGroupIcon,
-    HomeIcon,
-    LiveIcon,
-    HomeActiveIcon,
-    UserGroupActiveIcon,
-    LiveActiveIcon,
-} from '../../../components/Icons/Icons';
+import { JumpRopeIcon, DairyIcon, RecipeIcon } from '../../../components/Icons/Icons';
 import AccountList from '../../../components/AccountList';
 import { useEffect, useState } from 'react';
+import { RiUserFill } from 'react-icons/ri';
+import { IoLogOut } from 'react-icons/io5';
 
 const cx = classNames.bind(styles);
 function SideBar() {
-    const [suggestResult, setSuggestResult] = useState([]);
-    const [followingResult, setFollowingResult] = useState([]);
-
     useEffect(() => {
-        const fetchApi = async () => {
-            const suggestResults = await suggestServices.suggest();
-            const followingResults = await followingServices.following();
-
-            setSuggestResult(suggestResults);
-            setFollowingResult(followingResults);
-        };
+        const fetchApi = async () => {};
         fetchApi();
     }, []);
     return (
         <aside className={cx('wrapper')}>
             <Menu>
-                <MenuItem title="For You" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
+                <MenuItem title="Dairy" to={config.routes.dairy} icon={<DairyIcon />} activeIcon={<DairyIcon />} />
                 <MenuItem
-                    title="Following"
-                    to={config.routes.following}
-                    icon={<UserGroupIcon />}
-                    activeIcon={<UserGroupActiveIcon />}
+                    title="Activity"
+                    to={config.routes.activity}
+                    icon={<JumpRopeIcon />}
+                    activeIcon={<JumpRopeIcon />}
                 />
-                <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
+                <MenuItem title="Recipe" to={config.routes.recipe} icon={<RecipeIcon />} activeIcon={<RecipeIcon />} />
+                <MenuItem
+                    title="Account"
+                    to={config.routes.profile}
+                    icon={<RiUserFill />}
+                    activeIcon={<RiUserFill />}
+                />
+                <MenuItem
+                    separate
+                    title="Log Out"
+                    to={config.routes.login}
+                    icon={<IoLogOut />}
+                    activeIcon={<IoLogOut />}
+                />
             </Menu>
-            <AccountList title="Suggested accounts" numShow="5" accountResult={suggestResult} />
-            <AccountList title="Following accounts" numShow="7" accountResult={followingResult} />
         </aside>
     );
 }

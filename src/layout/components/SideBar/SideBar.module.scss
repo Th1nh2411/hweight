@@ -1,4 +1,7 @@
 .wrapper {
     padding: 20px 0 26px 8px;
-    width: 348px;
+    width: var(--sidebar-width);
+    position: fixed;
+    box-shadow: 1px 0px 1px rgb(0, 0, 0, 0.12);
+    height: 100vh;
 }

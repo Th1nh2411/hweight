@@ -1,5 +1,1 @@
-function Home() {
-    return <h2>Home page</h2>;
-}
-
-export default Home;
+export { default } from './Home';

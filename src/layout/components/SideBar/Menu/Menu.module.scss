@@ -5,14 +5,14 @@
 //MenuItem
 .menu-item {
     display: flex;
-    color: var(--text-color);
     align-items: center;
     font-weight: 600;
-    font-size: 2rem;
-    padding: 8px;
-    color: var(--text-color);
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    padding: 20px 12px;
     border-radius: 4px;
     transition: background-color ease-in-out 200ms;
+    position: relative;
     &.active {
         color: var(--primary-color);
     }
@@ -26,13 +26,29 @@
         background-color: rgba(22, 24, 35, 0.03);
     }
 }
+.menu-item.separate {
+    margin-top: 300px;
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        right: 20px;
+        top: 0;
+        height: 1px;
+        background: rgba(22, 24, 35, 0.12);
+    }
+}
 .item-title {
-    margin-left: 8px;
+    margin-left: 10px;
 }
 .active-icon,
 .icon {
     display: flex;
     align-items: center;
+    font-size: 2.2rem;
+}
+.icon {
+    color: var(--secondary-color);
 }
 .active-icon {
     display: none;

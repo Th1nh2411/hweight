@@ -6,22 +6,12 @@
     height: 90vh;
 }
 .bg-wrapper {
-    margin-right: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-right: 80px;
 }
 
 .bg-img {
-    width: 400px;
+    width: 300px;
     object-fit: cover;
-    text-align: center;
-}
-.slogan {
-    margin-top: 10px;
-    color: var(--secondary-color);
-    font-weight: 600;
-    font-size: 2rem;
 }
 .form-wrapper {
 }
@@ -46,7 +36,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
 
     input {
@@ -58,9 +48,7 @@
         font-weight: 600;
         font-size: 1.6rem;
     }
-    input.error {
-        border: 1px solid red !important;
-    }
+
     input:focus {
         outline: none;
     }
@@ -144,33 +132,35 @@
 }
 
 /* Styles for the input when focused */
-.error-message {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 10px 0 0;
-}
+
 .custom-btn {
     width: 100%;
     border-radius: 6px;
     height: 40px;
     margin-top: 15px;
 }
-.forgot-pw {
+.error-message {
+    color: red;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 10px 0 5px;
+}
+.login-option {
     text-align: center;
     margin-top: 15px;
     color: var(--primary-color);
     font-size: 1.4rem;
     display: block;
 }
+
 /* Styles for the button when hovered */
 .sign-up {
     margin-top: 10px;
     border: 1px solid rgb(219, 219, 219);
     padding: 18px;
     border-radius: 2px;
-    font-size: 1.4rem;
     text-align: center;
+    font-size: 1.4rem;
 }
 .sign-up-label {
     margin-left: 8px;

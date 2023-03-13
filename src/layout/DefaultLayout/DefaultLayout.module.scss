@@ -2,14 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f1f1f2;
 }
 .container {
-    display: flex;
     width: var(--default-layout-width);
     max-width: 100%;
     padding-top: var(--default-layout-header-height);
-    height: 1000px;
+    min-height: 100vh;
 }
 .content {
     flex: 1;
+    margin-left: var(--sidebar-width);
 }

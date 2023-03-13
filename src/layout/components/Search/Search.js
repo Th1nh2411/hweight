@@ -70,7 +70,7 @@ function Search() {
                         ref={inputRef}
                         onChange={handleChangeInput}
                         value={searchValue}
-                        placeholder="Search accounts and videos"
+                        placeholder="Search activities and recipes"
                         onFocus={() => setShowResult(true)}
                     />
                     {loading ||
