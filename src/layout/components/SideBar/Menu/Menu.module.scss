@@ -15,6 +15,7 @@
     position: relative;
     &.active {
         color: var(--primary-color);
+        background-color: rgba(22, 24, 35, 0.07);
     }
     &.active .icon {
         display: none;
@@ -23,7 +24,7 @@
         display: flex;
     }
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
+        background-color: rgba(22, 24, 35, 0.02);
     }
 }
 .menu-item.separate {

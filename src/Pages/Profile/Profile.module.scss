@@ -1,21 +1,32 @@
 .wrapper {
+    margin: 50px 0;
+    position: relative;
 }
 .card-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 600px;
-    padding: 20px 50px;
-    border: 1px solid var(--secondary-color);
+    padding: 30px 40px;
     margin: 30px 0 30px 80px;
-    border-radius: 4px;
+    width: 650px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+.update-icon {
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+.card-body {
+    flex: 1;
 }
 .title {
     color: var(--secondary-color);
     font-size: 2.6rem;
     font-weight: 700;
-    text-transform: uppercase;
-    margin: 10px 0;
 }
 .body-index {
     display: flex;
@@ -31,6 +42,18 @@
     position: relative;
     font-weight: 600;
     margin-bottom: 12px;
+    &.error {
+        margin-bottom: 35px;
+    }
+    &.error input:focus {
+        border: 1px solid red !important;
+    }
+    &.error input:focus ~ span:before,
+    &.error input:focus ~ span:after,
+    &.error input:focus ~ span i:before,
+    &.error input:focus ~ span i:after {
+        background-color: red !important;
+    }
     input {
         border: 1px solid lightgray;
         padding: 16px;
@@ -44,7 +67,7 @@
         outline: none;
     }
     .hasValue {
-        padding: 28px 12px 8px;
+        padding: 26px 12px 6px;
     }
     input ~ span:before,
     input ~ span:after {
@@ -99,12 +122,11 @@
     input ~ p {
         position: absolute;
         left: 18px;
-        width: 100%;
-        top: 14px;
+        top: 16px;
         color: #aaa;
         transition: 0.2s;
         letter-spacing: 0.5px;
-        font-size: 2rem;
+        font-size: 1.8rem;
         pointer-events: none;
     }
 
@@ -132,13 +154,21 @@
     input:not(:focus) ~ p {
         color: #aaa;
     }
+    .error-message {
+        color: red;
+        font-size: 1.3rem;
+        position: absolute;
+        bottom: -24px;
+        left: 0;
+    }
 }
+
 .gender-button-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-size: 1.8rem;
     .gender-button {
         display: inline-flex;
@@ -165,5 +195,16 @@
 
     .gender-button input[type='radio'] {
         display: none;
+    }
+}
+
+.card-footer {
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    .custom-btn {
+        width: 150px;
+        height: 38px;
+        transition: 0.2s;
     }
 }

@@ -10,4 +10,8 @@ export const post = async (path, body = {}, header = {}) => {
     const response = await httpRequest.post(path, body, header);
     return response.data;
 };
+export const patch = async (path, body = {}, header = {}) => {
+    const response = await httpRequest.patch(path, body, header);
+    return response.data;
+};
 export default httpRequest;
