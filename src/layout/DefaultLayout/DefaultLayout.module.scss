@@ -1,9 +1,18 @@
 .wrapper {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
-    background-color: #eef5ff;
+    background: #fff url('../../assets/images/BMI1.jpg') center center / cover no-repeat;
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: 100%;
+    }
 }
+
 .container {
     width: var(--default-layout-width);
     max-width: 100%;

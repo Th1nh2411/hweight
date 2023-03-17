@@ -41,10 +41,11 @@
 
 :root {
     --primary-color: #f8a647;
-    --secondary-color: #32485c;
-    --bg-color: #313131;
-    --card-bg-color: rgba(162, 162, 162, 0.304);
+    --secondary-color: #fff;
+    --bg-color: #080b14;
+    --card-bg-color: rgb(58, 58, 58);
     --default-layout-header-height: 90px;
+    --hover-color: #ff7817;
     --default-layout-width: 1150px;
     --default-layout-horizontal-spacer: 20px;
     --sidebar-width: 250px;
@@ -122,6 +123,9 @@ body {
         border-bottom: 6px solid rgba(84, 84, 84, 0.92);
     }
 }
+// Input type
+
+// Keyframes
 @keyframes slideToast {
     from {
         opacity: 0;

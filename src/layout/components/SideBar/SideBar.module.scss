@@ -4,4 +4,10 @@
     position: fixed;
     box-shadow: 1px 0px 1px rgb(0, 0, 0, 0.12);
     height: 100vh;
+    margin: 5px 0;
+    border-radius: 6px;
+}
+.wrapper:hover {
+    background-color: var(--card-bg-color);
+    transition: 0.2s all;
 }

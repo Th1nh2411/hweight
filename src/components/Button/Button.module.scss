@@ -13,6 +13,11 @@
     color: var(--text-color);
     border: 1px solid rgba(22, 24, 35, 0.12);
     font-weight: 600;
+    transition: color 0.4s ease-in-out;
+    overflow: hidden;
+    .title {
+        z-index: 10;
+    }
     &:hover {
         background-color: rgba(22, 24, 35, 0.06);
     }
@@ -35,7 +40,7 @@
     background-color: var(--primary-color);
     color: white;
     &:hover {
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+        background-color: var(--hover-color);
     }
 }
 .outline {

@@ -1,13 +1,13 @@
 .wrapper {
-    margin: 50px 0;
+    margin: 20px 0;
     position: relative;
 }
 .card-item {
     padding: 30px 40px;
-    margin: 30px 0 30px 80px;
-    width: 650px;
+    margin: 30px 0 30px 40px;
+    width: 720px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
 }
 .card-header {
     display: flex;
@@ -24,7 +24,7 @@
     flex: 1;
 }
 .title {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     font-size: 2.6rem;
     font-weight: 700;
 }
@@ -55,12 +55,12 @@
         background-color: red !important;
     }
     input {
-        border: 1px solid lightgray;
         padding: 16px;
         transition: 0.4s;
         color: var(--secondary-color);
         font-size: 2rem;
         font-weight: 600;
+        background-color: #454545;
     }
 
     input:focus {
@@ -162,7 +162,6 @@
         left: 0;
     }
 }
-
 .gender-button-container {
     display: flex;
     flex-direction: row;
@@ -174,14 +173,16 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: #fff;
         color: var(--secondary-color);
-        border: 2px solid var(--secondary-color);
+        border: 2px solid #454545;
         border-radius: 4px;
         width: 48%;
         height: 50px;
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        &:hover {
+            opacity: 0.8;
+        }
     }
     .gender-icon {
         font-size: 2.2rem;
@@ -189,8 +190,8 @@
     }
 
     .gender-button.selected {
-        background-color: var(--secondary-color);
-        color: #fff;
+        background-color: #454545;
+        color: var(--primary-color);
     }
 
     .gender-button input[type='radio'] {
@@ -205,6 +206,27 @@
     .custom-btn {
         width: 150px;
         height: 38px;
+        position: relative;
         transition: 0.2s;
+        &::before {
+            content: '';
+            z-index: 1;
+            position: absolute;
+            inset: 0;
+            background-color: var(--hover-color);
+            transform-origin: center right;
+            transform: scaleX(0);
+            transition: transform 0.25s ease-in-out;
+        }
+
+        &:hover {
+            cursor: pointer;
+            color: #fff;
+        }
+
+        &:hover::before {
+            transform-origin: center left;
+            transform: scaleY(1);
+        }
     }
 }

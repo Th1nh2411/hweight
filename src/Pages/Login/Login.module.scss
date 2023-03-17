@@ -3,7 +3,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
+    position: relative;
+    background: #fff url('../../assets/images/BMI1.jpg') center center / cover no-repeat;
+    z-index: 0;
+    &::before {
+        z-index: -99;
+        content: '';
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: 100%;
+    }
 }
 .bg-wrapper {
     margin-right: 50px;
@@ -27,7 +38,8 @@
 }
 .form-container {
     padding: 50px 40px 25px;
-    border: 1px solid rgb(219, 219, 219);
+    // border: 1px solid rgb(219, 219, 219);
+    background-color: var(--card-bg-color);
     border-radius: 2px;
     margin-bottom: 10px;
     width: 400px;
@@ -150,6 +162,7 @@
     text-align: center;
     margin: 10px 0 0;
 }
+
 .custom-btn {
     width: 100%;
     border-radius: 6px;
@@ -165,12 +178,13 @@
 }
 /* Styles for the button when hovered */
 .sign-up {
+    background-color: var(--card-bg-color);
     margin-top: 10px;
-    border: 1px solid rgb(219, 219, 219);
     padding: 18px;
     border-radius: 2px;
     font-size: 1.4rem;
     text-align: center;
+    color: var(--secondary-color);
 }
 .sign-up-label {
     margin-left: 8px;
