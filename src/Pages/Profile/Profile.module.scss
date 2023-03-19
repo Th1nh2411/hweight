@@ -3,17 +3,29 @@
     position: relative;
 }
 .card-item {
-    padding: 30px 40px;
     margin: 30px 0 30px 40px;
     width: 720px;
-    border-radius: 10px;
+    border-radius: 6px;
+    position: relative;
     background-color: var(--card-bg-color);
+    overflow: hidden;
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        border-radius: 50%;
+        box-shadow: 98px 53px 1200px 80px #ff6200;
+    }
 }
 .card-header {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     justify-content: space-between;
+    background-color: #211e1f;
+    padding: 30px 40px 15px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }
 .update-icon {
     font-size: 2.2rem;
@@ -22,6 +34,9 @@
 }
 .card-body {
     flex: 1;
+    padding: 10px 40px 0;
+    z-index: 10000;
+    position: relative;
 }
 .title {
     color: var(--primary-color);
@@ -31,137 +46,12 @@
 .body-index {
     display: flex;
     justify-content: space-between;
-    .input-container {
+    .body-index-input {
         flex: 1;
         max-width: 48%;
     }
 }
-.input-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    font-weight: 600;
-    margin-bottom: 12px;
-    &.error {
-        margin-bottom: 35px;
-    }
-    &.error input:focus {
-        border: 1px solid red !important;
-    }
-    &.error input:focus ~ span:before,
-    &.error input:focus ~ span:after,
-    &.error input:focus ~ span i:before,
-    &.error input:focus ~ span i:after {
-        background-color: red !important;
-    }
-    input {
-        padding: 16px;
-        transition: 0.4s;
-        color: var(--secondary-color);
-        font-size: 2rem;
-        font-weight: 600;
-        background-color: #454545;
-    }
 
-    input:focus {
-        outline: none;
-    }
-    .hasValue {
-        padding: 26px 12px 6px;
-    }
-    input ~ span:before,
-    input ~ span:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: var(--secondary-color);
-        transition: 0.2s;
-    }
-
-    input ~ span:after {
-        top: auto;
-        bottom: 0;
-        left: auto;
-        right: 0;
-    }
-
-    input ~ span i:before,
-    input ~ span i:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 0;
-        background-color: var(--secondary-color);
-        transition: 0.4s;
-    }
-
-    input ~ span i:after {
-        left: auto;
-        right: 0;
-        top: auto;
-        bottom: 0;
-    }
-
-    input:focus ~ span:before,
-    input:focus ~ span:after {
-        width: 100%;
-        transition: 0.2s;
-    }
-
-    input:focus ~ span i:before,
-    input:focus ~ span i:after {
-        height: 100%;
-        transition: 0.4s;
-    }
-
-    input ~ p {
-        position: absolute;
-        left: 18px;
-        top: 16px;
-        color: #aaa;
-        transition: 0.2s;
-        letter-spacing: 0.5px;
-        font-size: 1.8rem;
-        pointer-events: none;
-    }
-
-    .hasValue ~ p {
-        top: 5px;
-        left: 12px;
-        font-size: 1.3rem;
-        color: var(--secondary-color);
-        transition: 0.2s;
-        color: #a8a8a8;
-    }
-    .unit {
-        display: none;
-    }
-    .hasValue ~ .unit {
-        position: absolute;
-        display: block;
-        bottom: 5px;
-        right: 10px;
-        font-size: 2rem;
-        color: var(--secondary-color);
-        transition: 0.2s;
-        color: #a8a8a8;
-    }
-    input:not(:focus) ~ p {
-        color: #aaa;
-    }
-    .error-message {
-        color: red;
-        font-size: 1.3rem;
-        position: absolute;
-        bottom: -24px;
-        left: 0;
-    }
-}
 .gender-button-container {
     display: flex;
     flex-direction: row;
@@ -174,7 +64,7 @@
         align-items: center;
         justify-content: center;
         color: var(--secondary-color);
-        border: 2px solid #454545;
+        border: 2px solid #333131;
         border-radius: 4px;
         width: 48%;
         height: 50px;
@@ -190,7 +80,7 @@
     }
 
     .gender-button.selected {
-        background-color: #454545;
+        background-color: #333131;
         color: var(--primary-color);
     }
 
@@ -202,7 +92,7 @@
 .card-footer {
     display: flex;
     justify-content: end;
-    margin-top: 30px;
+    padding: 30px 40px;
     .custom-btn {
         width: 150px;
         height: 38px;

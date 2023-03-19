@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import * as loginServices from '../../services/loginService';
+import Input from '../../components/Input/Input';
 
 const cx = classNames.bind(styles);
 const Login = () => {
@@ -49,41 +50,29 @@ const Login = () => {
                     <img src={images.logo} className={cx('logo')} alt="logo-img" />
 
                     <form onSubmit={handleSubmit} className={cx('form-body')}>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', username ? 'hasValue' : '')}
-                                type="email"
-                                required
-                                value={username}
-                                onChange={(event) => {
-                                    setUsername(event.target.value);
-                                }}
-                            />
-                            <p>Your Email</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
+                        <Input
+                            onChange={(event) => {
+                                setUsername(event.target.value);
+                                setErrorMessage('');
+                            }}
+                            value={username}
+                            title="Your Email"
+                        />
 
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', password ? 'hasValue' : '')}
-                                type="password"
-                                id="password"
-                                name="password"
-                                required
-                                value={password}
-                                onChange={(event) => setPassword(event.target.value)}
-                            />
-                            <p>Password</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
+                        <Input
+                            onChange={(event) => {
+                                setPassword(event.target.value);
+                                setErrorMessage('');
+                            }}
+                            value={password}
+                            title="Your Password"
+                            errorMessage={errorMessage}
+                            errorCondition={errorMessage}
+                            type="password"
+                        />
                         <Button className={cx('custom-btn')} primary type="submit">
                             Sign In
                         </Button>
-                        <div className={cx('error-message')}>{errorMessage}</div>
                         <Link to={config.routes.forgot} className={cx('forgot-pw')}>
                             Forgot password?
                         </Link>

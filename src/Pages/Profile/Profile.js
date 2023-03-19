@@ -5,6 +5,7 @@ import * as profileService from '../../services/profileService';
 import styles from './Profile.module.scss';
 import Button from '../../components/Button';
 import Toast from '../../components/Toast';
+import Input from '../../components/Input/Input';
 
 const cx = classNames.bind(styles);
 
@@ -143,49 +144,32 @@ function Profile() {
                     <div className={cx('title')}>Personal Information</div>
                 </div>
                 <div className={cx('card-body')}>
-                    <div className={cx('input-container')}>
-                        <input
-                            className={cx('form-input', name ? 'hasValue' : '')}
-                            type="text"
-                            value={name}
-                            onChange={(event) => {
-                                setName(event.target.value);
-                                setChangePIValue(true);
-                            }}
-                        />
-                        <p>Your name</p>
-                        <span>
-                            <i />
-                        </span>
-                    </div>
-
+                    <Input
+                        onChange={(event) => {
+                            setName(event.target.value);
+                            setChangePIValue(true);
+                        }}
+                        value={name}
+                        title="Your name"
+                        type="text"
+                    />
                     <div className={cx('body-index')}>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', height ? 'hasValue' : '')}
-                                type="text"
-                                value={height}
-                                onChange={handleOnchangeHeight}
-                            />
-                            <p>Your height</p>
-                            <div className={cx('unit')}>cm</div>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', weight ? 'hasValue' : '')}
-                                type="text"
-                                value={weight}
-                                onChange={handleOnchangeWeight}
-                            />
-                            <p>Your weight</p>
-                            <div className={cx('unit')}>kg</div>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
+                        <Input
+                            onChange={handleOnchangeHeight}
+                            value={height}
+                            title="Your height"
+                            type="text"
+                            unit="cm"
+                            className={cx('body-index-input')}
+                        />
+                        <Input
+                            onChange={handleOnchangeWeight}
+                            value={weight}
+                            title="Your weight"
+                            type="text"
+                            unit="kg"
+                            className={cx('body-index-input')}
+                        />
                     </div>
                     <div className={cx('gender-button-container')}>
                         <label className={cx('gender-button', gender === '1' && 'selected')}>
@@ -233,69 +217,37 @@ function Profile() {
                     <div className={cx('title')}>Change Password</div>
                 </div>
                 <div className={cx('card-body')}>
-                    <div className={cx('input-container', { error: CPSuccess === 0 })}>
-                        <input
-                            className={cx('form-input', {
-                                hasValue: currentPassword,
-                            })}
-                            type="password"
-                            value={currentPassword}
-                            onChange={(event) => {
-                                if (unaccentedCharacters(event.target.value)) {
-                                    setCurrentPassword(event.target.value);
-                                    setCPSuccess();
-                                }
-                            }}
-                        />
-                        <p>Your current password</p>
-                        <span>
-                            <i />
-                        </span>
-                        {CPSuccess === 0 && (
-                            <div className={cx('error-message')}>Incorrect current password. Please try again.</div>
-                        )}
-                    </div>
+                    <Input
+                        onChange={(event) => {
+                            if (unaccentedCharacters(event.target.value)) {
+                                setCurrentPassword(event.target.value);
+                                setCPSuccess();
+                            }
+                        }}
+                        value={currentPassword}
+                        title="Your current password"
+                        type="password"
+                        errorCondition={CPSuccess === 0}
+                        errorMessage="Incorrect current password. Please try again."
+                    />
 
-                    <div className={cx('input-container', { error: invalidPassword(newPassword) })}>
-                        <input
-                            className={cx('form-input', {
-                                hasValue: newPassword,
-                            })}
-                            type="password"
-                            value={newPassword}
-                            onChange={handleOnChangeNewPassword}
-                        />
-                        <p>New password</p>
-                        <span>
-                            <i />
-                        </span>
-                        {invalidPassword(newPassword) && (
-                            <div className={cx('error-message')}>Password must have at least 6 characters</div>
-                        )}
-                    </div>
+                    <Input
+                        onChange={handleOnChangeNewPassword}
+                        value={newPassword}
+                        title="New password"
+                        type="password"
+                        errorCondition={invalidPassword(newPassword)}
+                        errorMessage="Password must have at least 6 characters"
+                    />
 
-                    <div
-                        className={cx('input-container', {
-                            error: !invalidPassword(newPassword) && invalidConfirmPw(confirmPassword),
-                        })}
-                    >
-                        <input
-                            className={cx('form-input', {
-                                hasValue: confirmPassword,
-                            })}
-                            type="password"
-                            value={confirmPassword}
-                            onChange={handleOnChangeConfirmPw}
-                            onFocus={() => {}}
-                        />
-                        <p>Confirm new password</p>
-                        <span>
-                            <i />
-                        </span>
-                        {!invalidPassword(newPassword) && invalidConfirmPw(confirmPassword) && (
-                            <div className={cx('error-message')}>Password confirmation does not match</div>
-                        )}
-                    </div>
+                    <Input
+                        onChange={handleOnChangeConfirmPw}
+                        value={confirmPassword}
+                        title="Confirm new password"
+                        type="password"
+                        errorCondition={!invalidPassword(newPassword) && invalidConfirmPw(confirmPassword)}
+                        errorMessage="Password confirmation does not match"
+                    />
                 </div>
                 <div className={cx('card-footer')}>
                     {changeCPValue && (
