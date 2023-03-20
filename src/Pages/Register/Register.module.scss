@@ -39,13 +39,10 @@
 }
 .form-container {
     padding: 50px 40px 25px;
-    border: 1px solid rgb(219, 219, 219);
-    border-radius: 2px;
     margin-bottom: 10px;
     width: 400px;
     display: flex;
     flex-direction: column;
-    background-color: var(--card-bg-color);
 }
 .form-body {
     margin-top: 32px;
@@ -127,12 +124,9 @@
 /* Styles for the button when hovered */
 .sign-up {
     margin-top: 10px;
-    border: 1px solid rgb(219, 219, 219);
     padding: 18px;
-    border-radius: 2px;
     font-size: 1.4rem;
     text-align: center;
-    background-color: var(--card-bg-color);
     color: var(--secondary-color);
 }
 .sign-up-label {

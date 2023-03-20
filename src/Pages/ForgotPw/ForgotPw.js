@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import * as loginServices from '../../services/loginService';
 import Input from '../../components/Input';
+import Card from '../../components/Card';
 const cx = classNames.bind(styles);
 const Login = () => {
     const navigate = useNavigate();
@@ -74,7 +75,7 @@ const Login = () => {
                 <img src={images.account} className={cx('bg-img')} alt="bg-img" />
             </div>
             <div className={cx('form-wrapper')}>
-                <div className={cx('form-container')}>
+                <Card className={cx('form-container')}>
                     <img src={images.logo} className={cx('logo')} alt="logo-img" />
                     <form
                         onSubmit={
@@ -82,19 +83,6 @@ const Login = () => {
                         }
                         className={cx('form-body')}
                     >
-                        {/* <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', inputValue ? 'hasValue' : '')}
-                                type={step === 1 ? 'email' : step === 2 ? 'text' : 'password'}
-                                required
-                                value={inputValue}
-                                onChange={(event) => setInputValue(event.target.value)}
-                            />
-                            <p>{step === 1 ? 'Your Email' : step === 2 ? 'OTP code' : 'New Password'}</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div> */}
                         {step === 1 || step === 2 ? (
                             <Input
                                 title={step === 1 ? 'Your Email' : 'OTP code'}
@@ -124,23 +112,7 @@ const Login = () => {
                                     errorCondition={invalidPassword(newPassword)}
                                     errorMessage="Password must have at least 6 characters"
                                 />
-                                {/* <div className={cx('input-container')}>
-                                    <input
-                                        className={cx('form-input', confirmPassword ? 'hasValue' : '')}
-                                        type="password"
-                                        required
-                                        value={confirmPassword}
-                                        onChange={(event) => {
-                                            if (unaccentedCharacters(event.target.value)) {
-                                                setConfirmPassword(event.target.value);
-                                            }
-                                        }}
-                                    />
-                                    <p>Confirm Password</p>
-                                    <span>
-                                        <i />
-                                    </span>
-                                </div> */}
+
                                 <Input
                                     title="Confirm Password"
                                     onChange={(event) => {
@@ -163,13 +135,13 @@ const Login = () => {
                             Sign In
                         </Link>
                     </form>
-                </div>
-                <div className={cx('sign-up')}>
+                </Card>
+                <Card className={cx('sign-up')}>
                     Don't have an account?
                     <Link to={config.routes.register} className={cx('sign-up-label')}>
                         Sign Up
                     </Link>
-                </div>
+                </Card>
             </div>
         </div>
     );

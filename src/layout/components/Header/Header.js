@@ -9,10 +9,12 @@ import Image from '../../../components/Image';
 import Search from '../Search';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
+import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 function Header() {
     const navigate = useNavigate();
+    const [changeBg, setChangeBg] = useState(false);
     const currentUser = true;
     const USER_MENU = [
         {
@@ -43,8 +45,16 @@ function Header() {
                 console.log('default');
         }
     };
+    const scrollTrigger = 60;
+    window.onscroll = () => {
+        if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
+            setChangeBg(true);
+        } else {
+            setChangeBg(false);
+        }
+    };
     return (
-        <header className={cx('wrapper')}>
+        <header className={cx('wrapper', { changeBg })}>
             <div className={cx('inner')}>
                 <Link to={config.routes.dairy}>
                     <div className={cx('logo-wrapper')}>

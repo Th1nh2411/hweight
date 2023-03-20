@@ -13,13 +13,14 @@
     color: var(--text-color);
     border: 1px solid rgba(22, 24, 35, 0.12);
     font-weight: 600;
-    transition: color 0.4s ease-in-out;
+    transition: all 0.2s ease-in-out;
     overflow: hidden;
     .title {
         z-index: 10;
     }
     &:hover {
-        background-color: rgba(22, 24, 35, 0.06);
+        background-color: rgba(22, 24, 35);
+        color: var(--secondary-color);
     }
     + .wrapper {
         margin-left: 8px;

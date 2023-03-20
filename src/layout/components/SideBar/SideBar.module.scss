@@ -2,12 +2,11 @@
     padding: 20px 0 26px 8px;
     width: var(--sidebar-width);
     position: fixed;
-    box-shadow: 1px 0px 1px rgb(0, 0, 0, 0.12);
     height: 100vh;
     margin: 5px 0;
     border-radius: 6px;
 }
 .wrapper:hover {
-    background-color: var(--card-bg-color);
+    background-color: #211e1f;
     transition: 0.2s all;
 }

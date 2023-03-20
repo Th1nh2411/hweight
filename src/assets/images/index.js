@@ -1,5 +1,5 @@
 const images = {
-    logo: require('./logo.png'),
+    logo: require('./logo2.png'),
     defaultAvatar: require('./avatar.png'),
     mailBox: require('./mailIcon.svg').default,
     running: require('./running.png'),

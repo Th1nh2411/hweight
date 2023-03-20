@@ -10,9 +10,14 @@
         margin-left: 0;
         border: none;
         width: 100%;
+        background-color: transparent;
+        color: var(--secondary-color);
+        &:hover {
+            background-color: rgba(172, 172, 172, 0.08);
+        }
     }
     .separate {
-        border-top: 1px solid rgba(22, 24, 35, 0.12);
+        border-top: 1px solid rgba(172, 172, 172, 0.12);
     }
 }
 
