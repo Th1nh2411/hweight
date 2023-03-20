@@ -31,30 +31,18 @@
 .slogan {
     margin-top: 10px;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 800;
     font-size: 2rem;
 }
 .form-wrapper {
 }
 .form-container {
     padding: 50px 40px 25px;
-    // border: 1px solid rgb(219, 219, 219);
-    // background-color: var(--card-bg-color);
-    // border-radius: 2px;
+
     margin-bottom: 10px;
     width: 400px;
     display: flex;
     flex-direction: column;
-    // position: relative;
-    // overflow: hidden;
-    // &::before {
-    //     content: '';
-    //     position: absolute;
-    //     bottom: 0;
-    //     left: 0;
-    //     border-radius: 50%;
-    //     box-shadow: 65px -41px 1000px 120px rgba(255, 106, 0, 0.5);
-    // }
 }
 .form-body {
     margin-top: 32px;
@@ -77,6 +65,7 @@
     color: var(--primary-color);
     font-size: 1.4rem;
     display: block;
+    font-weight: 700;
 }
 /* Styles for the button when hovered */
 .sign-up {
@@ -85,6 +74,7 @@
     font-size: 1.4rem;
     text-align: center;
     color: var(--secondary-color);
+    font-weight: 700;
 }
 .sign-up-label {
     margin-left: 8px;

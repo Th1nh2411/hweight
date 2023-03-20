@@ -38,7 +38,17 @@
     src: url(https://fonts.gstatic.com/s/ibmplexsans/v14/zYX9KVElMYYaJe8bpLHnCwDKjWr7AI5sdO_q.woff2) format('woff2');
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
 }
-
+// Nunino fonts
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    src: url(../../assets/fonts/Nunito-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: 'Nunito';
+    font-style: italic;
+    src: url(../../assets/fonts/Nunito-Italic-VariableFont_wght.ttf);
+}
 :root {
     --primary-color: #f8a647;
     --secondary-color: #fff;
@@ -63,7 +73,7 @@ html {
     font-size: 62.5%;
 }
 body {
-    font-family: 'IBM Plex Sans', ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     color: var(--text-color);
@@ -87,7 +97,7 @@ input,
 [tabindex] {
     outline: none;
     border: none;
-    font-family: 'IBM Plex Sans', ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 a[href] {
     text-decoration: none;
