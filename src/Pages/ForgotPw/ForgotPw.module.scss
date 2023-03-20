@@ -3,7 +3,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
+    position: relative;
+    background: #fff url('../../assets/images/BMI1.jpg') center center / cover no-repeat;
+    z-index: 0;
+    &::before {
+        z-index: -99;
+        content: '';
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: 100%;
+    }
 }
 .bg-wrapper {
     margin-right: 80px;
@@ -22,6 +33,7 @@
     margin-bottom: 10px;
     width: 400px;
     display: flex;
+    background-color: var(--card-bg-color);
     flex-direction: column;
 }
 .form-body {
@@ -32,104 +44,6 @@
     object-fit: cover;
     margin: auto;
 }
-.input-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin-bottom: 10px;
-    font-weight: 600;
-
-    input {
-        border: 1px solid lightgray;
-        padding: 16px;
-        transition: 0.4s;
-        background: transparent;
-        color: var(--secondary-color);
-        font-weight: 600;
-        font-size: 1.6rem;
-    }
-
-    input:focus {
-        outline: none;
-    }
-    .hasValue {
-        padding: 24px 10px 8px;
-    }
-    input ~ span:before,
-    input ~ span:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: var(--secondary-color);
-        transition: 0.2s;
-    }
-
-    input ~ span:after {
-        top: auto;
-        bottom: 0;
-        left: auto;
-        right: 0;
-    }
-
-    input ~ span i:before,
-    input ~ span i:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 0;
-        background-color: var(--secondary-color);
-        transition: 0.4s;
-    }
-
-    input ~ span i:after {
-        left: auto;
-        right: 0;
-        top: auto;
-        bottom: 0;
-    }
-
-    input:focus ~ span:before,
-    input:focus ~ span:after {
-        width: 100%;
-        transition: 0.2s;
-    }
-
-    input:focus ~ span i:before,
-    input:focus ~ span i:after {
-        height: 100%;
-        transition: 0.4s;
-    }
-
-    input ~ p {
-        position: absolute;
-        left: 18px;
-        width: 100%;
-        top: 14px;
-        color: #aaa;
-        transition: 0.2s;
-        letter-spacing: 0.5px;
-        font-size: 1.6rem;
-        pointer-events: none;
-    }
-
-    .hasValue ~ p {
-        top: 4px;
-        left: 10px;
-        font-size: 1.2rem;
-        color: var(--secondary-color);
-        transition: 0.2s;
-        color: #a8a8a8;
-    }
-
-    input:not(:focus) ~ p {
-        color: #aaa;
-    }
-}
 
 /* Styles for the input when focused */
 
@@ -139,12 +53,7 @@
     height: 40px;
     margin-top: 15px;
 }
-.error-message {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 10px 0 5px;
-}
+
 .login-option {
     text-align: center;
     margin-top: 15px;
@@ -161,6 +70,8 @@
     border-radius: 2px;
     text-align: center;
     font-size: 1.4rem;
+    color: var(--secondary-color);
+    background-color: var(--card-bg-color);
 }
 .sign-up-label {
     margin-left: 8px;

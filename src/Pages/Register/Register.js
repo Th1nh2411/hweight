@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import { FaFemale, FaMale } from 'react-icons/fa';
 import * as registerService from '../../services/registerService';
+import Input from '../../components/Input/Input';
+import Card from '../../components/Card/Card';
 
 const cx = classNames.bind(styles);
 const Register = () => {
@@ -44,60 +46,35 @@ const Register = () => {
                 <div className={cx('slogan')}>Keep your body clean. Stay off the nicotine.</div>
             </div>
             <div className={cx('form-wrapper')}>
-                <div className={cx('form-container')}>
+                <Card className={cx('form-container')}>
                     <img src={images.logo} className={cx('logo')} alt="logo-img" />
                     <div className={cx('form-title')}>Sign up to manage your BMI and have a healthy weight.</div>
 
                     <form onSubmit={handleSubmit} className={cx('form-body')}>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', name ? 'hasValue' : '')}
-                                type="text"
-                                required
-                                value={name}
-                                onChange={(event) => {
-                                    setName(event.target.value);
-                                }}
-                            />
-                            <p>Your Full Name</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', username ? 'hasValue' : '')}
-                                type="email"
-                                required
-                                value={username}
-                                onChange={(event) => {
-                                    setUsername(event.target.value);
-                                }}
-                            />
-                            <p>Your Email</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
-                        <div className={cx('input-container')}>
-                            <input
-                                className={cx('form-input', {
-                                    hasValue: password,
-                                    error: password.length < 6 && password.length !== 0,
-                                })}
-                                type="password"
-                                required
-                                value={password}
-                                onChange={handleOnChangePassword}
-                            />
-                            <p>Password</p>
-                            <span>
-                                <i />
-                            </span>
-                        </div>
-                        {password.length < 6 && password.length !== 0 && (
-                            <div className={cx('error-message')}>{errorMessage}</div>
-                        )}
+                        <Input
+                            title="Your Full Name"
+                            onChange={(event) => {
+                                setName(event.target.value);
+                            }}
+                            value={name}
+                        />
+                        <Input
+                            title="Your Email"
+                            onChange={(event) => {
+                                setUsername(event.target.value);
+                            }}
+                            value={username}
+                            type="email"
+                        />
+                        <Input
+                            title="Password"
+                            onChange={handleOnChangePassword}
+                            value={password}
+                            type="password"
+                            errorCondition={password.length < 6 && password.length !== 0}
+                            errorMessage={errorMessage}
+                        />
+
                         <div className={cx('gender-button-container')}>
                             <label className={cx('gender-button', gender === '1' && 'selected')}>
                                 <FaMale className={cx('gender-icon')} />
@@ -114,13 +91,13 @@ const Register = () => {
                             Sign Up
                         </Button>
                     </form>
-                </div>
-                <div className={cx('sign-up')}>
+                </Card>
+                <Card className={cx('sign-up')}>
                     Already have an account?
                     <Link to={config.routes.login} className={cx('sign-up-label')}>
                         Sign In
                     </Link>
-                </div>
+                </Card>
             </div>
         </div>
     );

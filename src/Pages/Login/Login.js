@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import * as loginServices from '../../services/loginService';
 import Input from '../../components/Input/Input';
+import Card from '../../components/Card/Card';
 
 const cx = classNames.bind(styles);
 const Login = () => {
@@ -46,7 +47,7 @@ const Login = () => {
                 <div className={cx('slogan')}>Keep your body clean. Stay off the nicotine.</div>
             </div>
             <div className={cx('form-wrapper')}>
-                <div className={cx('form-container')}>
+                <Card className={cx('form-container')}>
                     <img src={images.logo} className={cx('logo')} alt="logo-img" />
 
                     <form onSubmit={handleSubmit} className={cx('form-body')}>
@@ -57,6 +58,7 @@ const Login = () => {
                             }}
                             value={username}
                             title="Your Email"
+                            type="email"
                         />
 
                         <Input
@@ -77,13 +79,13 @@ const Login = () => {
                             Forgot password?
                         </Link>
                     </form>
-                </div>
-                <div className={cx('sign-up')}>
+                </Card>
+                <Card className={cx('sign-up')}>
                     Don't have an account?
                     <Link to={config.routes.register} className={cx('sign-up-label')}>
                         Sign Up
                     </Link>
-                </div>
+                </Card>
             </div>
         </div>
     );

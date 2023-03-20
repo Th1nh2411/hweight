@@ -39,12 +39,22 @@
 .form-container {
     padding: 50px 40px 25px;
     // border: 1px solid rgb(219, 219, 219);
-    background-color: var(--card-bg-color);
-    border-radius: 2px;
+    // background-color: var(--card-bg-color);
+    // border-radius: 2px;
     margin-bottom: 10px;
     width: 400px;
     display: flex;
     flex-direction: column;
+    // position: relative;
+    // overflow: hidden;
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     border-radius: 50%;
+    //     box-shadow: 65px -41px 1000px 120px rgba(255, 106, 0, 0.5);
+    // }
 }
 .form-body {
     margin-top: 32px;
@@ -53,114 +63,6 @@
     width: 200px;
     object-fit: cover;
     margin: auto;
-}
-.input-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin-bottom: 12px;
-    font-weight: 600;
-
-    input {
-        border: 1px solid lightgray;
-        padding: 16px;
-        transition: 0.4s;
-        background: transparent;
-        color: var(--secondary-color);
-        font-weight: 600;
-        font-size: 1.6rem;
-    }
-    input.error {
-        border: 1px solid red !important;
-    }
-    input:focus {
-        outline: none;
-    }
-    .hasValue {
-        padding: 24px 10px 8px;
-    }
-    input ~ span:before,
-    input ~ span:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: var(--secondary-color);
-        transition: 0.2s;
-    }
-
-    input ~ span:after {
-        top: auto;
-        bottom: 0;
-        left: auto;
-        right: 0;
-    }
-
-    input ~ span i:before,
-    input ~ span i:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 0;
-        background-color: var(--secondary-color);
-        transition: 0.4s;
-    }
-
-    input ~ span i:after {
-        left: auto;
-        right: 0;
-        top: auto;
-        bottom: 0;
-    }
-
-    input:focus ~ span:before,
-    input:focus ~ span:after {
-        width: 100%;
-        transition: 0.2s;
-    }
-
-    input:focus ~ span i:before,
-    input:focus ~ span i:after {
-        height: 100%;
-        transition: 0.4s;
-    }
-
-    input ~ p {
-        position: absolute;
-        left: 18px;
-        width: 100%;
-        top: 14px;
-        color: #aaa;
-        transition: 0.2s;
-        letter-spacing: 0.5px;
-        font-size: 1.6rem;
-        pointer-events: none;
-    }
-
-    .hasValue ~ p {
-        top: 4px;
-        left: 10px;
-        font-size: 1.2rem;
-        color: var(--secondary-color);
-        transition: 0.2s;
-        color: #a8a8a8;
-    }
-
-    input:not(:focus) ~ p {
-        color: #aaa;
-    }
-}
-
-/* Styles for the input when focused */
-.error-message {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 10px 0 0;
 }
 
 .custom-btn {
@@ -178,10 +80,8 @@
 }
 /* Styles for the button when hovered */
 .sign-up {
-    background-color: var(--card-bg-color);
     margin-top: 10px;
     padding: 18px;
-    border-radius: 2px;
     font-size: 1.4rem;
     text-align: center;
     color: var(--secondary-color);

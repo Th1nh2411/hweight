@@ -1,0 +1,15 @@
+.wrapper {
+    border-radius: 6px;
+    position: relative;
+    background-color: var(--card-bg-color);
+    border: 1px solid rgb(63, 63, 63);
+    overflow: hidden;
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        box-shadow: 75px 27px 1000px 140px rgba(255, 106, 0, 0.5);
+    }
+}

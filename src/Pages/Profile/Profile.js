@@ -5,8 +5,8 @@ import * as profileService from '../../services/profileService';
 import styles from './Profile.module.scss';
 import Button from '../../components/Button';
 import Toast from '../../components/Toast';
-import Input from '../../components/Input/Input';
-
+import Input from '../../components/Input';
+import Card from '../../components/Card';
 const cx = classNames.bind(styles);
 
 function Profile() {
@@ -139,7 +139,7 @@ function Profile() {
     };
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('card-item')}>
+            <Card className={cx('card-item')}>
                 <div className={cx('card-header')}>
                     <div className={cx('title')}>Personal Information</div>
                 </div>
@@ -211,8 +211,8 @@ function Profile() {
                         Save
                     </Button>
                 </div>
-            </div>
-            <div className={cx('card-item')}>
+            </Card>
+            <Card className={cx('card-item')}>
                 <div className={cx('card-header')}>
                     <div className={cx('title')}>Change Password</div>
                 </div>
@@ -270,7 +270,7 @@ function Profile() {
                         Save
                     </Button>
                 </div>
-            </div>
+            </Card>
             {PISuccess && (
                 <Toast
                     title="Success"

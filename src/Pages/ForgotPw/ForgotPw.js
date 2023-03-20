@@ -6,26 +6,38 @@ import Button from '../../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import * as loginServices from '../../services/loginService';
-
+import Input from '../../components/Input';
 const cx = classNames.bind(styles);
 const Login = () => {
     const navigate = useNavigate();
-    const [inputValue, setInputValue] = useState('');
+    const [OTPMail, setOTPMail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [step, setStep] = useState(1);
+    const unaccentedCharacters = (input) => {
+        var regex = /^[a-zA-Z0-9]*$/;
+        return regex.test(input);
+    };
+    const invalidPassword = (input) => {
+        var regex = /^.{1,5}$/;
 
+        return regex.test(input);
+    };
+    const invalidConfirmPw = (input) => {
+        return input !== newPassword && input !== '';
+    };
     const handleSubmitUsername = (event) => {
         event.preventDefault();
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
             console.log(results);
             if (results.success) {
-                setInputValue('');
+                setOTPMail('');
                 setStep(2);
                 setErrorMessage('');
             } else {
-                setInputValue('');
+                setOTPMail('');
                 setErrorMessage("Account doesn't exist");
             }
         };
@@ -37,11 +49,11 @@ const Login = () => {
             const results = await loginServices.getToken();
             console.log(results);
             if (results.success) {
-                setInputValue('');
+                setOTPMail('');
                 setStep(3);
                 setErrorMessage('');
             } else {
-                setInputValue('');
+                setOTPMail('');
                 setErrorMessage('Wrong OTP code');
             }
         };
@@ -52,11 +64,7 @@ const Login = () => {
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
             console.log(results);
-            if (inputValue === confirmPassword) {
-                navigate(config.routes.login);
-            } else {
-                setErrorMessage('Your password and confirmation password do not match');
-            }
+            navigate(config.routes.login);
         };
         getTokenApi();
     };
@@ -74,7 +82,7 @@ const Login = () => {
                         }
                         className={cx('form-body')}
                     >
-                        <div className={cx('input-container')}>
+                        {/* <div className={cx('input-container')}>
                             <input
                                 className={cx('form-input', inputValue ? 'hasValue' : '')}
                                 type={step === 1 ? 'email' : step === 2 ? 'text' : 'password'}
@@ -86,26 +94,70 @@ const Login = () => {
                             <span>
                                 <i />
                             </span>
-                        </div>
+                        </div> */}
+                        {step === 1 || step === 2 ? (
+                            <Input
+                                title={step === 1 ? 'Your Email' : 'OTP code'}
+                                onChange={(event) => {
+                                    setOTPMail(event.target.value);
+                                    setErrorMessage();
+                                }}
+                                value={OTPMail}
+                                errorCondition={errorMessage}
+                                errorMessage={errorMessage}
+                                type={step === 1 ? 'email' : 'text'}
+                            />
+                        ) : (
+                            ''
+                        )}
                         {step === 3 && (
-                            <div className={cx('input-container')}>
-                                <input
-                                    className={cx('form-input', confirmPassword ? 'hasValue' : '')}
+                            <>
+                                <Input
+                                    onChange={(event) => {
+                                        if (unaccentedCharacters(event.target.value)) {
+                                            setNewPassword(event.target.value);
+                                        }
+                                    }}
+                                    value={newPassword}
+                                    title="New password"
                                     type="password"
-                                    required
-                                    value={confirmPassword}
-                                    onChange={(event) => setConfirmPassword(event.target.value)}
+                                    errorCondition={invalidPassword(newPassword)}
+                                    errorMessage="Password must have at least 6 characters"
                                 />
-                                <p>Confirm Password</p>
-                                <span>
-                                    <i />
-                                </span>
-                            </div>
+                                {/* <div className={cx('input-container')}>
+                                    <input
+                                        className={cx('form-input', confirmPassword ? 'hasValue' : '')}
+                                        type="password"
+                                        required
+                                        value={confirmPassword}
+                                        onChange={(event) => {
+                                            if (unaccentedCharacters(event.target.value)) {
+                                                setConfirmPassword(event.target.value);
+                                            }
+                                        }}
+                                    />
+                                    <p>Confirm Password</p>
+                                    <span>
+                                        <i />
+                                    </span>
+                                </div> */}
+                                <Input
+                                    title="Confirm Password"
+                                    onChange={(event) => {
+                                        if (unaccentedCharacters(event.target.value)) {
+                                            setConfirmPassword(event.target.value);
+                                        }
+                                    }}
+                                    value={confirmPassword}
+                                    errorCondition={!invalidPassword(newPassword) && invalidConfirmPw(confirmPassword)}
+                                    errorMessage="Password confirmation does not match"
+                                    type="password"
+                                />
+                            </>
                         )}
                         <Button className={cx('custom-btn')} primary type="submit">
                             {step === 1 ? 'Send OTP' : step === 2 ? 'Verify OTP' : 'Change Password'}
                         </Button>
-                        <div className={cx('error-message')}>{errorMessage}</div>
 
                         <Link to={config.routes.login} className={cx('login-option')}>
                             Sign In

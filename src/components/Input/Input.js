@@ -32,7 +32,7 @@ function Input({ errorMessage, errorCondition, value, onChange, title, type = 't
 }
 Input.propTypes = {
     errorMessage: PropTypes.string,
-    errorCondition: PropTypes.bool,
+    errorCondition: PropTypes.any,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     title: PropTypes.string,
