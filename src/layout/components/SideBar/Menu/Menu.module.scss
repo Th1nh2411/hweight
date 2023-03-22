@@ -13,6 +13,7 @@
     border-radius: 4px;
     transition: background-color ease-in-out 200ms;
     position: relative;
+    font-weight: 800;
     &.active {
         color: var(--primary-color);
         background-color: rgba(147, 111, 84, 0.388);
@@ -40,13 +41,13 @@
     }
 }
 .item-title {
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .active-icon,
 .icon {
     display: flex;
     align-items: center;
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 .icon {
     color: var(--secondary-color);

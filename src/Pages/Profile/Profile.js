@@ -22,15 +22,8 @@ function Profile() {
     const [changeCPValue, setChangeCPValue] = useState();
     const [PISuccess, setPISuccess] = useState();
     const [CPSuccess, setCPSuccess] = useState();
-    const getProfileData = async () => {
-        const token = localStorage.getItem('token');
-        const results = await profileService.getProfile(token);
-        setProfile(results);
-        setHeight(results.height);
-        setWeight(results.weight);
-        setName(results.name);
-        setGender(results.gender);
-    };
+    const [getDataSuccess, setGetDataSuccess] = useState(false);
+
     const handleUpdateProfileData = async () => {
         const token = localStorage.getItem('token');
         const results = await profileService.updateProfile({ name, height, weight, gender }, token);
@@ -38,6 +31,16 @@ function Profile() {
         setChangePIValue(false);
     };
     useEffect(() => {
+        const getProfileData = async () => {
+            const token = localStorage.getItem('token');
+            const results = await profileService.getProfile(token);
+            setProfile(results);
+            setHeight(results.height);
+            setWeight(results.weight);
+            setName(results.name);
+            setGender(results.gender);
+            setGetDataSuccess(true);
+        };
         getProfileData();
     }, []);
     const onlyNumber = (input) => {
@@ -57,8 +60,8 @@ function Profile() {
     };
     const handleOnChangeGender = (event) => {
         if (event.target.value !== gender) {
+            setGender(event.target.value);
         }
-        setGender(event.target.value);
     };
     const handleCancelPI = () => {
         setHeight(profileData.height);
@@ -71,15 +74,17 @@ function Profile() {
         setPISuccess(true);
     };
     useEffect(() => {
-        if (
-            profileData.name !== name ||
-            profileData.height !== height ||
-            profileData.weight !== weight ||
-            profileData.gender !== gender
-        ) {
-            setChangePIValue(true);
-        } else {
-            setChangePIValue(false);
+        if (getDataSuccess) {
+            if (
+                profileData.name !== name ||
+                profileData.height !== height ||
+                profileData.weight !== weight ||
+                profileData.gender !== gender
+            ) {
+                setChangePIValue(true);
+            } else {
+                setChangePIValue(false);
+            }
         }
     }, [name, height, weight, gender]);
 

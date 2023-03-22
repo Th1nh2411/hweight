@@ -1,0 +1,65 @@
+.wrapper {
+    min-width: 300px;
+    background-color: #595959;
+    padding: 10px;
+}
+.calendar {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.header {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+}
+.nav-day-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.dateTime {
+    margin: 0 30px;
+}
+.nav {
+}
+
+.day-container {
+    display: flex;
+    width: 300px;
+    flex-wrap: wrap;
+    padding: 0px 10px;
+}
+.week-cell {
+    flex-basis: calc(100% / 7 - 5px); /* 5px là khoảng cách giữa các phần tử */
+    margin: 2px 5px 2px 0; /* khoảng cách giữa các dòng */
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.day-cell {
+    flex-basis: calc(100% / 7 - 5px); /* 5px là khoảng cách giữa các phần tử */
+    margin: 2px 5px 2px 0;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.85;
+    }
+}
+.day-cell--faded {
+    color: #595959;
+}
+.day-cell--in-month {
+}
+.day-cell--selected {
+    background-color: rgba(249, 188, 130, 0.792);
+    border-radius: 4px;
+}
+.day-cell--today {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}

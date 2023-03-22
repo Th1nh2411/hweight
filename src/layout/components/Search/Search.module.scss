@@ -5,7 +5,7 @@
 .search-title {
     color: rgba(22, 24, 35, 0.5);
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 700;
     padding: 2px 16px;
 }
 .search {
@@ -23,6 +23,7 @@
         background-color: transparent;
         color: var(--secondary-color);
         height: 100%;
+        font-weight: 600;
         caret-color: var(--primary-color);
     }
     input:not(:placeholder-shown) ~ .search-btn {
@@ -79,10 +80,10 @@
     color: rgba(255, 255, 255, 0.508);
     background-color: #333131;
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
+        background-color: rgba(254, 254, 254, 0.08);
         cursor: pointer;
     }
     &:active {
-        background-color: rgba(22, 24, 35, 0.06);
+        background-color: rgba(101, 101, 101, 0.06);
     }
 }
