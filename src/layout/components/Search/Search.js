@@ -5,7 +5,7 @@ import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { IoSearch } from 'react-icons/io5';
 import PopperWrapper from '../../../components/Popper';
-import AccountItem from '../../../components/AccountItem';
+import Item from '../../../components/Item';
 import { useDebounce } from '../../../hooks';
 import * as searchServices from '../../../services/searchService';
 
@@ -59,7 +59,7 @@ function Search() {
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Accounts</h4>
                             {searchResult.map((data) => (
-                                <AccountItem key={data.id} data={data} />
+                                <Item key={data.id} data={data} />
                             ))}
                         </PopperWrapper>
                     </div>

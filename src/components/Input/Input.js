@@ -12,7 +12,6 @@ function Input({ errorMessage, errorCondition, value, onChange, title, type = 't
                 className={cx('form-input', {
                     hasValue: value,
                 })}
-                id="input"
                 type={type}
                 value={value}
                 onChange={onChange}

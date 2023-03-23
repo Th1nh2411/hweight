@@ -1,0 +1,45 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 15px 10px;
+    transition: all 0.3s;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.109);
+        cursor: pointer;
+    }
+}
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.desc {
+    margin-left: 18px;
+}
+
+.name {
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    line-height: 2rem;
+    margin-bottom: 4px;
+}
+.time {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #979797;
+}
+.more-btn {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-right: 10px;
+}

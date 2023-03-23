@@ -5,7 +5,6 @@ import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
 
 import { JumpRopeIcon, DairyIcon, RecipeIcon } from '../../../components/Icons/Icons';
-import AccountList from '../../../components/AccountList';
 import { useEffect, useState } from 'react';
 import { RiUserFill } from 'react-icons/ri';
 import { IoLogOut } from 'react-icons/io5';

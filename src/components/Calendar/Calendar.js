@@ -15,8 +15,13 @@ function Calendar({ children, className }) {
     const thisYear = dayObj.year();
     const thisMonth = dayObj.month(); // (January as 0, December as 11)
     const calendarRef = useRef();
+    const headerRef = useRef();
     const handleDocumentClick = (event) => {
-        if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        if (
+            calendarRef.current &&
+            !calendarRef.current.contains(event.target) &&
+            !headerRef.current.contains(event.target)
+        ) {
             setShowFullCalendar(false);
         }
     };
@@ -37,31 +42,26 @@ function Calendar({ children, className }) {
         return (
             <TippyHeadless
                 visible={showFullCalendar}
-                offset={[30, 0]}
+                offset={[0, 6]}
                 delay={[0, 400]}
                 interactive
                 placement="bottom-end"
                 render={renderDayItems}
             >
-                <div ref={calendarRef} className={cx('wrapper', className)} tabIndex="-1">
-                    <div className={cx('calendar')}>
-                        <div className={cx('header')}>
-                            <button onClick={handlePrev} type="button" className={cx('nav-day-btn')}>
-                                <AiOutlineLeft />
-                            </button>
-                            <div onClick={() => setShowFullCalendar((prev) => !prev)} className={cx('dateTime')}>
-                                {dayObj.format('MMM DD YYYY')}
-                            </div>
-                            <button onClick={handleNext} type="button" className={cx('nav-day-btn')}>
-                                <AiOutlineRight />
-                            </button>
-                        </div>
+                <div ref={headerRef} className={cx('wrapper', className)} tabIndex="-1">
+                    <button onClick={handlePrev} type="button" className={cx('nav-day-btn')}>
+                        <AiOutlineLeft />
+                    </button>
+                    <div onClick={() => setShowFullCalendar((prev) => !prev)} className={cx('dateTime')}>
+                        {dayObj.format('DD MMMM YYYY')}
                     </div>
+                    <button onClick={handleNext} type="button" className={cx('nav-day-btn')}>
+                        <AiOutlineRight />
+                    </button>
                 </div>
             </TippyHeadless>
         );
     };
-    console.log(showFullCalendar);
     const renderDayItems = (attrs) => {
         const daysInMonth = dayObj.daysInMonth();
 

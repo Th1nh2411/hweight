@@ -193,6 +193,7 @@ export const RecipeIcon = ({ width = '2.2rem', height = '2.2rem', className }) =
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 50 50"
         stroke="#000000"
+        className={className}
     >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
