@@ -8,7 +8,6 @@ import { AiOutlineRightCircle } from 'react-icons/ai';
 const cx = classNames.bind(styles);
 
 function Item({ data, className, showTippy = false }) {
-    console.log(showTippy);
     return (
         <div>
             <Link to={`/@/${data.id}`} className={cx(className, 'wrapper')}>

@@ -32,7 +32,6 @@ const Login = () => {
         event.preventDefault();
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
-            console.log(results);
             if (results.success) {
                 setOTPMail('');
                 setStep(2);
@@ -48,7 +47,6 @@ const Login = () => {
         event.preventDefault();
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
-            console.log(results);
             if (results.success) {
                 setOTPMail('');
                 setStep(3);
@@ -64,7 +62,6 @@ const Login = () => {
         event.preventDefault();
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
-            console.log(results);
             navigate(config.routes.login);
         };
         getTokenApi();

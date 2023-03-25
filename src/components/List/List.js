@@ -6,12 +6,12 @@ import { useState } from 'react';
 import { RiEditFill } from 'react-icons/ri';
 
 const cx = classNames.bind(styles);
-function List({ title, subtitle, children }) {
+function List({ title, subtitle, edit = false, onClickEdit, children }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
                 <h5 className={cx('title')}>
-                    {title} <RiEditFill className={cx('title-icon')} />
+                    {title} {edit && <RiEditFill onClick={onClickEdit} className={cx('title-icon')} />}
                 </h5>
                 <span className={cx('subtitle')}>{subtitle}</span>
             </div>

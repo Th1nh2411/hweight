@@ -24,7 +24,6 @@ const Register = () => {
 
         const postApi = async () => {
             const results = await registerService.register({ username, password, name, gender });
-            console.log(results);
         };
         postApi();
         navigate(config.routes.dairy);

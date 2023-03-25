@@ -21,13 +21,11 @@ const Login = () => {
 
         const postApi = async () => {
             const results = await loginServices.login({ username, password });
-            console.log(results);
         };
         postApi();
         const getTokenApi = async () => {
             const results = await loginServices.getToken();
 
-            console.log(results);
             if (results.success) {
                 localStorage.setItem('token', results.token);
                 navigate(config.routes.dairy);

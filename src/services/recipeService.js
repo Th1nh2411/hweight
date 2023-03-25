@@ -12,6 +12,18 @@ export const getRecipe = async (token) => {
         return [];
     }
 };
+export const getMenu = async (token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+        const res = await httpRequest.get(`menu`, config);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const updateRecipe = async (data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },
