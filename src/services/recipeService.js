@@ -6,7 +6,7 @@ export const getRecipe = async (token) => {
     };
     try {
         const res = await httpRequest.get(`recipe`, config);
-        return res;
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -24,12 +24,36 @@ export const getMenu = async (token) => {
         return [];
     }
 };
+export const deleteRecipe = async (token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+        const res = await httpRequest.del(`recipe`);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+export const postRecipe = async (data, token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+        const res = await httpRequest.post(`recipe`, data);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const updateRecipe = async (data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.patch(`recipe`, data, config);
+        const res = await httpRequest.put(`recipe`, { data });
         return res;
     } catch (error) {
         console.log(error);

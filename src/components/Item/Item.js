@@ -1,16 +1,21 @@
-import PropTypes from 'prop-types';
 import styles from './Item.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
 import { Link } from 'react-router-dom';
-import { CheckIcon } from '../Icons/Icons';
 import { AiOutlineRightCircle } from 'react-icons/ai';
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import { useState } from 'react';
 const cx = classNames.bind(styles);
 
-function Item({ data, className, showTippy = false }) {
+function Item({ data, selected = false, editing = false, onChangeEditing, disableInput = false, className }) {
+    const [checked, setChecked] = useState(selected);
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+        onChangeEditing(event, data);
+    };
     return (
         <div>
-            <Link to={`/@/${data.id}`} className={cx(className, 'wrapper')}>
+            <Link to={`/@/${data.id}`} className={cx('wrapper', className, { selected: checked })}>
                 <div className={cx('info')}>
                     <Image src={data.img} alt={data.name} className={cx('avatar')} />
                     <div className={cx('desc')}>
@@ -23,13 +28,28 @@ function Item({ data, className, showTippy = false }) {
                     </div>
                 </div>
                 <div className={cx('more-btn')}>
+                    {editing && (
+                        <label
+                            onClick={(event) => {
+                                event.stopPropagation();
+                            }}
+                            className={cx('item-checkbox')}
+                        >
+                            <input
+                                type="checkbox"
+                                disabled={disableInput && !checked}
+                                name={data.id}
+                                checked={checked}
+                                onChange={handleChange}
+                            />
+                            {checked ? <AiOutlineMinusCircle /> : <AiOutlinePlusCircle />}
+                        </label>
+                    )}
                     <AiOutlineRightCircle />
                 </div>
             </Link>
         </div>
     );
 }
-Item.propTypes = {
-    data: PropTypes.object.isRequired,
-};
+
 export default Item;
