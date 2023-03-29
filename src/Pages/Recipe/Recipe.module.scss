@@ -35,25 +35,3 @@
     padding: 30px 40px 0;
     width: 500px;
 }
-.menu-list {
-    max-height: 450px;
-    overflow-y: scroll;
-    position: relative;
-    animation: slideIn linear 0.2s;
-}
-.menu-btn {
-    margin: 30px 10px 10px;
-    display: flex;
-    justify-content: end;
-}
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(calc(-20px));
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
