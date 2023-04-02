@@ -9,15 +9,17 @@ import * as recipeService from '../../services/recipeService';
 import { RecipeIcon } from '../../components/Icons/Icons';
 import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
+import dayjs from 'dayjs';
 
 const cx = classNames.bind(styles);
 
 function Recipe() {
+    const [dayObj, setDayObj] = useState(dayjs());
     const [recipes, setRecipes] = useState([]);
     const [menu, setMenu] = useState([]);
-    const getRecipesData = async () => {
+    const getRecipesData = async (day) => {
         const token = localStorage.getItem('token');
-        const results = await recipeService.getRecipe(token);
+        const results = await recipeService.getRecipe(day, token);
         setRecipes(results);
     };
     const getMenuData = async () => {
@@ -26,11 +28,21 @@ function Recipe() {
         setMenu(results);
     };
     useEffect(() => {
-        getRecipesData();
-    }, []);
+        getRecipesData(dayObj.format('DDMMYYYY'));
+    }, [dayObj]);
     useEffect(() => {
         getMenuData();
     }, []);
+    useEffect(() => {
+        console.log(recipes, menu);
+        recipes.forEach((recipe) => {
+            menu.forEach((item) => {
+                if (recipe.id === item.id) {
+                    setRecipes([...recipes, { id: recipe.id, ...item }]);
+                }
+            });
+        });
+    }, [menu]);
     const handleSubmitEdit = (type) => async (checkedItems) => {
         const newRecipes = recipes
             .filter((item) => item.type !== type)
@@ -41,9 +53,10 @@ function Recipe() {
             );
         setRecipes(newRecipes);
         const token = localStorage.getItem('token');
-        console.log(recipes);
-        const results = await recipeService.updateRecipe(newRecipes, token);
-        console.log(results);
+        const results = await recipeService.updateRecipes(newRecipes, dayObj.format('DDMMYYYY'), token);
+    };
+    const handleDayChange = (dayChange) => {
+        setDayObj(dayChange);
     };
 
     return (
@@ -52,7 +65,7 @@ function Recipe() {
                 <div className={cx('title')}>
                     Daily Recipe <RecipeIcon height="30px" className={cx('title-icon')} width="30px" />
                 </div>
-                <Calendar />
+                <Calendar onDayChange={handleDayChange} />
             </div>
             <div className={cx('body')}>
                 <RecipeList
@@ -62,6 +75,7 @@ function Recipe() {
                     listData={recipes.filter((recipe) => recipe.type === 1)}
                     title="Breakfast"
                     subtitle="200kcal"
+                    dayObj={dayObj}
                 />
                 <RecipeList
                     menuData={menu}

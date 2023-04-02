@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 function Modal({ className, handleCloseModal, children }) {
     const overlayRef = useRef();
     const handleDocumentClick = (event) => {
-        console.log(!!overlayRef.current, overlayRef.current.contains(event.target));
         if (overlayRef.current && overlayRef.current.contains(event.target)) {
             handleCloseModal();
         }

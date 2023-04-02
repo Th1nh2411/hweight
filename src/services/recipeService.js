@@ -1,11 +1,11 @@
 import * as httpRequest from '../utils/httpRequest';
 
-export const getRecipe = async (token) => {
+export const getRecipe = async (day, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.get(`recipe`, config);
+        const res = await httpRequest.get(`recipe/${day}`, config);
         return res.data;
     } catch (error) {
         console.log(error);
@@ -36,24 +36,36 @@ export const deleteRecipe = async (token) => {
         return [];
     }
 };
-export const postRecipe = async (data, token) => {
+export const updateMenuItem = async (id, data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.post(`recipe`, data);
+        const res = await httpRequest.patch(`menu/${id}`, data);
         return res;
     } catch (error) {
         console.log(error);
         return [];
     }
 };
-export const updateRecipe = async (data, token) => {
+export const updateRecipesItem = async (day, id, data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.put(`recipe`, { data });
+        const res = await httpRequest.patch(`recipe/${day}/${id}`, data);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+export const updateRecipes = async (data, day, token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+        const res = await httpRequest.put(`recipe/${day}`, { data });
         return res;
     } catch (error) {
         console.log(error);

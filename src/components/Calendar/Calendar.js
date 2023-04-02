@@ -9,7 +9,7 @@ import Popper from '../Popper';
 const cx = classNames.bind(styles);
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const todayObj = dayjs();
-function Calendar({ children, className }) {
+function Calendar({ onDayChange, children, className }) {
     const [dayObj, setDayObj] = useState(dayjs());
     const [showFullCalendar, setShowFullCalendar] = useState(false);
     const thisYear = dayObj.year();
@@ -31,6 +31,9 @@ function Calendar({ children, className }) {
             document.removeEventListener('click', handleDocumentClick);
         };
     }, []);
+    useEffect(() => {
+        onDayChange(dayObj);
+    }, [dayObj]);
     const renderCalendarHeader = () => {
         const handlePrev = () => {
             setDayObj(dayObj.subtract(1, 'day'));

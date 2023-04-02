@@ -5,6 +5,7 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 8px;
 }
 .title {
@@ -23,6 +24,19 @@
 
 .subtitle {
     color: #979797;
+    .icon {
+        margin-right: 10px;
+        color: var(--primary-color);
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+.message {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin: -8px 0 4px;
 }
 .body {
 }
