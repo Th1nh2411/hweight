@@ -33,16 +33,16 @@ function Recipe() {
     useEffect(() => {
         getMenuData();
     }, []);
-    useEffect(() => {
-        console.log(recipes, menu);
-        recipes.forEach((recipe) => {
-            menu.forEach((item) => {
-                if (recipe.id === item.id) {
-                    setRecipes([...recipes, { id: recipe.id, ...item }]);
-                }
-            });
-        });
-    }, [menu]);
+    // useEffect(() => {
+    //     console.log(recipes, menu);
+    //     recipes.forEach((recipe) => {
+    //         menu.forEach((item) => {
+    //             if (recipe.id === item.id) {
+    //                 setRecipes([...recipes, { id: recipe.id, ...item }]);
+    //             }
+    //         });
+    //     });
+    // }, [menu]);
     const handleSubmitEdit = (type) => async (checkedItems) => {
         const newRecipes = recipes
             .filter((item) => item.type !== type)
