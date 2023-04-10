@@ -1,10 +1,11 @@
-import styles from './List.module.scss';
+import styles from './RecipeList.module.scss';
 import classNames from 'classnames/bind';
-import { RiEditFill } from 'react-icons/ri';
-import RecipeItem from '../Item/Item';
+import { RiEditFill, RiQuestionLine } from 'react-icons/ri';
+import RecipeItem from '../RecipeItem/RecipeItem';
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { FaUndo } from 'react-icons/fa';
+import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(styles);
 function List({ title, edit = false, listData, menuData, onEditDone, dayObj, children, className }) {
@@ -35,6 +36,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
         } else {
             setShowEdit(false);
             setCheckedItems([]);
+            setClear(false);
         }
     };
     useEffect(() => {
@@ -43,13 +45,13 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
             checkedItems.forEach((item) => {
                 numKcal += item.kcal;
             });
-            setSubtitle(`${numKcal} kcal`);
+            setSubtitle(numKcal);
         } else {
             let numKcal = 0;
             listData.forEach((item) => {
                 numKcal += item.kcal;
             });
-            setSubtitle(`${numKcal} kcal`);
+            setSubtitle(numKcal);
         }
     }, [showEdit, checkedItems, listData]);
     const handleCheckboxChange = (e, data) => {
@@ -79,20 +81,41 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
         <div className={cx('wrapper', className)}>
             <div className={cx('header')}>
                 <h5 className={cx('title')}>
-                    {title} {edit && <RiEditFill onClick={onClickEdit} className={cx('title-icon')} />}
-                </h5>
-                <span className={cx('subtitle')}>
-                    {showEdit && (
-                        <FaUndo
-                            onClick={() => {
-                                setCheckedItems([]);
-                                setClear(true);
-                            }}
-                            className={cx('icon')}
-                        />
+                    {title}
+                    {edit && (
+                        <Tippy placement="bottom" content={showEdit ? 'Cancel Edit' : 'Edit meals'}>
+                            <div className={cx('title-icon')}>
+                                <RiEditFill onClick={onClickEdit} />
+                            </div>
+                        </Tippy>
                     )}
-                    {subtitle}
-                </span>
+                </h5>
+                <div className={cx('subtitle')}>
+                    {showEdit && (
+                        <Tippy placement="bottom" content="Clear all meals">
+                            <div className={cx('clear-icon')}>
+                                <FaUndo
+                                    onClick={() => {
+                                        setCheckedItems([]);
+                                        setClear(true);
+                                    }}
+                                />
+                            </div>
+                        </Tippy>
+                    )}
+
+                    <div className={cx({ warning: subtitle > 800 })}>{subtitle} kcal</div>
+                    {subtitle > 800 && (
+                        <Tippy
+                            placement="bottom"
+                            content="Eating more than 1000 calories in a meal will likely cause a surplus of energy."
+                        >
+                            <div className={cx('warning-detail-icon')}>
+                                <RiQuestionLine />
+                            </div>
+                        </Tippy>
+                    )}
+                </div>
             </div>
             {checkedItems.length === 3 && <div className={cx('message')}>Up to 3 recipes</div>}
             <div className={cx('body')}>

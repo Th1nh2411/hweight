@@ -5,7 +5,7 @@ import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { IoSearch } from 'react-icons/io5';
 import PopperWrapper from '../../../components/Popper';
-import Item from '../../../components/Item';
+import Item from '../../../components/RecipeItem';
 import { useDebounce } from '../../../hooks';
 import * as searchServices from '../../../services/searchService';
 

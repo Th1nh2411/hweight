@@ -15,6 +15,8 @@
     .title-icon {
         margin-left: 10px;
         color: var(--primary-color);
+        display: flex;
+        align-items: center;
         cursor: pointer;
         &:hover {
             opacity: 0.8;
@@ -24,13 +26,30 @@
 
 .subtitle {
     color: #979797;
-    .icon {
+    display: flex;
+    align-items: center;
+    .clear-icon {
         margin-right: 10px;
         color: var(--primary-color);
+        display: flex;
+        align-items: center;
         cursor: pointer;
         &:hover {
             opacity: 0.8;
         }
+    }
+    .subtitle-text {
+        transition: all 1s ease-in-out;
+    }
+    .warning {
+        color: rgb(255, 89, 0);
+    }
+    .warning-detail-icon {
+        font-size: 1.8rem;
+        margin-left: 4px;
+        display: flex;
+        align-items: center;
+        color: rgb(255, 89, 0);
     }
 }
 .message {
@@ -60,5 +79,16 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

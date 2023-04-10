@@ -1,4 +1,4 @@
-import styles from './Item.module.scss';
+import styles from './RecipeItem.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
 import { Link } from 'react-router-dom';
@@ -114,21 +114,28 @@ function Item({
                 </div>
                 <div className={cx('more-btn')}>
                     {editing && (
-                        <label
-                            onClick={(event) => {
-                                event.stopPropagation();
-                            }}
-                            className={cx('item-checkbox')}
+                        <Tippy
+                            delay={[0, 0]}
+                            offset={[0, -4]}
+                            placement="bottom"
+                            content={checked ? 'Remove from meal' : 'Add to meal'}
                         >
-                            <input
-                                type="checkbox"
-                                disabled={disableInput && !checked}
-                                name={data.id}
-                                checked={checked}
-                                onChange={handleChange}
-                            />
-                            {checked ? <AiOutlineMinusCircle /> : <AiOutlinePlusCircle />}
-                        </label>
+                            <label
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                }}
+                                className={cx('item-checkbox')}
+                            >
+                                <input
+                                    type="checkbox"
+                                    disabled={disableInput && !checked}
+                                    name={data.id}
+                                    checked={checked}
+                                    onChange={handleChange}
+                                />
+                                {checked ? <AiOutlineMinusCircle /> : <AiOutlinePlusCircle />}
+                            </label>
+                        </Tippy>
                     )}
                     <AiOutlineRightCircle />
                 </div>
