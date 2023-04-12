@@ -1,5 +1,5 @@
 import Home from '../Pages/Home';
-import Activity from '../Pages/Activity';
+import Exercise from '../Pages/Exercise';
 import Profile from '../Pages/Profile';
 import Login from '../Pages/Login';
 import ForgotPw from '../Pages/ForgotPw';
@@ -10,7 +10,7 @@ import HeaderOnlyLayout from '../layout/HeaderOnlyLayout';
 
 export const publicRoutes = [
     { path: config.routes.dairy, component: Home },
-    { path: config.routes.activity, component: Activity },
+    { path: config.routes.exercise, component: Exercise },
     { path: config.routes.profile, component: Profile },
     { path: config.routes.recipe, component: Recipe },
     { path: config.routes.login, component: Login, layout: null },

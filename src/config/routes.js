@@ -1,6 +1,6 @@
 const routes = {
     dairy: '/',
-    activity: '/activity',
+    exercise: '/exercise',
     recipe: '/recipe',
     profile: '/@/:nickname',
     login: '/login',

@@ -1,4 +1,4 @@
-import styles from './RecipeItem.module.scss';
+import styles from './ExerciseItem.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 
 function Item({
     data,
+    day,
     clear = false,
     selected = false,
     editing = false,
@@ -39,6 +40,9 @@ function Item({
     const handleLike = () => {
         setIsLiked(!isLiked);
         const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
+        // if (day) {
+        //     const results = RecipeService.updateRecipesItem(day.format('DDMMYYYY'), data.id, { isLiked: !isLiked });
+        // }
         onLiked(data.id, !isLiked);
         console.log(results);
     };
@@ -104,7 +108,7 @@ function Item({
                             {data.name}
                         </h4>
                         <h5 id="time-eat" className={cx('time')}>
-                            {data.calories} calories
+                            {data.calories} kcal
                         </h5>
                     </div>
                 </div>

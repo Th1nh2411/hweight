@@ -2,7 +2,7 @@ import styles from './RecipeList.module.scss';
 import classNames from 'classnames/bind';
 import { RiEditFill, RiQuestionLine } from 'react-icons/ri';
 import RecipeItem from '../RecipeItem/RecipeItem';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../Button/Button';
 import { FaUndo } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
@@ -14,6 +14,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
     const [clear, setClear] = useState(false);
     const [menu, setMenu] = useState([]);
     const [subtitle, setSubtitle] = useState(0);
+
     const isSelected = (compareItem) => {
         return listData.some((item) => item.id === compareItem.id);
     };
@@ -41,17 +42,17 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
     };
     useEffect(() => {
         if (showEdit) {
-            let numKcal = 0;
+            let numCalo = 0;
             checkedItems.forEach((item) => {
-                numKcal += item.kcal;
+                numCalo += item.calories;
             });
-            setSubtitle(numKcal);
+            setSubtitle(numCalo);
         } else {
-            let numKcal = 0;
+            let numCalo = 0;
             listData.forEach((item) => {
-                numKcal += item.kcal;
+                numCalo += item.calories;
             });
-            setSubtitle(numKcal);
+            setSubtitle(numCalo);
         }
     }, [showEdit, checkedItems, listData]);
     const handleCheckboxChange = (e, data) => {
@@ -104,7 +105,9 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
                         </Tippy>
                     )}
 
-                    <div className={cx({ warning: subtitle > 800 })}>{subtitle} kcal</div>
+                    <div className={cx('invisible', 'subtitle-text', { warning: subtitle > 800 })}>
+                        {subtitle} calories
+                    </div>
                     {subtitle > 800 && (
                         <Tippy
                             placement="bottom"

@@ -74,7 +74,6 @@ function Recipe() {
                     edit
                     listData={recipes.filter((recipe) => recipe.type === 1)}
                     title="Breakfast"
-                    subtitle="200kcal"
                     dayObj={dayObj}
                 />
                 <RecipeList
@@ -83,7 +82,6 @@ function Recipe() {
                     edit
                     listData={recipes.filter((recipe) => recipe.type === 2)}
                     title="Lunch"
-                    subtitle="500kcal"
                 />
 
                 <RecipeList
@@ -92,7 +90,6 @@ function Recipe() {
                     edit
                     listData={recipes.filter((recipe) => recipe.type === 3)}
                     title="Dinner"
-                    subtitle="400kcal"
                 />
             </div>
         </Card>

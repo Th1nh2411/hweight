@@ -73,59 +73,55 @@ function Calendar({ onDayChange, children, className }) {
         const dayObjOfLast = dayjs(`${thisYear}-${thisMonth + 1}-${daysInMonth}`);
         const weekDayOfLast = dayObjOfLast.day();
         return (
-            <Popper>
-                <div ref={calendarRef} className={cx('day-container')}>
-                    {weekDays.map((d) => (
-                        <div className={cx('week-cell')} key={d}>
-                            {d}
-                        </div>
-                    ))}
-                    {range(weekDayOf1).map((i) => (
-                        <div
-                            onClick={() => {
-                                setDayObj(dayObjOf1.subtract(weekDayOf1 - i, 'day'));
-                            }}
-                            className={cx('day-cell', 'day-cell--faded')}
-                            key={i}
-                        >
-                            {dayObjOf1.subtract(weekDayOf1 - i, 'day').date()}
-                        </div>
-                    ))}
+            <div ref={calendarRef} className={cx('day-container')}>
+                {weekDays.map((d) => (
+                    <div className={cx('week-cell')} key={d}>
+                        {d}
+                    </div>
+                ))}
+                {range(weekDayOf1).map((i) => (
+                    <div
+                        onClick={() => {
+                            setDayObj(dayObjOf1.subtract(weekDayOf1 - i, 'day'));
+                        }}
+                        className={cx('day-cell', 'day-cell--faded')}
+                        key={i}
+                    >
+                        {dayObjOf1.subtract(weekDayOf1 - i, 'day').date()}
+                    </div>
+                ))}
 
-                    {range(daysInMonth).map((i) => (
-                        <div
-                            onClick={() => {
-                                setDayObj(dayjs(`${thisYear}-${thisMonth + 1}-${i + 1}`));
-                            }}
-                            className={cx('day-cell', 'day-cell--in-month', {
-                                'day-cell--today':
-                                    i + 1 === todayObj.date() &&
-                                    thisMonth === todayObj.month() &&
-                                    thisYear === todayObj.year(),
-                                'day-cell--selected':
-                                    i + 1 === dayObj.date() &&
-                                    thisMonth === dayObj.month() &&
-                                    thisYear === dayObj.year(),
-                            })}
-                            key={i}
-                        >
-                            {i + 1}
-                        </div>
-                    ))}
+                {range(daysInMonth).map((i) => (
+                    <div
+                        onClick={() => {
+                            setDayObj(dayjs(`${thisYear}-${thisMonth + 1}-${i + 1}`));
+                        }}
+                        className={cx('day-cell', 'day-cell--in-month', {
+                            'day-cell--today':
+                                i + 1 === todayObj.date() &&
+                                thisMonth === todayObj.month() &&
+                                thisYear === todayObj.year(),
+                            'day-cell--selected':
+                                i + 1 === dayObj.date() && thisMonth === dayObj.month() && thisYear === dayObj.year(),
+                        })}
+                        key={i}
+                    >
+                        {i + 1}
+                    </div>
+                ))}
 
-                    {range(6 - weekDayOfLast).map((i) => (
-                        <div
-                            onClick={() => {
-                                setDayObj(dayObjOfLast.add(i + 1, 'day'));
-                            }}
-                            className={cx('day-cell', 'day-cell--faded')}
-                            key={i}
-                        >
-                            {dayObjOfLast.add(i + 1, 'day').date()}
-                        </div>
-                    ))}
-                </div>
-            </Popper>
+                {range(6 - weekDayOfLast).map((i) => (
+                    <div
+                        onClick={() => {
+                            setDayObj(dayObjOfLast.add(i + 1, 'day'));
+                        }}
+                        className={cx('day-cell', 'day-cell--faded')}
+                        key={i}
+                    >
+                        {dayObjOfLast.add(i + 1, 'day').date()}
+                    </div>
+                ))}
+            </div>
         );
     };
 

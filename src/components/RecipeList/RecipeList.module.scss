@@ -38,8 +38,12 @@
             opacity: 0.8;
         }
     }
+    .invisible {
+        opacity: 0;
+    }
     .subtitle-text {
-        transition: all 1s ease-in-out;
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
     }
     .warning {
         color: rgb(255, 89, 0);

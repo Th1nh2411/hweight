@@ -1,0 +1,37 @@
+.wrapper {
+    margin: 30px 50px 50px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    background-color: #211e1f;
+    padding: 24px 40px 15px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.body {
+    flex: 1;
+    padding: 10px 40px 0;
+    z-index: 100;
+    position: relative;
+    transition: 0.3s all;
+}
+.title {
+    color: var(--primary-color);
+    font-size: 3.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+.title-icon {
+    margin-left: 4px;
+}
+
+.modal-wrapper {
+    padding: 30px 40px 0;
+    width: 500px;
+}

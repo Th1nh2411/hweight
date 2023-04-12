@@ -3,16 +3,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary-color);
-    border-radius: 30px;
-    box-shadow: 0px 0px 3px 0px var(--primary-color);
+    background-color: #3e3e3e;
+    border-radius: 20px;
+    &:focus {
+        box-shadow: 0px 0px 3px 0px var(--primary-color);
+    }
 }
 
 .nav-day-btn {
     display: flex;
     align-items: center;
     padding: 8px;
-    border-radius: 30px;
+    border-radius: 20px;
+    background-color: #ffffffb8;
     cursor: pointer;
     &:hover {
         opacity: 0.8;
@@ -33,6 +36,9 @@
     width: 300px;
     flex-wrap: wrap;
     padding: 0px 10px;
+    background-color: #3e3e3e;
+    padding: 10px;
+    border-radius: 10px;
 }
 .week-cell {
     flex-basis: calc(100% / 7 - 5px); /* 5px là khoảng cách giữa các phần tử */

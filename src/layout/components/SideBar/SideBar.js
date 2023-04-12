@@ -20,8 +20,8 @@ function SideBar() {
             <Menu>
                 <MenuItem title="Dairy" to={config.routes.dairy} icon={<DairyIcon />} activeIcon={<DairyIcon />} />
                 <MenuItem
-                    title="Activity"
-                    to={config.routes.activity}
+                    title="Exercise"
+                    to={config.routes.exercise}
                     icon={<JumpRopeIcon />}
                     activeIcon={<JumpRopeIcon />}
                 />

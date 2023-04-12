@@ -1,0 +1,194 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 15px 10px;
+    transition: all 0.3s;
+    margin-bottom: 5px;
+    animation: slideIn linear 0.2s;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.109);
+        cursor: pointer;
+    }
+}
+.wrapper.disableInput {
+    opacity: 0.3;
+}
+.wrapper.selected {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.342);
+}
+.img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: revert;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.desc {
+    margin-left: 18px;
+}
+
+.name {
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    line-height: 2rem;
+    margin-bottom: 4px;
+}
+.time {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #979797;
+}
+.more-btn {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin-right: 10px;
+}
+.item-checkbox {
+    padding: 10px;
+    cursor: pointer;
+    input {
+        display: none;
+    }
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(calc(-20px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+// Modal Detail css
+.detail-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    min-width: 1000px;
+}
+.detail-img {
+    width: 370px;
+    height: 370px;
+    object-fit: cover;
+    overflow: revert;
+    margin-left: 40px;
+    border-radius: 10px;
+}
+.detail-body {
+    flex: 1;
+}
+.detail-body__name {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+.like-icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+}
+.like-icon {
+    color: transparent;
+    cursor: pointer;
+    transition: 0.3s all;
+    background-color: rgb(201, 201, 201);
+    border-radius: 4px;
+    padding: 2px;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.like-icon.isLiked {
+    animation: heartClick 0.3s ease-in-out;
+    color: #e23c3c;
+}
+.detail-info {
+    max-width: 540px;
+}
+.detail-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 24px 0 8px;
+}
+.detail-nutrition {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.detail-nutrition__item {
+    padding: 8px 10px;
+    background-color: rgba(255, 218, 172, 0.4);
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+.detail-nutrition__item + .detail-nutrition__item {
+    margin-left: 10px;
+}
+.detail-nutrition__icon {
+    margin-right: 4px;
+}
+.detail-ingredients__list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+
+.detail-ingredients__item {
+    width: 80px;
+    margin: 0 8px;
+}
+// .detail-ingredients__item + .detail-ingredients__item {
+//     margin-left: 20px;
+// }
+.ingredient-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: revert;
+}
+.ingredients-name {
+    font-size: 1.4rem;
+    overflow: hidden;
+    // white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ingredients-quantity {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+@keyframes heartClick {
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
