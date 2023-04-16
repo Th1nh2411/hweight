@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding: 20px;
+    padding: 30px 30px;
     background-color: #333333;
     overflow: hidden;
     &:hover .show-detail {
@@ -49,7 +49,22 @@
         color: #e23c3c;
     }
 }
-
+.done-btn {
+    // font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: var(--primary-color);
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}
+.done-icon {
+    margin-left: 4px;
+}
 .subtitle {
     color: #979797;
     font-size: 1.4rem;
@@ -58,45 +73,62 @@
 .info {
     margin-top: 5px;
 }
+
 .show-detail {
+    animation: slideIn2 0.3s ease-in-out;
     cursor: pointer;
     position: absolute;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
-    height: 40%;
-    width: 100%;
-    // background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    background-color: #211e1fe4;
+    height: 28px;
+    width: 130px;
     display: none;
     justify-content: center;
     align-items: center;
+
+    font-size: 1.4rem;
+    background-color: #211e1fe4;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-weight: 800;
     // transition: 0.3s all ease-in-out;
-    animation: slideIn2 0.3s ease-in-out;
+    &:hover {
+        opacity: 0.8;
+    }
     .show-detail-icon {
         color: white;
-        font-size: 2.2rem;
+        font-size: 2rem;
         font-weight: 800;
         text-align: center;
+        margin-right: 5px;
     }
 }
+.show-detail.show {
+    display: flex;
+}
 .body {
-    padding: 15px 20px;
+    padding: 15px 40px;
     background-color: #211e1f;
     animation: slideIn 0.3s ease-in-out;
     position: relative;
+    max-height: 500px;
+    overflow-y: scroll;
 }
-.body.hide {
-    animation: slideOut 0.3s ease-in-out;
-}
+
+// .body.show {
+//     animation: slideOut 0.3s ease-in-out;
+// }
 .body-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin: 10px 0 10px;
 }
 .hide-btn {
     position: absolute;
-    right: 24px;
-    top: 20px;
-    font-size: 2.4rem;
+    right: 55px;
+    top: 24px;
+    font-size: 3rem;
     cursor: pointer;
     &:hover {
         opacity: 0.8;
@@ -137,6 +169,33 @@
     display: flex;
     justify-content: end;
 }
+// Modal Confirm
+.confirm-wrapper {
+    padding: 40px 20px 30px;
+}
+.confirm-img-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.confirm-img {
+    width: 150px;
+    object-fit: cover;
+    overflow: revert;
+    text-align: center;
+}
+.confirm-title {
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+// Animation keyframes
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -151,12 +210,12 @@
 @keyframes slideIn2 {
     from {
         opacity: 0;
-        transform: translateY(calc(50px));
+        transform: translate((-50%), calc(50px));
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate((-50%), 0);
     }
 }
 @keyframes slideOut {

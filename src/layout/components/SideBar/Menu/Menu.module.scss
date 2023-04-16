@@ -8,12 +8,18 @@
     align-items: center;
     font-weight: 600;
     font-size: 1.8rem;
-    color: var(--secondary-color);
+    color: rgb(196, 196, 196);
     padding: 20px 12px;
     border-radius: 4px;
     transition: background-color ease-in-out 200ms;
     position: relative;
     font-weight: 800;
+    &:hover {
+        color: var(--secondary-color);
+    }
+    &:hover .icon {
+        color: var(--secondary-color);
+    }
     &.active {
         color: var(--primary-color);
         background-color: rgba(147, 111, 84, 0.388);
@@ -23,9 +29,6 @@
     }
     &.active .active-icon {
         display: flex;
-    }
-    &:hover {
-        background-color: rgba(147, 111, 84, 0.816);
     }
 }
 .menu-item.separate {
@@ -50,7 +53,7 @@
     font-size: 2rem;
 }
 .icon {
-    color: var(--secondary-color);
+    color: rgb(196, 196, 196);
 }
 .active-icon {
     display: none;
