@@ -33,7 +33,7 @@ export const CheckIcon = ({ width = '1.4rem', height = '1.4rem', className }) =>
         ></path>
     </svg>
 );
-export const HomeIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const HomeIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -50,7 +50,7 @@ export const HomeIcon = ({ width = '3.2rem', height = '3.2rem', className }) => 
         ></path>
     </svg>
 );
-export const HomeActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const HomeActiveIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -58,6 +58,7 @@ export const HomeActiveIcon = ({ width = '3.2rem', height = '3.2rem', className 
         viewBox="0 0 48 48"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
+        className={className}
     >
         <path
             fillRule="evenodd"
@@ -66,7 +67,7 @@ export const HomeActiveIcon = ({ width = '3.2rem', height = '3.2rem', className 
         ></path>
     </svg>
 );
-export const UserGroupIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const UserGroupIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -92,7 +93,7 @@ export const UserGroupIcon = ({ width = '3.2rem', height = '3.2rem', className }
         ></path>
     </svg>
 );
-export const UserGroupActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const UserGroupActiveIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -107,7 +108,7 @@ export const UserGroupActiveIcon = ({ width = '3.2rem', height = '3.2rem', class
         <path d="M33 26.5C36.0376 26.5 38.5 24.0376 38.5 21C38.5 17.9624 36.0376 15.5 33 15.5C29.9624 15.5 27.5 17.9624 27.5 21C27.5 24.0376 29.9624 26.5 33 26.5Z"></path>
     </svg>
 );
-export const LiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const LiveIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -124,7 +125,7 @@ export const LiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => 
         <path d="M15 15.134C15.6667 15.5189 15.6667 16.4811 15 16.866L12 18.5981C11.3333 18.983 10.5 18.5019 10.5 17.7321L10.5 14.2679C10.5 13.4981 11.3333 13.017 12 13.4019L15 15.134Z"></path>
     </svg>
 );
-export const LiveActiveIcon = ({ width = '3.2rem', height = '3.2rem', className }) => (
+export const LiveActiveIcon = ({ width = '2.2rem', height = '2.2rem', className }) => (
     <svg
         width={width}
         data-e2e=""
@@ -148,6 +149,7 @@ export const DairyIcon = ({ width = '2.2rem', height = '2.2rem', className }) =>
         height={height}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 53.042 53.042"
+        className={className}
     >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

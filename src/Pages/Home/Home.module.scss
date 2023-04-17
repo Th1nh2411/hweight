@@ -1,4 +1,126 @@
 .wrapper {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 30px 50px 50px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    background-color: #211e1f;
+    padding: 24px 40px 15px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.title {
+    color: var(--primary-color);
+    font-size: 3.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+.title-icon {
+    margin-left: 5px;
+}
+.body {
+    padding: 10px 40px 0px;
+    position: relative;
+    transition: 0.3s all;
+}
+.bmiCal-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 30px;
+    background: linear-gradient(#333333, #211e1f);
+    overflow: hidden;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+.bmiCal-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.bmiCal-num-wrapper {
+    display: flex;
+    align-items: center;
+    // background: linear-gradient(150deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    padding-right: 20px;
+    border-radius: 10px;
+}
+
+.bmiCal-num {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-right: 4px;
+    letter-spacing: 2px;
+    color: #ff5500;
+}
+
+.bmiCal-subtitle {
+    // height: fit-content;
+}
+.bmiCal-BMI {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 3px;
+    text-align: start;
+    color: #a8a8a8;
+}
+.bmiCal-status {
+    font-size: 1.3rem;
+    line-height: 1;
+    color: #ff5500;
+}
+.bmiCal-advice-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    // background: linear-gradient(150deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border-left: #909090 1px solid;
+    padding: 10px 0 10px 30px;
+    // border-radius: 10px;
+}
+.bmiCal-advice-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 700;
+}
+.bmiCal-advice {
+    font-size: 1.3rem;
+}
+.bmiCal-body {
+    width: 100%;
+    padding: 40px 10px 0;
+}
+.bmiCal-title {
+    display: flex;
+    justify-content: space-around;
+}
+.bmiCal-under {
+    color: #005a80;
+}
+.bmiCal-nor {
+    color: #80ff00;
+}
+.bmiCal-over {
+    color: #ff5500;
+}
+.bmiCal-line {
+    height: 5px; /* độ dày của đường thẳng */
+    background-image: linear-gradient(to right, #005a80, #005a80, #80ff00, #ff5500, #ff5500); /* gradient màu */
+    border-radius: 5px;
+    margin: 8px 0;
+}
+.bmiCal-index-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.bmiCal-index {
+    font-size: 1.2rem;
 }

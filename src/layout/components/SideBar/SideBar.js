@@ -4,7 +4,7 @@ import Menu from './Menu';
 import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
 
-import { JumpRopeIcon, DairyIcon, RecipeIcon } from '../../../components/Icons/Icons';
+import { JumpRopeIcon, DairyIcon, RecipeIcon, HomeIcon, HomeActiveIcon } from '../../../components/Icons/Icons';
 import { useEffect, useState } from 'react';
 import { RiUserFill } from 'react-icons/ri';
 import { IoLogOut } from 'react-icons/io5';
@@ -18,7 +18,12 @@ function SideBar() {
     return (
         <aside className={cx('wrapper')}>
             <Menu>
-                <MenuItem title="Dairy" to={config.routes.dairy} icon={<DairyIcon />} activeIcon={<DairyIcon />} />
+                <MenuItem
+                    title="Home"
+                    to={config.routes.dairy}
+                    icon={<HomeActiveIcon height="2.4rem" width="2.4rem" />}
+                    activeIcon={<HomeActiveIcon height="2.4rem" width="2.4rem" />}
+                />
                 <MenuItem
                     title="Exercise"
                     to={config.routes.exercise}

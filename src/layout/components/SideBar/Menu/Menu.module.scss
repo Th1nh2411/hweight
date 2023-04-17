@@ -23,6 +23,8 @@
     &.active {
         color: var(--primary-color);
         background-color: rgba(147, 111, 84, 0.388);
+        transform: translateX(8px);
+        transition: all 0.3s ease-in-out;
     }
     &.active .icon {
         display: none;
