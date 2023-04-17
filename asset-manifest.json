@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "./static/css/main.6f9c2e83.css",
-    "main.js": "./static/js/main.74a534e5.js",
-    "static/js/787.bd71c651.chunk.js": "./static/js/787.bd71c651.chunk.js",
-    "static/media/BMI1.jpg": "./static/media/BMI1.efff4c2efd01b1308947.jpg",
-    "static/media/Nunito-Italic-VariableFont_wght.ttf": "./static/media/Nunito-Italic-VariableFont_wght.8c3b61b77fee2ba4b6db.ttf",
-    "static/media/Nunito-VariableFont_wght.ttf": "./static/media/Nunito-VariableFont_wght.4a3eef3e0a61b7eb3eda.ttf",
-    "static/media/running.png": "./static/media/running.c40060c93d5fec4034f9.png",
-    "static/media/account.png": "./static/media/account.009d57c5f220abb0ccf3.png",
-    "static/media/logo2.png": "./static/media/logo2.bae7cdae474a136a5ddd.png",
-    "static/media/mailIcon.svg": "./static/media/mailIcon.e0bdfe353ead52caabab0b8b8fe108ac.svg",
-    "index.html": "./index.html",
-    "main.6f9c2e83.css.map": "./static/css/main.6f9c2e83.css.map",
-    "main.74a534e5.js.map": "./static/js/main.74a534e5.js.map",
-    "787.bd71c651.chunk.js.map": "./static/js/787.bd71c651.chunk.js.map"
+    "main.css": "/mbi-webapp/static/css/main.e56a00af.css",
+    "main.js": "/mbi-webapp/static/js/main.7ab2c7bd.js",
+    "static/js/787.bd71c651.chunk.js": "/mbi-webapp/static/js/787.bd71c651.chunk.js",
+    "static/media/BMI1.jpg": "/mbi-webapp/static/media/BMI1.efff4c2efd01b1308947.jpg",
+    "static/media/Nunito-Italic-VariableFont_wght.ttf": "/mbi-webapp/static/media/Nunito-Italic-VariableFont_wght.8c3b61b77fee2ba4b6db.ttf",
+    "static/media/Nunito-VariableFont_wght.ttf": "/mbi-webapp/static/media/Nunito-VariableFont_wght.4a3eef3e0a61b7eb3eda.ttf",
+    "static/media/running.png": "/mbi-webapp/static/media/running.c40060c93d5fec4034f9.png",
+    "static/media/account.png": "/mbi-webapp/static/media/account.009d57c5f220abb0ccf3.png",
+    "static/media/logo2.png": "/mbi-webapp/static/media/logo2.bae7cdae474a136a5ddd.png",
+    "static/media/mailIcon.svg": "/mbi-webapp/static/media/mailIcon.e0bdfe353ead52caabab0b8b8fe108ac.svg",
+    "index.html": "/mbi-webapp/index.html",
+    "main.e56a00af.css.map": "/mbi-webapp/static/css/main.e56a00af.css.map",
+    "main.7ab2c7bd.js.map": "/mbi-webapp/static/js/main.7ab2c7bd.js.map",
+    "787.bd71c651.chunk.js.map": "/mbi-webapp/static/js/787.bd71c651.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f9c2e83.css",
-    "static/js/main.74a534e5.js"
+    "static/css/main.e56a00af.css",
+    "static/js/main.7ab2c7bd.js"
   ]
 }
