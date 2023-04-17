@@ -1,6 +1,6 @@
 {
     "name": "bmi",
-    "homepage": "https://rinktvn2525.github.io/BMI-Webapp",
+    "homepage": "https://th1nh2411.github.io/BMI-Webapp",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -40,7 +40,7 @@
         "test": "react-app-rewired test",
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -b main -d build"
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": [
