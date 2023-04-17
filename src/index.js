@@ -7,7 +7,7 @@ import GlobalStyle from './components/GlobalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
+    <BrowserRouter basename={window.location.pathname || ''}>
         <GlobalStyle>
             <App />
         </GlobalStyle>
