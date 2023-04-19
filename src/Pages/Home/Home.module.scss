@@ -58,7 +58,6 @@
     font-weight: 800;
     margin-right: 4px;
     letter-spacing: 2px;
-    color: #ff5500;
 }
 
 .bmiCal-subtitle {
@@ -75,7 +74,6 @@
 .bmiCal-status {
     font-size: 1.3rem;
     line-height: 1;
-    color: #ff5500;
 }
 .bmiCal-advice-wrapper {
     display: flex;
@@ -103,19 +101,26 @@
     justify-content: space-around;
 }
 .bmiCal-under {
-    color: #005a80;
+    color: #0093d2;
 }
 .bmiCal-nor {
-    color: #80ff00;
+    color: #60ab00;
 }
 .bmiCal-over {
-    color: #ff5500;
+    color: var(--primary-color);
 }
 .bmiCal-line {
     height: 5px; /* độ dày của đường thẳng */
-    background-image: linear-gradient(to right, #005a80, #005a80, #80ff00, #ff5500, #ff5500); /* gradient màu */
+    background-image: linear-gradient(
+        to right,
+        #0093d2,
+        #0093d2,
+        #60ab00,
+        var(--primary-color),
+        var(--primary-color)
+    ); /* gradient màu */
     border-radius: 5px;
-    margin: 8px 0;
+    margin: 10px 0;
 }
 .bmiCal-index-wrapper {
     display: flex;

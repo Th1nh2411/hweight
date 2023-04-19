@@ -115,7 +115,16 @@ a[href] {
 .mr-16 {
     margin-right: 16px;
 }
-
+.sep {
+    &::before {
+        content: '';
+        margin: 0 10px;
+        width: 1px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #cccccc69;
+    }
+}
 // Custom tippy tool tip
 body {
     .tippy-box {

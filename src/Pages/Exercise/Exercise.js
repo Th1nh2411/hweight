@@ -4,7 +4,7 @@ import Card from '../../components/Card';
 import { FireIcon, JumpRopeIcon } from '../../components/Icons/Icons';
 import ExerciseList from '../../components/ExerciseList';
 import * as exerciseService from '../../services/exerciseService';
-import * as historyService from '../../services/historyService';
+import * as profileService from '../../services/profileService';
 import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
@@ -19,12 +19,12 @@ function Exercise() {
     };
     const getHistoryData = async () => {
         const token = localStorage.getItem('token');
-        const results = await historyService.getHistory(token);
+        const results = await profileService.getProfile(token);
         setHistory(results);
     };
     const updateHistoryData = async (data) => {
         const token = localStorage.getItem('token');
-        const results = await historyService.updateHistory(data, token);
+        const results = await profileService.updateProfile(data, token);
         setHistory(results);
     };
     useEffect(() => {

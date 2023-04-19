@@ -61,6 +61,89 @@
     font-size: 1.4rem;
     margin: -8px 0 4px;
 }
+// Filter
+.filter-wrapper {
+}
+.filter-title {
+}
+.calories-filter {
+}
+.filter-subtitle {
+}
+.calories-filter-progressBar {
+    .range-slide {
+        position: relative;
+        margin: 40px;
+        height: 4px;
+        width: 240px;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        height: 4px;
+        background: #ccc;
+        left: 9px;
+        right: 9px;
+    }
+
+    .line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 4px;
+        background-color: red;
+    }
+
+    .thumb {
+        position: absolute;
+        z-index: 2;
+        text-align: left;
+        border: 1px solid red;
+        background-color: #4ee44e;
+        border-radius: 50%;
+        outline: none;
+        top: -7px;
+        height: 18px;
+        width: 18px;
+        margin-left: -9px;
+    }
+
+    input {
+        -webkit-appearance: none;
+        appearance: none;
+        position: absolute;
+        pointer-events: none;
+        z-index: 3;
+        height: 3px;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        margin: 0;
+    }
+
+    input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        pointer-events: all;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.calories-display {
+    margin: 40px;
+    width: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+.ingredients-filter {
+}
+
+// body
 .body {
 }
 .menu-list {
