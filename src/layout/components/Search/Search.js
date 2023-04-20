@@ -5,7 +5,7 @@ import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { IoSearch } from 'react-icons/io5';
 import PopperWrapper from '../../../components/Popper';
-import Item from '../../../components/RecipeItem';
+import RecipeItem from '../../../components/RecipeItem';
 import { useDebounce } from '../../../hooks';
 import * as searchServices from '../../../services/searchService';
 
@@ -16,6 +16,7 @@ function Search() {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const debouncedValue = useDebounce(searchValue, 500);
+    const inputRef = useRef();
     useEffect(() => {
         if (!debouncedValue.trim()) {
             setSearchResult([]);
@@ -31,7 +32,6 @@ function Search() {
         };
         fetchApi();
     }, [debouncedValue]);
-    const inputRef = useRef();
     const handleClearSearch = () => {
         setSearchValue('');
         setSearchResult([]);
@@ -59,7 +59,7 @@ function Search() {
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Accounts</h4>
                             {searchResult.map((data) => (
-                                <Item key={data.id} data={data} />
+                                <RecipeItem key={data.id} data={data} />
                             ))}
                         </PopperWrapper>
                     </div>

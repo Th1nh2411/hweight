@@ -2,21 +2,19 @@ import styles from './RecipeList.module.scss';
 import classNames from 'classnames/bind';
 import { RiEditFill, RiQuestionLine } from 'react-icons/ri';
 import RecipeItem from '../RecipeItem/RecipeItem';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { FaUndo } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
 
+import Filter from '../Filter/Filter';
+
 const cx = classNames.bind(styles);
 function List({ title, edit = false, listData, menuData, onEditDone, dayObj, children, className }) {
-    const minCalories = 10;
-    const maxCalories = 400;
     const [checkedItems, setCheckedItems] = useState([]);
     const [showEdit, setShowEdit] = useState(false);
     const [clear, setClear] = useState(false);
     const [menu, setMenu] = useState([]);
-    const [minCaloriesValue, setMinCaloriesValue] = useState(minCalories);
-    const [maxCaloriesValue, setMaxCaloriesValue] = useState(maxCalories);
     const [subtitle, setSubtitle] = useState(0);
 
     const isSelected = (compareItem) => {
@@ -59,6 +57,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
             setSubtitle(numCalo);
         }
     }, [showEdit, checkedItems, listData]);
+
     const handleCheckboxChange = (e, data) => {
         if (e.target.checked) {
             setCheckedItems((prev) => [...prev, data]);
@@ -82,8 +81,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
             }
         });
     };
-    const calcLeftPosition = (value) => (100 / (maxCalories - minCalories)) * (value - minCalories);
-    console.log(minCalories, maxCalories);
+
     return (
         <div className={cx('wrapper', className)}>
             <div className={cx('header')}>
@@ -126,57 +124,8 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
                     )}
                 </div>
             </div>
-            <div className={cx('filter-wrapper')}>
-                <p className={cx('filter-title')}>Filter </p>
-                <div className={cx('calories-filter')}>
-                    <p className={cx('filter-subtitle')}>Calories : </p>
-                    <div className={cx('calories-filter-progressBar')}>
-                        <div className={cx('range-slide')}>
-                            <div className={cx('slide')}>
-                                <div
-                                    className={cx('line')}
-                                    id="line"
-                                    style={{
-                                        left: calcLeftPosition(minCaloriesValue) + '%',
-                                        right: 100 - calcLeftPosition(maxCaloriesValue) + '%',
-                                    }}
-                                ></div>
-                                <span
-                                    className={cx('thumb')}
-                                    id="thumbMin"
-                                    style={{ left: calcLeftPosition(minCaloriesValue) + '%' }}
-                                ></span>
-                                <span
-                                    className={cx('thumb')}
-                                    id="thumbMax"
-                                    style={{ left: calcLeftPosition(maxCaloriesValue) + '%' }}
-                                ></span>
-                            </div>
-                            <input
-                                type="range"
-                                min={minCalories}
-                                max={maxCalories}
-                                value={minCaloriesValue}
-                                onChange={(event) => {
-                                    setMinCaloriesValue(event.target.value);
-                                }}
-                            />
-                            <input
-                                type="range"
-                                min={minCalories}
-                                max={maxCalories}
-                                value={maxCaloriesValue}
-                                onChange={(event) => setMaxCaloriesValue(event.target.value)}
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('calories-display')}>
-                        <span id="min">{minCaloriesValue}</span>
-                        <span id="max">{maxCaloriesValue}</span>
-                    </div>
-                </div>
-                <div className={cx('ingredients-filter')}></div>
-            </div>
+            {showEdit && <Filter />}
+
             <div className={cx('body')}>
                 {showEdit ? (
                     <div>

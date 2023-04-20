@@ -47,7 +47,6 @@ function Item({
         setIsLiked(!isLiked);
         const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
         onLiked(data.id, !isLiked);
-        console.log(results);
     };
 
     const handleChangeInput = (e) => {

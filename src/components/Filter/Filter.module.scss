@@ -1,90 +1,34 @@
-.wrapper {
-    margin-bottom: 30px;
-    transition: all 0.3s;
-}
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 8px;
-}
-.title {
-    font-size: 2.2rem;
-    display: flex;
-    align-items: center;
-    .title-icon {
-        margin-left: 10px;
-        color: var(--primary-color);
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-}
-
-.subtitle {
-    color: #979797;
-    display: flex;
-    align-items: center;
-    .clear-icon {
-        margin-right: 10px;
-        color: var(--primary-color);
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-    .invisible {
-        opacity: 0;
-    }
-    .subtitle-text {
-        opacity: 1;
-        transition: opacity 1s ease-in-out;
-    }
-    .warning {
-        color: rgb(255, 89, 0);
-    }
-    .warning-detail-icon {
-        font-size: 1.8rem;
-        margin-left: 4px;
-        display: flex;
-        align-items: center;
-        color: rgb(255, 89, 0);
-    }
-}
-.message {
-    color: var(--primary-color);
-    font-size: 1.4rem;
-    margin: -8px 0 4px;
-}
 // Filter
 .filter-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    // padding: 10px 20px;
+    // border-radius: 12px;
+    // background-color: #464646;
+    // border: 1px #b8b8b838 solid;
 }
 .filter-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--primary-color);
 }
 .calories-filter {
     display: flex;
     align-items: center;
-    margin-left: 20px;
 }
 .filter-subtitle {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 .calories-filter-progressBar {
     margin: 0px 12px -25px;
     .range-slide {
         position: relative;
         height: 4px;
-        width: 150px;
+        width: 180px;
     }
 
     .slide {
@@ -147,22 +91,19 @@
 .calories-display {
     margin-top: 5px;
     font-size: 1.3rem;
-    width: 150px;
+    width: 180px;
     display: flex;
     justify-content: space-between;
 }
 .ingredients-filter {
     .search-filter-result {
         height: 300px;
-        width: 200px;
+        width: 260px;
         overflow-y: scroll;
-    }
-    .search-filter-item {
-        padding: 10px 20px;
     }
 
     .search-filter {
-        width: 200px;
+        width: 260px;
         position: relative;
         height: 40px;
         background-color: #333131;
@@ -207,42 +148,79 @@
         animation: spinner 1s linear infinite;
     }
 }
-
-// body
-.body {
-}
-.menu-list {
-    max-height: 450px;
-    overflow-y: scroll;
-    position: relative;
-    animation: slideIn linear 0.2s;
-}
-.menu-btn {
-    margin: 30px 10px 10px;
+// Search Item
+.SearchItem-wrapper {
+    padding: 10px 5px;
+    margin: 0 18px;
     display: flex;
-    justify-content: end;
-}
-@keyframes slideIn {
-    from {
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px solid #cccccc32;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    .title {
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    input {
+        position: absolute;
         opacity: 0;
-        transform: translateY(calc(-20px));
+        cursor: pointer;
+        height: 0;
+        width: 0;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    /* Create a custom checkbox */
+    .checkmark {
+        position: relative;
+        // top: 2px;
+        // left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 2px;
+    }
+
+    /* On mouse-over, add a grey background color */
+    &:hover input ~ .checkmark {
+        opacity: 0.8;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    input:checked ~ .checkmark {
+        background-color: var(--primary-color);
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: '';
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkmark:after {
+        left: 7px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 }
-@keyframes fadeIn {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.SearchItem-wrapper.checked {
+    color: var(--primary-color);
 }
 @keyframes spinner {
     from {
