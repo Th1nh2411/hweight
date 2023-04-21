@@ -6,12 +6,15 @@ import ExerciseList from '../../components/ExerciseList';
 import * as exerciseService from '../../services/exerciseService';
 import * as profileService from '../../services/profileService';
 import { useEffect, useState } from 'react';
+import { FaDumbbell } from 'react-icons/fa';
 
 const cx = classNames.bind(styles);
 function Exercise() {
     const [exercises, setExercises] = useState([]);
     const [history, setHistory] = useState([]);
-
+    const [tab, setTab] = useState(0);
+    const [leftLine, setLeftLine] = useState('');
+    const [widthLine, setWidthLine] = useState('');
     const getExerciseData = async () => {
         const token = localStorage.getItem('token');
         const results = await exerciseService.getExercise(token);
@@ -47,9 +50,63 @@ function Exercise() {
                 </div>
             </div>
             <div className={cx('body')}>
-                {exercises.map((exercise, index) => (
+                {/* {exercises.map((exercise, index) => (
                     <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
-                ))}
+                ))} */}
+                <div className={cx('tabs-wrapper')}>
+                    <div
+                        onClick={(event) => {
+                            setTab(0);
+                            setLeftLine(event.target.offsetLeft + 'px');
+                            setWidthLine(event.target.offsetWidth + 'px');
+                        }}
+                        className={cx('tab-item', { active: tab === 0 })}
+                    >
+                        <FaDumbbell className={cx('tab-icon')} />
+                        Light Exercise
+                    </div>
+
+                    <div
+                        onClick={(event) => {
+                            setTab(1);
+                            setLeftLine(event.target.offsetLeft + 'px');
+                            setWidthLine(event.target.offsetWidth + 'px');
+                        }}
+                        className={cx('tab-item', { active: tab === 1 })}
+                    >
+                        <FaDumbbell className={cx('tab-icon')} />
+                        Moderate Exercises
+                    </div>
+                    <div
+                        onClick={(event) => {
+                            setTab(2);
+                            setLeftLine(event.target.offsetLeft + 'px');
+                            setWidthLine(event.target.offsetWidth + 'px');
+                        }}
+                        className={cx('tab-item', { active: tab === 2 })}
+                    >
+                        <FaDumbbell className={cx('tab-icon')} />
+                        Heavy Exercises
+                    </div>
+                    <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
+                </div>
+                <div className={cx('tabs-content')}>
+                    <div className={cx('tab-pane', { active: tab === 0 })}>
+                        {exercises.map((exercise, index) => (
+                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                        ))}
+                    </div>
+                    <div className={cx('tab-pane', { active: tab === 1 })}>
+                        {exercises.map((exercise, index) => (
+                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                        ))}
+                    </div>
+                    <div className={cx('tab-pane', { active: tab === 2 })}>
+                        {exercises.map((exercise, index) => (
+                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </Card>
     );

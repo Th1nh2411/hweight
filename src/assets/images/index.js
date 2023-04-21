@@ -5,5 +5,6 @@ const images = {
     running: require('./running.png'),
     account: require('./account.png'),
     mainBg: require('./BMI1.jpg'),
+    waterWave: require('./waterWave.png'),
 };
 export default images;

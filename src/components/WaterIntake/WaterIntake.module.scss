@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 30px;
+    background: linear-gradient(#333333, #211e1f);
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.cup {
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    position: relative;
+    width: 120px;
+    height: 160px;
+    border: 6px solid #262626;
+    border-top: 2px solid transparent;
+    border-radius: 15px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background: url(../../assets/images/waterWave.png);
+    background-repeat: repeat-x;
+    background-position-y: 125px;
+    animation: waterAnimated 10s linear infinite;
+    box-shadow: 0 0 0 6px #fff, 0 20px 35px rgba(0, 0, 0, 1);
+}
+.cup:before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 90px;
+    border: 6px solid #fff;
+    right: -47px;
+    top: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.add-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+@keyframes waterAnimated {
+    0% {
+        background-position-x: 0;
+    }
+
+    50% {
+        background-position-x: 1000px;
+    }
+
+    100% {
+        background-position-x: 2000px;
+    }
+}
