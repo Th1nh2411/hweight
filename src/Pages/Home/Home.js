@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import * as profileService from '../../services/profileService';
 import BMICal from '../../components/BMICal/BMICal';
 import WaterIntake from '../../components/WaterIntake/WaterIntake';
-import PopperWrapper from '../../components/Popper';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +32,10 @@ function Home() {
             </div>
             <div className={cx('body')}>
                 <BMICal data={history} />
-                <WaterIntake data={history} />
+                <div className={cx('tracker-wrapper')}>
+                    <WaterIntake data={history} />
+                    hehe
+                </div>
             </div>
         </Card>
     );
