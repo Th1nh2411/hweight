@@ -9,7 +9,7 @@ import Tippy from '@tippyjs/react';
 const cx = classNames.bind(styles);
 
 const WaterIntake = ({ data }) => {
-    const [water, setWater] = useState(parseInt(data.water));
+    const [water, setWater] = useState(parseInt(data.water) || 0);
     const [showOptions, setShowOptions] = useState(false);
     const optionsRef = useRef(null);
     const addBtnRef = useRef(null);
