@@ -6,7 +6,6 @@
     padding: 20px 20px;
     background: linear-gradient(#333333, #211e1f);
     overflow: hidden;
-    margin-bottom: 20px;
     border-radius: 10px;
 }
 .header {
@@ -31,18 +30,19 @@
 
 .subtitle {
     // height: fit-content;
+    text-align: start;
 }
 .BMI {
     font-size: 3rem;
     font-weight: 700;
     line-height: 1;
     letter-spacing: 3px;
-    text-align: start;
     color: #a8a8a8;
 }
 .status {
     font-size: 1.3rem;
     line-height: 1;
+    margin-left: 1.5px;
 }
 .advice-wrapper {
     display: flex;

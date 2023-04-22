@@ -16,7 +16,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
 
 const cx = classNames.bind(styles);
-function List({ data, className, updateCaloOut }) {
+function List({ data, className, updateCalOut }) {
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [showDetail, setShowDetail] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -56,7 +56,7 @@ function List({ data, className, updateCaloOut }) {
                         <Button
                             onClick={() => {
                                 setShowConfirm(false);
-                                updateCaloOut(data.calories);
+                                updateCalOut(data.calories);
                             }}
                             primary
                         >

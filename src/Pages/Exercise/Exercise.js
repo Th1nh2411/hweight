@@ -34,8 +34,8 @@ function Exercise() {
         getExerciseData();
         getHistoryData();
     }, []);
-    const handleUpdateCaloOut = (calo) => {
-        updateHistoryData({ caloOut: history.caloOut + calo });
+    const handleUpdateCalOut = (cal) => {
+        updateHistoryData({ calOut: history.calOut + cal });
         getHistoryData();
     };
     return (
@@ -46,13 +46,10 @@ function Exercise() {
                     <JumpRopeIcon height="28px" width="28px" className={cx('title-icon')} />
                 </div>
                 <div className={cx('subtitle')}>
-                    <FireIcon className={cx('subtitle-icon')} /> Calories out today: {history.caloOut}
+                    <FireIcon className={cx('subtitle-icon')} /> Calories out today: {history.calOut}
                 </div>
             </div>
             <div className={cx('body')}>
-                {/* {exercises.map((exercise, index) => (
-                    <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
-                ))} */}
                 <div className={cx('tabs-wrapper')}>
                     <div
                         onClick={(event) => {
@@ -93,17 +90,17 @@ function Exercise() {
                 <div className={cx('tabs-content')}>
                     <div className={cx('tab-pane', { active: tab === 0 })}>
                         {exercises.map((exercise, index) => (
-                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                            <ExerciseList updateCalOut={handleUpdateCalOut} key={index} data={exercise} />
                         ))}
                     </div>
                     <div className={cx('tab-pane', { active: tab === 1 })}>
                         {exercises.map((exercise, index) => (
-                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                            <ExerciseList updateCalOut={handleUpdateCalOut} key={index} data={exercise} />
                         ))}
                     </div>
                     <div className={cx('tab-pane', { active: tab === 2 })}>
                         {exercises.map((exercise, index) => (
-                            <ExerciseList updateCaloOut={handleUpdateCaloOut} key={index} data={exercise} />
+                            <ExerciseList updateCalOut={handleUpdateCalOut} key={index} data={exercise} />
                         ))}
                     </div>
                 </div>
