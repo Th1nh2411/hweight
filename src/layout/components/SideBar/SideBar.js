@@ -4,17 +4,11 @@ import Menu from './Menu';
 import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
 
-import { JumpRopeIcon, DairyIcon, RecipeIcon, HomeIcon, HomeActiveIcon } from '../../../components/Icons/Icons';
-import { useEffect, useState } from 'react';
-import { RiUserFill } from 'react-icons/ri';
+import { JumpRopeIcon, RecipeIcon, HomeActiveIcon, UserGroupActiveIcon } from '../../../components/Icons/Icons';
 import { IoLogOut } from 'react-icons/io5';
-
+import { FaRegUserCircle } from 'react-icons/fa';
 const cx = classNames.bind(styles);
 function SideBar() {
-    useEffect(() => {
-        const fetchApi = async () => {};
-        fetchApi();
-    }, []);
     return (
         <aside className={cx('wrapper')}>
             <Menu>
@@ -34,8 +28,14 @@ function SideBar() {
                 <MenuItem
                     title="Account"
                     to={config.routes.profile}
-                    icon={<RiUserFill />}
-                    activeIcon={<RiUserFill />}
+                    icon={<FaRegUserCircle />}
+                    activeIcon={<FaRegUserCircle />}
+                />
+                <MenuItem
+                    title="HWNet"
+                    to={config.routes.HWNet}
+                    icon={<UserGroupActiveIcon />}
+                    activeIcon={<UserGroupActiveIcon />}
                 />
                 <MenuItem
                     separate

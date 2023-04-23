@@ -3,6 +3,7 @@ const routes = {
     exercise: '/exercise',
     recipe: '/recipe',
     profile: '/@/:nickname',
+    HWNet: '/HWNet',
     login: '/login',
     search: '/search',
     forgot: '/forgot',

@@ -32,6 +32,11 @@
     font-size: 2.6rem;
     font-weight: 700;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    .title-icon {
+        margin-left: 8px;
+    }
 }
 .body-index {
     display: flex;

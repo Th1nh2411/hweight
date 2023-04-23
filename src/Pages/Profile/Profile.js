@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
-import { FaFemale, FaMale } from 'react-icons/fa';
+import { FaFemale, FaMale, FaRegUserCircle } from 'react-icons/fa';
 import * as profileService from '../../services/profileService';
 import styles from './Profile.module.scss';
 import Button from '../../components/Button';
 import Toast from '../../components/Toast';
 import Input from '../../components/Input';
 import Card from '../../components/Card';
+import { RiLockPasswordFill } from 'react-icons/ri';
 const cx = classNames.bind(styles);
 
 function Profile() {
@@ -146,7 +147,9 @@ function Profile() {
         <div className={cx('wrapper')}>
             <Card className={cx('card-item')}>
                 <div className={cx('card-header')}>
-                    <div className={cx('title')}>Personal Information</div>
+                    <div className={cx('title')}>
+                        Personal Information <FaRegUserCircle className={cx('title-icon')} />
+                    </div>
                 </div>
                 <div className={cx('card-body')}>
                     <Input
@@ -219,7 +222,9 @@ function Profile() {
             </Card>
             <Card className={cx('card-item')}>
                 <div className={cx('card-header')}>
-                    <div className={cx('title')}>Change Password</div>
+                    <div className={cx('title')}>
+                        Change Password <RiLockPasswordFill className={cx('title-icon')} />
+                    </div>
                 </div>
                 <div className={cx('card-body')}>
                     <Input
