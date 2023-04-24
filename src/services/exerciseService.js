@@ -12,6 +12,18 @@ export const getExercise = async (token) => {
         return [];
     }
 };
+export const getDetailExercise = async (id, token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+        const res = await httpRequest.get(`exercise/${id}`, config);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const updateExercise = async (id, data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },

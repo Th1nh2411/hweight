@@ -6,9 +6,10 @@ import { MdLeaderboard } from 'react-icons/md';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
 import ListRank from '../../components/ListRank/ListRank';
-import Tippy from '@tippyjs/react';
-import { UserGroupActiveIcon } from '../../components/Icons';
-import DetailRecipe from '../../components/DetailRecipe/DetailRecipe';
+import { ConnectIcon } from '../../components/Icons';
+import { HiUserGroup } from 'react-icons/hi2';
+import DetailRecipe from '../../components/DetailRecipe';
+import DetailExercise from '../../components/DetailExercise';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,8 @@ function HWNet() {
     const [topExercise, setTopExercise] = useState();
     const [detailRecipe, setDetailRecipe] = useState({});
     const [showDetailRecipe, setShowDetailRecipe] = useState(false);
+    const [detailExercise, setDetailExercise] = useState({});
+    const [showDetailEx, setShowDetailEx] = useState(false);
     const getTopRecipeData = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getMenu(token);
@@ -27,12 +30,6 @@ function HWNet() {
         const results = await exerciseService.getExercise(token);
         setTopExercise(results);
     };
-    const getDetailRecipeData = async (id) => {
-        const token = localStorage.getItem('token');
-        const results = await recipeService.getDetailRecipe(id, token);
-        setDetailRecipe(results);
-        setShowDetailRecipe(true);
-    };
 
     useEffect(() => {
         getTopRecipeData();
@@ -40,19 +37,26 @@ function HWNet() {
     useEffect(() => {
         getTopExerciseData();
     }, []);
+    const getDetailRecipeData = async (id) => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getDetailRecipe(id, token);
+        setDetailRecipe(results);
+        setShowDetailRecipe(true);
+    };
+    const getDetailExerciseData = async (id) => {
+        const token = localStorage.getItem('token');
+        const results = await exerciseService.getDetailExercise(id, token);
+        setDetailExercise(results);
+        setShowDetailEx(true);
+    };
     return (
         <Card className={cx('wrapper')}>
-            {showDetailRecipe && (
-                <DetailRecipe
-                    data={detailRecipe}
-                    show={showDetailRecipe}
-                    onCloseModal={() => setShowDetailRecipe(false)}
-                />
-            )}
+            {showDetailRecipe && <DetailRecipe data={detailRecipe} onCloseModal={() => setShowDetailRecipe(false)} />}
+            {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
             <div className={cx('header')}>
                 <div className={cx('title')}>
                     HWNet
-                    <UserGroupActiveIcon height="3.8rem" width="3.8rem" className={cx('title-icon')} />
+                    <ConnectIcon height="2.6rem" width="2.6rem" className={cx('title-icon')} />
                 </div>
             </div>
             <div className={cx('body')}>
@@ -81,8 +85,29 @@ function HWNet() {
                             </div>
                         </div>
                         <div className={cx('content-body')}>
-                            <ListRank listData={topExercise} />
+                            <ListRank
+                                listData={topExercise}
+                                onClickItem={(id) => {
+                                    getDetailExerciseData(id);
+                                }}
+                            />
                         </div>
+                    </div>
+                </div>
+                <div className={cx('content-wrapper')}>
+                    <div className={cx('content-title')}>
+                        The others{' '}
+                        <div className={cx('icon')}>
+                            <HiUserGroup />
+                        </div>
+                    </div>
+                    <div className={cx('content-body')}>
+                        <ListRank
+                            listData={topExercise}
+                            onClickItem={(id) => {
+                                getDetailExerciseData(id);
+                            }}
+                        />
                     </div>
                 </div>
             </div>

@@ -1,89 +1,46 @@
-.wrapper {
-    margin-bottom: 30px;
-    transition: all 0.3s;
-    animation: slideIn linear 0.2s;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 30px 30px;
-    background-color: #333333;
-    overflow: hidden;
-    &:hover {
-        cursor: pointer;
-        background-color: #4c4c4c;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(calc(-20px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
-.header {
+// Modal Detail css
+.detail-wrapper {
     display: flex;
     align-items: center;
-    position: relative;
-    padding: 30px 30px;
-    background-color: #333333;
-    overflow: hidden;
-    &:hover .show-detail {
-        display: flex;
-    }
+    padding: 30px;
+    min-width: 1000px;
+    max-width: 1200px;
 }
-.img-wrapper {
-    width: 150px;
-    height: 150px;
+.detail-img-wrapper {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    margin-left: 40px;
+}
+.detail-img {
+    margin-top: 20px;
+    width: 400px;
+    height: 350px;
     object-fit: cover;
-    flex-shrink: 0;
+    overflow: revert;
+    border-radius: 10px;
 }
-.detail {
-    margin-left: 20px;
+.detail-body {
+    flex: 1;
 }
-.header-title {
-    color: var(--primary-color);
+.detail-name {
     font-size: 2.8rem;
-    display: flex;
-    align-items: center;
-    .like-icon-wrapper {
-        display: flex;
-        align-items: center;
-        margin-left: 12px;
-    }
-    .like-icon {
-        color: transparent;
-        cursor: pointer;
-        transition: 0.3s all;
-        background-color: rgb(201, 201, 201);
-        border-radius: 4px;
-        padding: 2px;
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-    .like-icon.isLiked {
-        animation: heartClick 0.3s ease-in-out;
-        color: #e23c3c;
-    }
-}
-.done-btn {
-    // font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 20px;
-    top: 20px;
     color: var(--primary-color);
-    &:hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
-}
-.done-icon {
-    margin-left: 4px;
-    font-size: 1.8rem;
-}
-.subtitle {
-    color: #979797;
-    font-size: 1.4rem;
-    margin-top: -5px;
+    text-transform: uppercase;
+    font-weight: 700;
     display: flex;
-}
-.info {
-    margin-top: 5px;
+    align-items: center;
 }
 .likes-num {
     display: flex;
@@ -97,42 +54,63 @@
     background-color: #e23c3c;
     border-radius: 50%;
 }
+.like-icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    .like-icon {
+        color: transparent;
+        cursor: pointer;
+        transition: 0.3s all;
+        background-color: rgb(201, 201, 201);
+        border-radius: 4px;
+        padding: 2px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
 
-// .body.show {
-//     animation: slideOut 0.3s ease-in-out;
-// }
-// .body-title {
-//     color: var(--primary-color);
-//     font-size: 2.2rem;
-//     margin-bottom: 5px;
-// }
+.like-icon.isLiked {
+    animation: heartClick 0.3s ease-in-out;
+    color: #e23c3c;
+}
+.detail-info {
+}
 
-// .equipment-list {
-//     display: flex;
-//     align-items: flex-start;
-//     justify-content: flex-start;
-//     flex-wrap: wrap;
-//     margin: 0 -8px;
-// }
-// .equipment-item {
-//     width: 60px;
-//     margin: 0 8px;
-// }
-// .equipment-img {
-//     width: 60px;
-//     height: 60px;
-//     border-radius: 10px;
-//     object-fit: cover;
-//     overflow: revert;
-// }
-// .equipment-name {
-//     font-size: 1.4rem;
-//     overflow: hidden;
-//     // white-space: nowrap;
-//     text-overflow: ellipsis;
-// }
+.detail-title {
+    color: var(--primary-color);
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin: 10px 0 5px;
+}
 
+.equipment-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+.equipment-item {
+    width: 60px;
+    margin: 0 8px;
+}
+.equipment-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: revert;
+}
+.equipment-name {
+    font-size: 1.4rem;
+    overflow: hidden;
+    // white-space: nowrap;
+    text-overflow: ellipsis;
+}
 // Tab
+
 .tabs-wrapper {
     display: flex;
     position: relative;
@@ -176,20 +154,24 @@
 }
 .tab-pane {
     display: none;
-    height: 290px;
+    height: 340px;
 }
 .tab-pane.active {
     display: block;
 }
-// review
+.exercises-list {
+    overflow-y: scroll;
+    height: 100%;
+}
+// Evaluate
 .reviews-wrapper {
     // border: 1px solid #333131;
     // background-color: #4b4b4b;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-y: scroll;
     height: 80%;
+    overflow-y: scroll;
 }
 .review-item {
     padding: 10px 15px;
@@ -279,65 +261,6 @@
         &:active {
             background-color: rgba(101, 101, 101, 0.06);
         }
-    }
-}
-// Modal Confirm
-.confirm-wrapper {
-    padding: 40px 20px 30px;
-}
-.confirm-img-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.confirm-img {
-    width: 150px;
-    object-fit: cover;
-    overflow: revert;
-    text-align: center;
-}
-.confirm-title {
-    max-width: 500px;
-    text-align: center;
-    font-size: 1.8rem;
-}
-.confirm-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-// Animation keyframes
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(calc(-20px));
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes slideIn2 {
-    from {
-        opacity: 0;
-        transform: translate((-50%), calc(50px));
-    }
-
-    to {
-        opacity: 1;
-        transform: translate((-50%), 0);
-    }
-}
-@keyframes slideOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(calc(50px));
     }
 }
 @keyframes heartClick {

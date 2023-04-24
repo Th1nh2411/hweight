@@ -16,30 +16,28 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
 
 const cx = classNames.bind(styles);
-function List({ data, className, updateCalOut }) {
+function List({ data, className, updateCalOut, onClickExercise }) {
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [showDetail, setShowDetail] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-    const [tab, setTab] = useState(0);
-    const [review, setReviewValue] = useState('');
-    const [leftLine, setLeftLine] = useState('');
-    const [widthLine, setWidthLine] = useState('');
-    const handleClickWrapper = () => {
-        setShowDetail(!showDetail);
-    };
+    // const [tab, setTab] = useState(0);
+    // const [review, setReviewValue] = useState('');
+    // const [leftLine, setLeftLine] = useState('');
+    // const [widthLine, setWidthLine] = useState('');
+
     const handleClickLike = () => {
         setIsLiked(!isLiked);
         const results = exerciseService.updateExercise(data.id, { isLiked: !isLiked });
     };
-    const handleChangeInput = (e) => {
-        const searchValue = e.target.value;
-        if (!searchValue.startsWith(' ')) {
-            setReviewValue(searchValue);
-        }
-    };
-    const handleClearReviewValue = () => {
-        setReviewValue('');
-    };
+    // const handleChangeInput = (e) => {
+    //     const searchValue = e.target.value;
+    //     if (!searchValue.startsWith(' ')) {
+    //         setReviewValue(searchValue);
+    //     }
+    // };
+    // const handleClearReviewValue = () => {
+    //     setReviewValue('');
+    // };
     return (
         <>
             {showConfirm && (
@@ -65,51 +63,41 @@ function List({ data, className, updateCalOut }) {
                     </div>
                 </Modal>
             )}
-            <div className={cx('wrapper', className)}>
-                <div className={cx('header')}>
-                    <Image src={data.img} className={cx('img-wrapper')} />
-                    <div className={cx('detail')}>
-                        <h5 className={cx('header-title')}>
-                            {data.name}
-                            <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
-                                <div className={cx('like-icon-wrapper')}>
-                                    <HeartIcon
-                                        onClick={handleClickLike}
-                                        height="2.8rem"
-                                        width="2.8rem"
-                                        className={cx('like-icon', { isLiked })}
-                                    />
-                                </div>
-                            </Tippy>
-                        </h5>
-                        <div
-                            className={cx('done-btn')}
-                            onClick={() => {
-                                setShowConfirm(true);
-                            }}
-                        >
-                            Done
-                            <HiClipboardDocumentCheck className={cx('done-icon')} />
-                        </div>
-                        <div className={cx('subtitle')}>
-                            can reduce up to {data.calories} calories{' '}
-                            <div className={cx('likes-num', 'sep')}>
-                                <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" />
-                                {data.likes} likes
+            <div onClick={() => onClickExercise(data.id)} className={cx('wrapper', className)}>
+                <Image src={data.img} className={cx('img-wrapper')} />
+                <div className={cx('detail')}>
+                    <h5 className={cx('header-title')}>
+                        {data.name}
+                        <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
+                            <div className={cx('like-icon-wrapper')}>
+                                <HeartIcon
+                                    onClick={handleClickLike}
+                                    height="2.8rem"
+                                    width="2.8rem"
+                                    className={cx('like-icon', { isLiked })}
+                                />
                             </div>
-                        </div>
-                        <div className={cx('info')}>{data.info}</div>
-                        <div className={cx('show-detail', { show: showDetail })} onClick={handleClickWrapper}>
-                            {!showDetail ? (
-                                <BsChevronBarDown className={cx('show-detail-icon')} />
-                            ) : (
-                                <BsChevronBarUp className={cx('show-detail-icon')} />
-                            )}
-                            {!showDetail ? 'View more' : 'View less'}
+                        </Tippy>
+                    </h5>
+                    <div
+                        className={cx('done-btn')}
+                        onClick={() => {
+                            setShowConfirm(true);
+                        }}
+                    >
+                        Done
+                        <HiClipboardDocumentCheck className={cx('done-icon')} />
+                    </div>
+                    <div className={cx('subtitle')}>
+                        can reduce up to {data.calories} calories{' '}
+                        <div className={cx('likes-num', 'sep')}>
+                            <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" />
+                            {data.likes} likes
                         </div>
                     </div>
+                    <div className={cx('info')}>{data.info}</div>
                 </div>
-                {showDetail && (
+                {/* {showDetail && (
                     <div className={cx('body')}>
                         <h5 className={cx('body-title')}>Essential equipments</h5>
                         <div className={cx('equipment-list')}>
@@ -181,7 +169,7 @@ function List({ data, className, updateCalOut }) {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </>
     );

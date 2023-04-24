@@ -17,12 +17,15 @@
     min-width: 1000px;
     max-width: 1200px;
 }
+.detail-img-wrapper {
+    margin-left: 40px;
+}
 .detail-img {
-    width: 500px;
-    height: 500px;
+    margin-top: 20px;
+    width: 350px;
+    height: 350px;
     object-fit: cover;
     overflow: revert;
-    margin-left: 40px;
     border-radius: 10px;
 }
 .detail-body {
@@ -73,14 +76,18 @@
 }
 
 .detail-title {
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     font-weight: 700;
-    margin: 15px 0 5px;
+    margin: 15px 0 10px;
+    color: var(--primary-color);
 }
 .detail-nutrition {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+.detail-nutrition + .detail-nutrition {
+    margin-top: 8px;
 }
 .detail-nutrition__item {
     padding: 8px 10px;
@@ -171,7 +178,7 @@
 }
 .tab-pane {
     display: none;
-    height: 240px;
+    height: 340px;
 }
 .tab-pane.active {
     display: block;

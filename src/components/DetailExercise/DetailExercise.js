@@ -1,4 +1,4 @@
-import styles from './DetailRecipe.module.scss';
+import styles from './DetailExercise.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -8,9 +8,11 @@ import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
 import * as RecipeService from '../../services/recipeService';
+import { IoFitnessSharp } from 'react-icons/io5';
+import ExerciseItem from '../ExerciseItem';
 const cx = classNames.bind(styles);
 
-function DetailRecipe({ data = {}, onCloseModal }) {
+function DetailExercise({ data = {}, onCloseModal }) {
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [tab, setTab] = useState(0);
     const [review, setReviewValue] = useState('');
@@ -58,47 +60,54 @@ function DetailRecipe({ data = {}, onCloseModal }) {
                     <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.likes} people love
                     this
                 </div>
-
+                {/* <h5 className={cx('detail-title')}>Essential equipments</h5>
+                <div className={cx('equipment-list')}>
+                    {data.equipments.map((equipment, index) => (
+                        <div key={index} className={cx('equipment-item')}>
+                            <Image className={cx('equipment-img')} src={equipment.img} />
+                            <div className={cx('equipment-name')}>{equipment.name}</div>
+                        </div>
+                    ))}
+                </div> */}
                 <div className={cx('tabs-wrapper')}>
+                    {data.sets.map((set, index) => (
+                        <div
+                            key={index}
+                            onClick={(event) => {
+                                setTab(index);
+                                setLeftLine(event.target.offsetLeft + 'px');
+                                setWidthLine(event.target.offsetWidth + 'px');
+                            }}
+                            className={cx('tab-item', { active: tab === index })}
+                        >
+                            <IoFitnessSharp className={cx('tab-icon')} />
+                            Set {index + 1}
+                        </div>
+                    ))}
                     <div
                         onClick={(event) => {
-                            setTab(0);
+                            setTab(data.sets.length + 1);
                             setLeftLine(event.target.offsetLeft + 'px');
                             setWidthLine(event.target.offsetWidth + 'px');
                         }}
-                        className={cx('tab-item', { active: tab === 0 })}
-                    >
-                        <DairyIcon className={cx('tab-icon')} />
-                        Ingredients you need
-                    </div>
-                    <div
-                        onClick={(event) => {
-                            setTab(1);
-                            setLeftLine(event.target.offsetLeft + 'px');
-                            setWidthLine(event.target.offsetWidth + 'px');
-                        }}
-                        className={cx('tab-item', { active: tab === 1 })}
+                        className={cx('tab-item', { active: tab === data.sets.length + 1 })}
                     >
                         <EvaluateIcon className={cx('tab-icon')} />
-                        Recipe reviews
+                        Evaluate recipe
                     </div>
                     <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
                 </div>
                 <div className={cx('tabs-content')}>
-                    <div className={cx('tab-pane', { active: tab === 0 })}>
-                        <div className={cx('detail-ingredients__list')}>
-                            {data.ingredients.map((ingredient, index) => (
-                                <div key={index} className={cx('detail-ingredients__item')}>
-                                    <Image className={cx('detail-ingredient-img')} src={ingredient.img} />
-                                    <div className={cx('detail-ingredients-name')}>{ingredient.name}</div>
-                                    <div className={cx('detail-ingredients-quantity')}>
-                                        {ingredient.quantity} {ingredient.unit}
-                                    </div>
-                                </div>
-                            ))}
+                    {data.sets.map((set, index) => (
+                        <div className={cx('tab-pane', { active: tab === index })} key={index}>
+                            <div className={cx('exercises-list')}>
+                                {set.map((movement, index) => (
+                                    <ExerciseItem key={index} data={movement} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx('tab-pane', { active: tab === 1 })}>
+                    ))}
+                    <div className={cx('tab-pane', { active: tab === data.sets.length + 1 })}>
                         <div className={cx('reviews-wrapper')}>
                             {data.comments.map((comment, index) => (
                                 <div key={index} className={cx('review-item')}>
@@ -124,26 +133,14 @@ function DetailRecipe({ data = {}, onCloseModal }) {
                 </div>
             </div>
             <div className={cx('detail-img-wrapper')}>
-                <div className={cx('detail-title')}>Nutrition</div>
-                <div className={cx('detail-nutrition')}>
-                    <div className={cx('detail-nutrition__item')}>
-                        <FireIcon className={cx('detail-nutrition__icon')} />
-                        {data.calories}kcal
-                    </div>
-                    <div className={cx('detail-nutrition__item')}>
-                        <MeatIcon className={cx('detail-nutrition__icon')} />
-                        {data.proteins}g proteins
-                    </div>
-                </div>
-                <div className={cx('detail-nutrition')}>
-                    <div className={cx('detail-nutrition__item')}>
-                        <FatIcon className={cx('detail-nutrition__icon')} />
-                        {data.fat}g fats
-                    </div>
-                    <div className={cx('detail-nutrition__item')}>
-                        <RiceBowIcon className={cx('detail-nutrition__icon')} />
-                        {data.carbo}g carbo
-                    </div>
+                <h5 className={cx('detail-title')}>Essential equipments</h5>
+                <div className={cx('equipment-list')}>
+                    {data.equipments.map((equipment, index) => (
+                        <div key={index} className={cx('equipment-item')}>
+                            <Image className={cx('equipment-img')} src={equipment.img} />
+                            <div className={cx('equipment-name')}>{equipment.name}</div>
+                        </div>
+                    ))}
                 </div>
                 <Image src={data.img} alt={data.name} className={cx('detail-img')} />
             </div>
@@ -151,4 +148,4 @@ function DetailRecipe({ data = {}, onCloseModal }) {
     );
 }
 
-export default memo(DetailRecipe);
+export default memo(DetailExercise);

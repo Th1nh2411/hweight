@@ -4,7 +4,7 @@ import Menu from './Menu';
 import MenuItem from './Menu/MenuItem';
 import config from '../../../config';
 
-import { JumpRopeIcon, RecipeIcon, HomeActiveIcon, UserGroupActiveIcon } from '../../../components/Icons/Icons';
+import { JumpRopeIcon, RecipeIcon, HomeActiveIcon, ConnectIcon } from '../../../components/Icons/Icons';
 import { IoLogOut } from 'react-icons/io5';
 import { FaRegUserCircle } from 'react-icons/fa';
 const cx = classNames.bind(styles);
@@ -31,12 +31,7 @@ function SideBar() {
                     icon={<FaRegUserCircle />}
                     activeIcon={<FaRegUserCircle />}
                 />
-                <MenuItem
-                    title="HWNet"
-                    to={config.routes.HWNet}
-                    icon={<UserGroupActiveIcon />}
-                    activeIcon={<UserGroupActiveIcon />}
-                />
+                <MenuItem title="HWNet" to={config.routes.HWNet} icon={<ConnectIcon />} activeIcon={<ConnectIcon />} />
                 <MenuItem
                     separate
                     title="Log Out"
