@@ -9,6 +9,7 @@ import Tippy from '@tippyjs/react';
 const cx = classNames.bind(styles);
 
 const WaterIntake = ({ data }) => {
+    const maxWater = 3700;
     const [water, setWater] = useState(parseInt(data.water) || 0);
     const [showOptions, setShowOptions] = useState(false);
     const optionsRef = useRef(null);
@@ -20,7 +21,6 @@ const WaterIntake = ({ data }) => {
     useEffect(() => {
         setWater(parseInt(data.water));
     }, [data]);
-    const maxWater = 3700;
     const waterUI = useMemo(() => 125 - (water / maxWater) * 125, [water]);
     const handleClickAddBtn = () => {
         setShowOptions(!showOptions);

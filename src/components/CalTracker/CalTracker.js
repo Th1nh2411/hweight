@@ -12,14 +12,10 @@ const cx = classNames.bind(styles);
 
 const CalTracker = ({ data }) => {
     // const caloriesIn
-    const [caloriesIn, setCaloriesIn] = useState(parseInt(data.calIn) || 0);
-    const [caloriesOut, setCaloriesOut] = useState(parseInt(data.calOut) + data.calMin || 0);
-    const BMI = useMemo(() => (data.weight / ((data.height / 100) * (data.height / 100))).toFixed(1), [data]);
-    useEffect(() => {
-        setCaloriesIn(parseInt(data.calIn));
-        setCaloriesOut(parseInt(data.calOut) + data.calMin);
-    }, [data]);
-    console.log(BMI);
+    const caloriesIn = Number(data.calIn) || 0;
+    const caloriesOut = Number(data.calOut) + Number(data.calMin) || 0;
+    const BMI = (data.weight / ((data.height / 100) * (data.height / 100))).toFixed(1);
+
     const suggest = useMemo(() => {
         if (caloriesIn < data.calMin) {
             return 'You should eat more food to reach the required calories for your body';

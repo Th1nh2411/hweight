@@ -4,7 +4,7 @@ import Image from '../Image';
 import { Link } from 'react-router-dom';
 import { AiFillCloseCircle, AiOutlineRightCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
@@ -19,10 +19,11 @@ function Item({
     onChangeEditing,
     disableInput = false,
     onLiked,
+    onClickRecipe,
     className,
 }) {
     const [checked, setChecked] = useState(selected);
-    const [showModalDetail, setShowModalDetail] = useState();
+    // const [showModalDetail, setShowModalDetail] = useState();
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [tab, setTab] = useState(0);
     const [review, setReviewValue] = useState('');
@@ -41,7 +42,7 @@ function Item({
     }, [clear]);
 
     const handleClickRecipe = () => {
-        setShowModalDetail(true);
+        onClickRecipe(data.id);
     };
     const handleLike = () => {
         setIsLiked(!isLiked);
@@ -60,8 +61,8 @@ function Item({
     };
     return (
         <div>
-            {showModalDetail && (
-                <Modal className={cx('detail-wrapper')} handleCloseModal={() => setShowModalDetail(false)}>
+            {/* {showModalDetail && (
+                <Modal className={cx('detail-wrapper')} handleClickOutside={() => setShowModalDetail(false)}>
                     <div className={cx('detail-body')}>
                         <div className={cx('detail-name')}>
                             {data.name}
@@ -84,12 +85,12 @@ function Item({
                         <div className={cx('detail-title')}>Nutrition</div>
                         <div className={cx('detail-nutrition')}>
                             <div className={cx('detail-nutrition__item')}>
-                                <MeatIcon className={cx('detail-nutrition__icon')} />
-                                {data.proteins}g proteins
-                            </div>
-                            <div className={cx('detail-nutrition__item')}>
                                 <FireIcon className={cx('detail-nutrition__icon')} />
                                 {data.calories}kcal
+                            </div>
+                            <div className={cx('detail-nutrition__item')}>
+                                <MeatIcon className={cx('detail-nutrition__icon')} />
+                                {data.proteins}g proteins
                             </div>
                             <div className={cx('detail-nutrition__item')}>
                                 <FatIcon className={cx('detail-nutrition__icon')} />
@@ -166,7 +167,7 @@ function Item({
                     </div>
                     <Image src={data.img} alt={data.name} className={cx('detail-img')} />
                 </Modal>
-            )}
+            )} */}
             <div onClick={handleClickRecipe} className={cx('wrapper', className, { selected: checked, disableInput })}>
                 <div className={cx('info')}>
                     <Image src={data.img} alt={data.name} className={cx('img')} />
@@ -215,4 +216,4 @@ function Item({
     );
 }
 
-export default Item;
+export default memo(Item);

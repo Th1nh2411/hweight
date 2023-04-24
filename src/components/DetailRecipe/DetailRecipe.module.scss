@@ -1,0 +1,292 @@
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(calc(-20px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+// Modal Detail css
+.detail-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    min-width: 1000px;
+    max-width: 1200px;
+}
+.detail-img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    overflow: revert;
+    margin-left: 40px;
+    border-radius: 10px;
+}
+.detail-body {
+    flex: 1;
+}
+.detail-name {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+.likes-num {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    position: relative;
+}
+.likes-icon {
+    margin-right: 5px;
+    background-color: #e23c3c;
+    border-radius: 50%;
+}
+.like-icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    .like-icon {
+        color: transparent;
+        cursor: pointer;
+        transition: 0.3s all;
+        background-color: rgb(201, 201, 201);
+        border-radius: 4px;
+        padding: 2px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.like-icon.isLiked {
+    animation: heartClick 0.3s ease-in-out;
+    color: #e23c3c;
+}
+.detail-info {
+}
+
+.detail-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 15px 0 5px;
+}
+.detail-nutrition {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.detail-nutrition__item {
+    padding: 8px 10px;
+    background-color: rgba(255, 218, 172, 0.4);
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+.detail-nutrition__item + .detail-nutrition__item {
+    margin-left: 10px;
+}
+.detail-nutrition__icon {
+    margin-right: 4px;
+}
+.detail-ingredients__list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+
+.detail-ingredients__item {
+    width: 80px;
+    margin: 0 8px;
+}
+
+.detail-ingredient-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: revert;
+}
+.detail-ingredients-name {
+    font-size: 1.4rem;
+    overflow: hidden;
+    // white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.detail-ingredients-quantity {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+// Tab
+
+.tabs-wrapper {
+    display: flex;
+    position: relative;
+    margin: 12px 0px;
+}
+.tabs-wrapper .line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 262px;
+    height: 6px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    transition: all 0.2s ease;
+}
+.tab-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 11px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.5s ease;
+    border-bottom: 5px solid transparent;
+    &:hover {
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.114);
+        border-color: rgba(194, 53, 100, 0.1);
+    }
+    .tab-icon {
+        margin-right: 5px;
+    }
+}
+.tab-item.active {
+    opacity: 1;
+}
+.tabs-content {
+}
+.tab-pane {
+    display: none;
+    height: 240px;
+}
+.tab-pane.active {
+    display: block;
+}
+// Evaluate
+.reviews-wrapper {
+    // border: 1px solid #333131;
+    // background-color: #4b4b4b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    height: 80%;
+}
+.review-item {
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: #363636;
+    margin: 0 5px 5px;
+}
+.review-name {
+    color: var(--primary-color);
+    font-weight: 800;
+    line-height: 1;
+}
+.review-content {
+    // line-height: 1;
+    font-size: 1.4rem;
+}
+.review-showMore {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+.review {
+    margin-top: 5px;
+    position: relative;
+    height: 50px;
+    background-color: #333131;
+    border-radius: 92px;
+    padding: 0 0 0 16px;
+    border: 1.5px solid transparent;
+    display: flex;
+    input {
+        padding-right: 40px;
+        flex: 1;
+        font-size: 1.6rem;
+        background-color: transparent;
+        color: var(--secondary-color);
+        height: 100%;
+        font-weight: 600;
+        caret-color: var(--primary-color);
+    }
+    input:not(:placeholder-shown) ~ .review-btn {
+        color: var(--secondary-color);
+    }
+    .clear {
+        cursor: pointer;
+        background-color: transparent;
+        font-size: 1.4rem;
+        display: flex;
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--secondary-color);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 30px;
+        top: 10px;
+        right: 50px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    &:focus-within {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    .review-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 100%;
+        border-top-right-radius: 92px;
+        border-bottom-right-radius: 92px;
+        font-size: 2.2rem;
+        color: rgba(255, 255, 255, 0.508);
+        background-color: #333131;
+        &:hover {
+            background-color: rgba(254, 254, 254, 0.08);
+            cursor: pointer;
+        }
+        &:active {
+            background-color: rgba(101, 101, 101, 0.06);
+        }
+    }
+}
+@keyframes heartClick {
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

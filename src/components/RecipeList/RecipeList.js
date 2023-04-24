@@ -10,7 +10,7 @@ import Tippy from '@tippyjs/react';
 import Filter from '../Filter/Filter';
 
 const cx = classNames.bind(styles);
-function List({ title, edit = false, listData, menuData, onEditDone, dayObj, children, className }) {
+function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onClickRecipe, children, className }) {
     const [checkedItems, setCheckedItems] = useState([]);
     const [showEdit, setShowEdit] = useState(false);
     const [clear, setClear] = useState(false);
@@ -135,6 +135,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
                                     <div key={index}>
                                         <RecipeItem
                                             onLiked={handleLiked}
+                                            onClickRecipe={onClickRecipe}
                                             data={item}
                                             editing
                                             onChangeEditing={handleCheckboxChange}
@@ -161,7 +162,9 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, chi
                         </div>
                     </div>
                 ) : (
-                    listData.map((recipe, index) => <RecipeItem key={index} data={recipe} />)
+                    listData.map((recipe, index) => (
+                        <RecipeItem onClickRecipe={onClickRecipe} key={index} data={recipe} />
+                    ))
                 )}
             </div>
         </div>

@@ -1,0 +1,51 @@
+.wrapper {
+    max-height: 460px;
+    overflow-y: scroll;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 10px;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+.item.even {
+    background-color: #353535;
+}
+.item-order {
+    margin-right: 5px;
+    width: 28px;
+    text-align: center;
+    font-weight: 700;
+}
+.item-name {
+    display: flex;
+    align-items: center;
+}
+.item-img {
+    margin-right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: revert;
+}
+
+.likes-num {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    position: relative;
+    font-weight: 700;
+}
+.likes-icon {
+    margin-left: 5px;
+    background-color: #e23c3c;
+    border-radius: 50%;
+}

@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
+import { memo } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -71,4 +72,4 @@ Button.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func,
 };
-export default Button;
+export default memo(Button);

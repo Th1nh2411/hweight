@@ -33,7 +33,7 @@ function Item({ data }) {
     return (
         <div>
             {showModalDetail && (
-                <Modal className={cx('detail-wrapper')} handleCloseModal={() => setShowModalDetail(false)}>
+                <Modal className={cx('detail-wrapper')} handleClickOutside={() => setShowModalDetail(false)}>
                     <div className={cx('detail-body__name')}>{data.name}</div>
                     <div className={cx('detail-body__info')}>
                         Execution time <ClockIcon width="2.4rem" height="2.4rem" className={cx('clock-icon')} /> -

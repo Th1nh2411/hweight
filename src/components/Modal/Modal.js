@@ -5,11 +5,11 @@ import styles from './Modal.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Modal({ className, handleCloseModal, children }) {
+function Modal({ className, handleClickOutside, children }) {
     const overlayRef = useRef();
     const handleDocumentClick = (event) => {
         if (overlayRef.current && overlayRef.current.contains(event.target)) {
-            handleCloseModal();
+            handleClickOutside();
         }
     };
     useEffect(() => {

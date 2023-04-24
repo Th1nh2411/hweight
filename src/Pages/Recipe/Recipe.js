@@ -10,6 +10,7 @@ import { RecipeIcon } from '../../components/Icons/Icons';
 import Button from '../../components/Button/Button';
 import Modal from '../../components/Modal/Modal';
 import dayjs from 'dayjs';
+import DetailRecipe from '../../components/DetailRecipe/DetailRecipe';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,9 @@ function Recipe() {
     const [dayObj, setDayObj] = useState(dayjs());
     const [recipes, setRecipes] = useState([]);
     const [menu, setMenu] = useState([]);
+    const [showDetailRecipe, setShowDetailRecipe] = useState(false);
+    const [detailRecipe, setDetailRecipe] = useState({});
+
     const getRecipesData = async (day) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getRecipe(day, token);
@@ -27,22 +31,18 @@ function Recipe() {
         const results = await recipeService.getMenu(token);
         setMenu(results);
     };
+    const getDetailRecipeData = async (id) => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getDetailRecipe(id, token);
+        setDetailRecipe(results);
+        setShowDetailRecipe(true);
+    };
     useEffect(() => {
         getRecipesData(dayObj.format('DDMMYYYY'));
     }, [dayObj]);
     useEffect(() => {
         getMenuData();
     }, []);
-    // useEffect(() => {
-    //     console.log(recipes, menu);
-    //     recipes.forEach((recipe) => {
-    //         menu.forEach((item) => {
-    //             if (recipe.id === item.id) {
-    //                 setRecipes([...recipes, { id: recipe.id, ...item }]);
-    //             }
-    //         });
-    //     });
-    // }, [menu]);
     const handleSubmitEdit = (type) => async (checkedItems) => {
         const newRecipes = recipes
             .filter((item) => item.type !== type)
@@ -61,6 +61,13 @@ function Recipe() {
 
     return (
         <Card className={cx('wrapper')}>
+            {showDetailRecipe && (
+                <DetailRecipe
+                    data={detailRecipe}
+                    show={showDetailRecipe}
+                    onCloseModal={() => setShowDetailRecipe(false)}
+                />
+            )}
             <div className={cx('header')}>
                 <div className={cx('title')}>
                     Daily Recipe <RecipeIcon height="30px" className={cx('title-icon')} width="30px" />
@@ -75,6 +82,9 @@ function Recipe() {
                     listData={recipes.filter((recipe) => recipe.type === 1)}
                     title="Breakfast"
                     dayObj={dayObj}
+                    onClickRecipe={(id) => {
+                        getDetailRecipeData(id);
+                    }}
                 />
                 <RecipeList
                     menuData={menu}

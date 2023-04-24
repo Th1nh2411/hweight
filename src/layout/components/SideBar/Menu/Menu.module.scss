@@ -34,7 +34,10 @@
     }
 }
 .menu-item.separate {
-    margin-top: 300px;
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
     &::before {
         content: '';
         position: absolute;
