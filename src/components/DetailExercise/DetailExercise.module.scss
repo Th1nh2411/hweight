@@ -16,6 +16,7 @@
     padding: 30px;
     min-width: 1000px;
     max-width: 1200px;
+    position: relative;
 }
 .detail-img-wrapper {
     // display: flex;
@@ -31,6 +32,28 @@
     overflow: revert;
     border-radius: 10px;
 }
+.done-btn {
+    // font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.2s all ease-in-out;
+    &:hover {
+        cursor: pointer;
+        background-color: #5d5d5d;
+        // opacity: 0.8;
+    }
+    .done-icon {
+        margin-left: 4px;
+        font-size: 1.8rem;
+    }
+}
+
 .detail-body {
     flex: 1;
 }
@@ -262,6 +285,31 @@
             background-color: rgba(101, 101, 101, 0.06);
         }
     }
+}
+// Modal Confirm
+.confirm-wrapper {
+    padding: 40px 20px 30px;
+}
+.confirm-img-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.confirm-img {
+    width: 150px;
+    object-fit: cover;
+    overflow: revert;
+    text-align: center;
+}
+.confirm-title {
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 @keyframes heartClick {
     25% {

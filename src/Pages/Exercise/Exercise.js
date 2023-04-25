@@ -44,12 +44,21 @@ function Exercise() {
         getHistoryData();
     }, []);
     const handleUpdateCalOut = (cal) => {
-        updateHistoryData({ calOut: history.calOut + cal });
+        updateHistoryData({ calOut: Number(history.calOut) + Number(cal) });
         getHistoryData();
+        if (showDetailEx) {
+            setShowDetailEx(false);
+        }
     };
     return (
         <Card className={cx('wrapper')}>
-            {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
+            {showDetailEx && (
+                <DetailExercise
+                    updateCalOut={handleUpdateCalOut}
+                    data={detailExercise}
+                    onCloseModal={() => setShowDetailEx(false)}
+                />
+            )}
             <div className={cx('header')}>
                 <div className={cx('title')}>
                     exercise

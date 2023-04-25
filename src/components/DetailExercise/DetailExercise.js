@@ -10,9 +10,13 @@ import Tippy from '@tippyjs/react';
 import * as RecipeService from '../../services/recipeService';
 import { IoFitnessSharp } from 'react-icons/io5';
 import ExerciseItem from '../ExerciseItem';
+import Button from '../Button/Button';
+import images from '../../assets/images';
+import { HiClipboardDocumentCheck } from 'react-icons/hi2';
 const cx = classNames.bind(styles);
 
-function DetailExercise({ data = {}, onCloseModal }) {
+function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
+    const [showConfirm, setShowConfirm] = useState(false);
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [tab, setTab] = useState(0);
     const [review, setReviewValue] = useState('');
@@ -41,6 +45,39 @@ function DetailExercise({ data = {}, onCloseModal }) {
                 onCloseModal();
             }}
         >
+            {showConfirm && (
+                <Modal className={cx('confirm-wrapper')} handleCloseModal={() => setShowConfirm(false)}>
+                    <div className={cx('confirm-img-wrapper')}>
+                        <Image className={cx('confirm-img')} src={images.running} />
+                    </div>
+                    <div className={cx('confirm-title')}>
+                        Confirm that you have done this exercise? The amount of calories out when doing this exercise is{' '}
+                        {data.calories} calories
+                    </div>
+                    <div className={cx('confirm-btn-wrapper')}>
+                        <Button onClick={() => setShowConfirm(false)}>Cancel</Button>
+                        <Button
+                            onClick={() => {
+                                setShowConfirm(false);
+                                updateCalOut(data.calories);
+                            }}
+                            primary
+                        >
+                            Confirm
+                        </Button>
+                    </div>
+                </Modal>
+            )}
+            <div
+                className={cx('done-btn')}
+                onClick={(event) => {
+                    setShowConfirm(true);
+                    event.stopPropagation();
+                }}
+            >
+                Done
+                <HiClipboardDocumentCheck className={cx('done-icon')} />
+            </div>
             <div className={cx('detail-body')}>
                 <div className={cx('detail-name')}>
                     {data.name}

@@ -81,8 +81,9 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                     </h5>
                     <div
                         className={cx('done-btn')}
-                        onClick={() => {
+                        onClick={(event) => {
                             setShowConfirm(true);
+                            event.stopPropagation();
                         }}
                     >
                         Done

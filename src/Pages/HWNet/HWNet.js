@@ -5,21 +5,28 @@ import Card from '../../components/Card/Card';
 import { MdLeaderboard } from 'react-icons/md';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
+import * as usersService from '../../services/usersService';
 import ListRank from '../../components/ListRank/ListRank';
 import { ConnectIcon } from '../../components/Icons';
 import { HiUserGroup } from 'react-icons/hi2';
 import DetailRecipe from '../../components/DetailRecipe';
 import DetailExercise from '../../components/DetailExercise';
+import DetailUser from '../../components/DetailUser';
+import { Col, Row } from 'react-bootstrap';
+import Image from '../../components/Image/Image';
 
 const cx = classNames.bind(styles);
 
 function HWNet() {
-    const [topRecipe, setTopRecipe] = useState();
-    const [topExercise, setTopExercise] = useState();
+    const [topRecipe, setTopRecipe] = useState([]);
+    const [topExercise, setTopExercise] = useState([]);
+    const [users, setUsers] = useState([]);
     const [detailRecipe, setDetailRecipe] = useState({});
     const [showDetailRecipe, setShowDetailRecipe] = useState(false);
     const [detailExercise, setDetailExercise] = useState({});
     const [showDetailEx, setShowDetailEx] = useState(false);
+    const [detailUser, setDetailUser] = useState({});
+    const [showDetailUser, setShowDetailUser] = useState(false);
     const getTopRecipeData = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getMenu(token);
@@ -30,13 +37,17 @@ function HWNet() {
         const results = await exerciseService.getExercise(token);
         setTopExercise(results);
     };
-
+    const getUsersData = async () => {
+        const token = localStorage.getItem('token');
+        const results = await usersService.getUsers(token);
+        setUsers(results);
+    };
     useEffect(() => {
         getTopRecipeData();
-    }, []);
-    useEffect(() => {
         getTopExerciseData();
+        getUsersData();
     }, []);
+
     const getDetailRecipeData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getDetailRecipe(id, token);
@@ -49,10 +60,17 @@ function HWNet() {
         setDetailExercise(results);
         setShowDetailEx(true);
     };
+    const getDetailUserData = async (id) => {
+        const token = localStorage.getItem('token');
+        const results = await usersService.getDetailUser(id, token);
+        setDetailUser(results);
+        setShowDetailUser(true);
+    };
     return (
         <Card className={cx('wrapper')}>
             {showDetailRecipe && <DetailRecipe data={detailRecipe} onCloseModal={() => setShowDetailRecipe(false)} />}
             {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
+            {showDetailUser && <DetailUser data={detailUser} onCloseModal={() => setShowDetailUser(false)} />}
             <div className={cx('header')}>
                 <div className={cx('title')}>
                     HWNet
@@ -60,8 +78,8 @@ function HWNet() {
                 </div>
             </div>
             <div className={cx('body')}>
-                <div className={cx('dFlex-2c')}>
-                    <div className={cx('content-wrapper')}>
+                <Row>
+                    <Col className={cx('content-wrapper')}>
                         <div className={cx('content-title')}>
                             Top 30 Recipe{' '}
                             <div className={cx('icon')}>
@@ -76,8 +94,8 @@ function HWNet() {
                                 }}
                             />
                         </div>
-                    </div>
-                    <div className={cx('content-wrapper')}>
+                    </Col>
+                    <Col className={cx('content-wrapper')}>
                         <div className={cx('content-title')}>
                             Top 10 Exercise{' '}
                             <div className={cx('icon')}>
@@ -92,8 +110,8 @@ function HWNet() {
                                 }}
                             />
                         </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
                 <div className={cx('content-wrapper')}>
                     <div className={cx('content-title')}>
                         The others{' '}
@@ -101,14 +119,24 @@ function HWNet() {
                             <HiUserGroup />
                         </div>
                     </div>
-                    <div className={cx('content-body')}>
-                        <ListRank
-                            listData={topExercise}
-                            onClickItem={(id) => {
-                                getDetailExerciseData(id);
-                            }}
-                        />
-                    </div>
+                    <Row className={cx('content-body')}>
+                        {users.map((user, index) => (
+                            <Col
+                                xl="4"
+                                key={index}
+                                className={cx('user-wrapper')}
+                                onClick={() => getDetailUserData(user.id)}
+                            >
+                                <Image className={cx('user-img')} />
+                                <div className={cx('user-info')}>
+                                    <div className={cx('user-name')}>{user.name}</div>
+                                    <div className={cx('user-bmi', { under: user.BMI < 18.5, over: user.BMI > 25 })}>
+                                        {user.BMI} BMI
+                                    </div>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
                 </div>
             </div>
         </Card>
