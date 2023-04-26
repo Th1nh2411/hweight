@@ -8,9 +8,9 @@ import { JumpRopeIcon, RecipeIcon, HomeActiveIcon, ConnectIcon } from '../../../
 import { IoLogOut } from 'react-icons/io5';
 import { FaRegUserCircle } from 'react-icons/fa';
 const cx = classNames.bind(styles);
-function SideBar() {
+function SideBar({ className }) {
     return (
-        <aside className={cx('wrapper')}>
+        <aside className={cx('wrapper', className)}>
             <Menu>
                 <MenuItem
                     title="Home"

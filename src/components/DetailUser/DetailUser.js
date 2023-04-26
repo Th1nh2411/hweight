@@ -5,9 +5,8 @@ import Modal from '../Modal/Modal';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
 import { FaFemale, FaMale } from 'react-icons/fa';
-import { Col, Row } from 'react-bootstrap';
 import ListRank from '../ListRank/ListRank';
-import { MdLeaderboard } from 'react-icons/md';
+import { BsFillBarChartLineFill } from 'react-icons/bs';
 import DetailRecipe from '../DetailRecipe/DetailRecipe';
 import DetailExercise from '../DetailExercise/DetailExercise';
 const cx = classNames.bind(styles);
@@ -74,12 +73,12 @@ function DetailUser({ data = {}, onCloseModal }) {
                         </div>
                     </div>
                 </div>
-                <Row className={cx('content-wrapper')}>
-                    <Col className={cx('content-list')}>
+                <div className={cx('content-wrapper', 'row')}>
+                    <div className={cx('content-list', 'col')}>
                         <div className={cx('content-title')}>
                             Favorite recipes{' '}
                             <div className={cx('icon')}>
-                                <MdLeaderboard />
+                                <BsFillBarChartLineFill />
                             </div>
                         </div>
                         <div className={cx('content-body')}>
@@ -90,12 +89,12 @@ function DetailUser({ data = {}, onCloseModal }) {
                                 }}
                             />
                         </div>
-                    </Col>
-                    <Col className={cx('content-list')}>
+                    </div>
+                    <div className={cx('content-list', 'col')}>
                         <div className={cx('content-title')}>
                             Favorite exercises{' '}
                             <div className={cx('icon')}>
-                                <MdLeaderboard />
+                                <BsFillBarChartLineFill />
                             </div>
                         </div>
                         <div className={cx('content-body')}>
@@ -106,8 +105,8 @@ function DetailUser({ data = {}, onCloseModal }) {
                                 }}
                             />
                         </div>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         </Modal>
     );

@@ -5,7 +5,7 @@ import { AiFillCheckCircle, AiFillCloseCircle, AiFillExclamationCircle, AiFillIn
 import { useEffect, useMemo, useRef, useState } from 'react';
 const cx = classNames.bind(styles);
 
-const BMICal = ({ data }) => {
+const BMICal = ({ data, className }) => {
     const BMI = useMemo(() => (data.weight / ((data.height / 100) * (data.height / 100))).toFixed(1), [data]);
     const type = useMemo(() => {
         if (BMI < 18.5) {
@@ -19,7 +19,7 @@ const BMICal = ({ data }) => {
     const upperLimitW = useMemo(() => (25 * (data.height / 100) * (data.height / 100)).toFixed(1), [data]);
     const lowerLimitW = useMemo(() => (18.5 * (data.height / 100) * (data.height / 100)).toFixed(1), [data]);
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', className)}>
             <div className={cx('header')}>
                 <div className={cx('num-wrapper')}>
                     <p

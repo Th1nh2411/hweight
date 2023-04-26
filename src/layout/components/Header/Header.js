@@ -10,11 +10,15 @@ import Search from '../Search';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import { useState } from 'react';
+import { HiBars4 } from 'react-icons/hi2';
+import Modal from '../../../components/Modal/Modal';
+import SideBar from '../SideBar';
 const cx = classNames.bind(styles);
 
 function Header() {
     const navigate = useNavigate();
     const [changeBg, setChangeBg] = useState(false);
+    const [showSidebarMb, setShowSidebarMb] = useState(false);
     const currentUser = true;
     const USER_MENU = [
         {
@@ -55,7 +59,13 @@ function Header() {
     };
     return (
         <header className={cx('wrapper', { changeBg })}>
+            {showSidebarMb && (
+                <Modal className={cx('side-mb-wrapper')} handleClickOutside={() => setShowSidebarMb(false)}>
+                    <SideBar />
+                </Modal>
+            )}
             <div className={cx('inner')}>
+                <HiBars4 onClick={() => setShowSidebarMb(true)} className={cx('show-nav-btn')} />
                 <Link to={config.routes.dairy}>
                     <div className={cx('logo-wrapper')}>
                         <img src={images.logo} className={cx('logo')} alt="logo" />

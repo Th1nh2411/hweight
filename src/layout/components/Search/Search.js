@@ -8,6 +8,8 @@ import PopperWrapper from '../../../components/Popper';
 import RecipeItem from '../../../components/RecipeItem';
 import { useDebounce } from '../../../hooks';
 import * as searchServices from '../../../services/searchService';
+import * as recipeService from '../../../services/recipeService';
+import DetailRecipe from '../../../components/DetailRecipe/DetailRecipe';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -17,6 +19,8 @@ function Search() {
     const [loading, setLoading] = useState(false);
     const debouncedValue = useDebounce(searchValue, 500);
     const inputRef = useRef();
+    const [showDetailRecipe, setShowDetailRecipe] = useState(false);
+    const [detailRecipe, setDetailRecipe] = useState({});
     useEffect(() => {
         if (!debouncedValue.trim()) {
             setSearchResult([]);
@@ -46,23 +50,36 @@ function Search() {
             setSearchValue(searchValue);
         }
     };
+    const getDetailRecipeData = async (id) => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getDetailRecipe(id, token);
+        setDetailRecipe(results);
+        setShowDetailRecipe(true);
+    };
     const handleSubmit = (e) => {};
     return (
         // Using a wrapper div => solve warning Tippy, creating a newparentNode context
-        <div>
+        <>
+            {showDetailRecipe && (
+                <DetailRecipe
+                    data={detailRecipe}
+                    show={showDetailRecipe}
+                    onCloseModal={() => setShowDetailRecipe(false)}
+                />
+            )}
             <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 onClickOutside={handleHideResult}
                 render={(attrs) => (
-                    <div className={cx('search-result')} tabIndex="-1">
-                        <PopperWrapper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
+                    <PopperWrapper>
+                        <div className={cx('search-result')} tabIndex="-1">
+                            <h4 className={cx('search-title')}>Recipes</h4>
                             {searchResult.map((data) => (
-                                <RecipeItem key={data.id} data={data} />
+                                <RecipeItem onClickRecipe={getDetailRecipeData} key={data.id} data={data} />
                             ))}
-                        </PopperWrapper>
-                    </div>
+                        </div>
+                    </PopperWrapper>
                 )}
             >
                 <div className={cx('search')}>
@@ -70,7 +87,7 @@ function Search() {
                         ref={inputRef}
                         onChange={handleChangeInput}
                         value={searchValue}
-                        placeholder="Search activities and recipes"
+                        placeholder="Search recipes"
                         onFocus={() => setShowResult(true)}
                     />
                     {loading ||
@@ -87,7 +104,7 @@ function Search() {
                     </button>
                 </div>
             </HeadlessTippy>
-        </div>
+        </>
     );
 }
 

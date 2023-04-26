@@ -1,16 +1,13 @@
-import PropTypes from 'prop-types';
 import styles from './CalTracker.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { WaterPlusIcon } from '../Icons';
-import { IoWaterSharp } from 'react-icons/io5';
-import * as profileService from '../../services/profileService';
+
 import Tippy from '@tippyjs/react';
 import RadialChart from '../RadialChart';
 import { RiQuestionLine } from 'react-icons/ri';
 const cx = classNames.bind(styles);
 
-const CalTracker = ({ data }) => {
+const CalTracker = ({ data, className }) => {
     // const caloriesIn
     const caloriesIn = Number(data.calIn) || 0;
     const caloriesOut = Number(data.calOut) + Number(data.calMin) || 0;
@@ -32,7 +29,7 @@ const CalTracker = ({ data }) => {
 
     console.log(caloriesIn, caloriesOut);
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', className)}>
             <div className={cx('title')}>
                 Calories Tracker{' '}
                 <Tippy placement="bottom" content={suggest}>
@@ -83,20 +80,20 @@ const CalTracker = ({ data }) => {
                         </div>
                     </div>
                 </div>
-                <div className={cx('desc-wrapper')}>
-                    <div className={cx('desc-item')}>
+                <div className={cx('desc-wrapper', 'row')}>
+                    <div className={cx('desc-item', 'col-12')}>
                         <div className={cx('desc-color')} style={{ backgroundColor: '#5685df' }}></div>
                         <div className={cx('desc-title')}>Recommended daily calorie intake</div>
                     </div>
-                    <div className={cx('desc-item')}>
+                    <div className={cx('desc-item', 'col-12')}>
                         <div className={cx('desc-color')} style={{ backgroundColor: 'var(--primary-color)' }}></div>
                         <div className={cx('desc-title')}>Calories your body burns at rest</div>
                     </div>
-                    <div className={cx('desc-item')}>
+                    <div className={cx('desc-item', 'col-12')}>
                         <div className={cx('desc-color')} style={{ backgroundColor: '#6b42d7' }}></div>
                         <div className={cx('desc-title')}>Calories intake today</div>
                     </div>
-                    <div className={cx('desc-item')}>
+                    <div className={cx('desc-item', 'col-12')}>
                         <div className={cx('desc-color')} style={{ backgroundColor: '#d75c42' }}></div>
                         <div className={cx('desc-title')}>Calories out today</div>
                     </div>

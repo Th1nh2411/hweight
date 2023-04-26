@@ -26,4 +26,14 @@
     flex: 1;
     margin-left: var(--sidebar-width);
     z-index: 1;
+    padding: 20px 30px;
+}
+@media (max-width: 991.98px) {
+    .content {
+        margin-left: 0;
+        padding: 0;
+    }
+    .sidebar {
+        display: none;
+    }
 }

@@ -102,11 +102,10 @@ export const ConnectIcon = ({ width = '2.2rem', height = '2.2rem', className }) 
         x="0px"
         y="0px"
         width={width}
-        data-e2e=""
         height={height}
         className={className}
         viewBox="0 0 122.88 122.88"
-        enable-background="new 0 0 122.88 122.88"
+        enableBackground="new 0 0 122.88 122.88"
         fill="currentColor"
     >
         <g>
@@ -411,7 +410,7 @@ export const ClockIcon = ({ width = '2.2rem', height = '2.2rem', className, onCl
         id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 64 64"
-        enable-background="new 0 0 64 64"
+        enableBackground="new 0 0 64 64"
         fill="#000000"
     >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

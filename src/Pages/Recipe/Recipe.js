@@ -4,11 +4,8 @@ import styles from './Recipe.module.scss';
 import Card from '../../components/Card';
 import Calendar from '../../components/Calendar';
 import RecipeList from '../../components/RecipeList/RecipeList';
-import RecipeItem from '../../components/RecipeItem/RecipeItem';
 import * as recipeService from '../../services/recipeService';
 import { RecipeIcon } from '../../components/Icons/Icons';
-import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal';
 import dayjs from 'dayjs';
 import DetailRecipe from '../../components/DetailRecipe/DetailRecipe';
 
@@ -82,9 +79,7 @@ function Recipe() {
                     listData={recipes.filter((recipe) => recipe.type === 1)}
                     title="Breakfast"
                     dayObj={dayObj}
-                    onClickRecipe={(id) => {
-                        getDetailRecipeData(id);
-                    }}
+                    onClickRecipe={getDetailRecipeData}
                 />
                 <RecipeList
                     menuData={menu}

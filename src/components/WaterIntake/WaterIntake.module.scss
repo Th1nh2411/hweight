@@ -3,10 +3,10 @@
     flex-direction: column;
     align-items: center;
 
-    padding: 20px 45px 30px 30px;
-    background: linear-gradient(#333333, #211e1f);
-    margin-bottom: 20px;
-    border-radius: 10px;
+    // padding: 20px 45px 30px 30px;
+    // background: linear-gradient(#333333, #211e1f);
+    // margin-bottom: 20px;
+    // border-radius: 10px;
 }
 .icon {
     margin-right: 2px;
@@ -36,7 +36,7 @@
     background-repeat: repeat-x;
     background-position-y: 125px;
     animation: waterAnimated 10s linear infinite;
-    box-shadow: 0 0 0 6px #fff, 0 20px 35px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 0px 6px #fff, 0px 0px 20px 8px rgb(0 0 0);
     // -webkit-clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
 }
 .cup:before {
@@ -45,7 +45,7 @@
     width: 25px;
     height: 120px;
     border: 6px solid #fff;
-    right: -42px;
+    right: -31px;
     top: 30px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;

@@ -1,12 +1,15 @@
 .search-result,
 .search {
-    width: 500px;
+    width: 40vw;
+}
+.search-result {
+    padding: 12px 20px;
+    overflow-y: scroll;
 }
 .search-title {
-    color: rgba(22, 24, 35, 0.5);
-    font-size: 1.4rem;
+    color: var(--primary-color);
+    font-size: 1.8rem;
     font-weight: 700;
-    padding: 2px 16px;
 }
 .search {
     position: relative;
@@ -85,5 +88,10 @@
     }
     &:active {
         background-color: rgba(101, 101, 101, 0.06);
+    }
+}
+@media (max-width: 767.98px) {
+    .search {
+        display: none;
     }
 }

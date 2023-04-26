@@ -25,6 +25,16 @@
     align-items: center;
     justify-content: space-between;
 }
+.show-nav-btn {
+    display: none;
+    font-size: 6.5rem;
+    padding: 15px;
+    border-radius: 5px;
+    &:hover {
+        cursor: pointer;
+        background-color: #888;
+    }
+}
 .logo-wrapper {
     min-width: 240px;
     display: flex;
@@ -81,4 +91,19 @@
     padding: 4px 10px;
     cursor: pointer;
     display: flex;
+}
+@media (max-width: 767.98px) {
+    .inner {
+        padding: 0 5px;
+    }
+    .logo-wrapper {
+        display: none;
+    }
+    .show-nav-btn {
+        display: block;
+    }
+    .side-mb-wrapper {
+        margin: 0;
+        background-color: #1b1b1b;
+    }
 }

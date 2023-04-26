@@ -1,10 +1,8 @@
 .wrapper {
-    margin: 30px 50px 50px;
 }
 .header {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
     justify-content: space-between;
     background-color: #211e1f;
     padding: 24px 40px 15px;
@@ -25,11 +23,23 @@
     margin-left: 5px;
 }
 .body {
-    padding: 10px 40px 0px;
+    padding: 10px 40px 20px;
     position: relative;
     transition: 0.3s all;
 }
-.tracker-wrapper {
-    display: flex;
-    margin-top: 12px;
+.content-wrapper {
+    margin-top: 10px;
+    padding: 20px 20px;
+    background: linear-gradient(#333333, #211e1f);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+@media (max-width: 767.98px) {
+    .body {
+        padding: 0px;
+    }
+    .content-wrapper {
+        background: none;
+    }
 }

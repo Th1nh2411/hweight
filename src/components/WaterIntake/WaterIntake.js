@@ -8,7 +8,7 @@ import * as profileService from '../../services/profileService';
 import Tippy from '@tippyjs/react';
 const cx = classNames.bind(styles);
 
-const WaterIntake = ({ data }) => {
+const WaterIntake = ({ data, className }) => {
     const maxWater = 3700;
     const [water, setWater] = useState(parseInt(data.water) || 0);
     const [showOptions, setShowOptions] = useState(false);
@@ -45,7 +45,7 @@ const WaterIntake = ({ data }) => {
         };
     }, []);
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', className)}>
             <div className={cx('title')}>Water Intake</div>
             <div className={cx('cup')} style={{ backgroundPositionY: waterUI + 'px' }}>
                 <Tippy

@@ -2,7 +2,7 @@ import styles from './HWNet.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../../components/Card/Card';
-import { MdLeaderboard } from 'react-icons/md';
+import { BsFillBarChartLineFill } from 'react-icons/bs';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
 import * as usersService from '../../services/usersService';
@@ -79,65 +79,77 @@ function HWNet() {
             </div>
             <div className={cx('body')}>
                 <Row>
-                    <Col className={cx('content-wrapper')}>
-                        <div className={cx('content-title')}>
-                            Top 30 Recipe{' '}
-                            <div className={cx('icon')}>
-                                <MdLeaderboard />
+                    <Col sm={'12'} md={'6'}>
+                        <div className={cx('content-wrapper')}>
+                            <div className={cx('content-title')}>
+                                Top 30 Recipe{' '}
+                                <div className={cx('icon')}>
+                                    <BsFillBarChartLineFill />
+                                </div>
                             </div>
-                        </div>
-                        <div className={cx('content-body')}>
-                            <ListRank
-                                listData={topRecipe}
-                                onClickItem={(id) => {
-                                    getDetailRecipeData(id);
-                                }}
-                            />
+                            <div className={cx('content-body')}>
+                                <ListRank
+                                    listData={topRecipe}
+                                    onClickItem={(id) => {
+                                        getDetailRecipeData(id);
+                                    }}
+                                />
+                            </div>
                         </div>
                     </Col>
-                    <Col className={cx('content-wrapper')}>
-                        <div className={cx('content-title')}>
-                            Top 10 Exercise{' '}
-                            <div className={cx('icon')}>
-                                <MdLeaderboard />
+                    <Col sm={'12'} md={'6'}>
+                        <div className={cx('content-wrapper')}>
+                            <div className={cx('content-title')}>
+                                Top 10 Exercise{' '}
+                                <div className={cx('icon')}>
+                                    <BsFillBarChartLineFill />
+                                </div>
+                            </div>
+                            <div className={cx('content-body')}>
+                                <ListRank
+                                    listData={topExercise}
+                                    onClickItem={(id) => {
+                                        getDetailExerciseData(id);
+                                    }}
+                                />
                             </div>
                         </div>
-                        <div className={cx('content-body')}>
-                            <ListRank
-                                listData={topExercise}
-                                onClickItem={(id) => {
-                                    getDetailExerciseData(id);
-                                }}
-                            />
+                    </Col>
+
+                    <Col xl={'12'}>
+                        <div className={cx('content-wrapper')}>
+                            <div className={cx('content-title')}>
+                                The others{' '}
+                                <div className={cx('icon')}>
+                                    <HiUserGroup />
+                                </div>
+                            </div>
+                            <Row className={cx('content-body')}>
+                                {users.map((user, index) => (
+                                    <Col
+                                        md="4"
+                                        key={index}
+                                        className={cx('user-wrapper')}
+                                        onClick={() => getDetailUserData(user.id)}
+                                    >
+                                        <Image className={cx('user-img')} />
+                                        <div className={cx('user-info')}>
+                                            <div className={cx('user-name')}>{user.name}</div>
+                                            <div
+                                                className={cx('user-bmi', {
+                                                    under: user.BMI < 18.5,
+                                                    over: user.BMI > 25,
+                                                })}
+                                            >
+                                                {user.BMI} BMI
+                                            </div>
+                                        </div>
+                                    </Col>
+                                ))}
+                            </Row>
                         </div>
                     </Col>
                 </Row>
-                <div className={cx('content-wrapper')}>
-                    <div className={cx('content-title')}>
-                        The others{' '}
-                        <div className={cx('icon')}>
-                            <HiUserGroup />
-                        </div>
-                    </div>
-                    <Row className={cx('content-body')}>
-                        {users.map((user, index) => (
-                            <Col
-                                xl="4"
-                                key={index}
-                                className={cx('user-wrapper')}
-                                onClick={() => getDetailUserData(user.id)}
-                            >
-                                <Image className={cx('user-img')} />
-                                <div className={cx('user-info')}>
-                                    <div className={cx('user-name')}>{user.name}</div>
-                                    <div className={cx('user-bmi', { under: user.BMI < 18.5, over: user.BMI > 25 })}>
-                                        {user.BMI} BMI
-                                    </div>
-                                </div>
-                            </Col>
-                        ))}
-                    </Row>
-                </div>
             </div>
         </Card>
     );
