@@ -12,7 +12,7 @@ import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
 
 const cx = classNames.bind(styles);
-const Register = () => {
+const Register = ({ setAuth }) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +32,7 @@ const Register = () => {
 
             if (results.success) {
                 localStorage.setItem('token', results.token);
-                // setAuth(results.token);
+                setAuth(results.token);
                 navigate(config.routes.dairy);
             } else {
                 setUsername('');

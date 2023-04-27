@@ -11,8 +11,8 @@ import HWNet from '../Pages/HWNet/HWNet';
 
 export const publicRoutes = [
     // { path: config.routes.login, component: Login, layout: null },
+    // { path: config.routes.register, component: Register, layout: null },
     { path: config.routes.forgot, component: ForgotPw, layout: null },
-    { path: config.routes.register, component: Register, layout: null },
 ];
 export const privateRoutes = [
     { path: config.routes.dairy, component: Home },
