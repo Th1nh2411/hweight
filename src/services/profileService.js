@@ -5,7 +5,7 @@ export const getProfile = async (token) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.get(`profile`, config);
+        const res = await httpRequest.get(`https://mocki.io/v1/750bacd9-b902-4b7c-b3a6-a6eff5d75eee`, config); //profile
         return res;
     } catch (error) {
         console.log(error);
@@ -17,7 +17,7 @@ export const updateProfile = async (data, token) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.patch(`profile`, data, config);
+        const res = await httpRequest.patch(`https://mocki.io/v1/750bacd9-b902-4b7c-b3a6-a6eff5d75eee`, data, config); //profile
         return res;
     } catch (error) {
         console.log(error);

@@ -5,8 +5,8 @@ export const getRecipe = async (day, token) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.get(`recipe/${day}`, config);
-        return res.data;
+        const res = await httpRequest.get(`https://mocki.io/v1/80a5215f-a1aa-44cb-9707-3b1cb6e4e487`, config); //recipe/${day}
+        return res; //only res
     } catch (error) {
         console.log(error);
         return [];
@@ -17,7 +17,7 @@ export const getDetailRecipe = async (id, token) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.get(`menu/${id}`, config);
+        const res = await httpRequest.get(`https://mocki.io/v1/13b08abb-3c38-4160-92fd-57203324c825`, config); //menu/${id}
         return res;
     } catch (error) {
         console.log(error);
@@ -29,25 +29,14 @@ export const getMenu = async (token) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-        const res = await httpRequest.get(`menu`, config);
+        const res = await httpRequest.get(`https://mocki.io/v1/0ca63472-d3fe-4611-bf4a-30903ce91d3e`, config); //menu
         return res;
     } catch (error) {
         console.log(error);
         return [];
     }
 };
-export const deleteRecipe = async (token) => {
-    const config = {
-        headers: { Authorization: `Bearer ${token}` },
-    };
-    try {
-        const res = await httpRequest.del(`recipe`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return [];
-    }
-};
+
 export const updateMenuItem = async (id, data, token) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` },

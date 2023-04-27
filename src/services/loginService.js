@@ -11,7 +11,7 @@ export const login = async (param = {}) => {
 };
 export const getToken = async (config = {}) => {
     try {
-        const res = await httpRequest.get(`login`, config);
+        const res = await httpRequest.get(`https://mocki.io/v1/75c740d2-4b27-4bd5-984e-bd701055c1d3`, config); //login
         return res;
     } catch (error) {
         console.log(error);

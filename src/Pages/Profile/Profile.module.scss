@@ -1,7 +1,8 @@
 .wrapper {
     position: relative;
 }
-.card-item {
+.card-item + .card-item {
+    margin-top: 15px;
 }
 .card-header {
     display: flex;
@@ -121,7 +122,7 @@
     .title {
         font-size: 2rem;
     }
-    .card-item + .card-item {
-        margin-top: 20px;
-    }
+    // .card-item + .card-item {
+    //     margin-top: 20px;
+    // }
 }
