@@ -28,6 +28,7 @@ const Login = () => {
 
             if (results.success) {
                 localStorage.setItem('token', results.token);
+                // setAuth(results.token);
                 navigate(config.routes.dairy);
             } else {
                 setUsername('');

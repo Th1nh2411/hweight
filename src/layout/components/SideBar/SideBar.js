@@ -33,6 +33,7 @@ function SideBar({ className }) {
                 />
                 <MenuItem title="HWNet" to={config.routes.HWNet} icon={<ConnectIcon />} activeIcon={<ConnectIcon />} />
                 <MenuItem
+                    onClick={() => localStorage.removeItem('token')}
                     separate
                     title="Log Out"
                     to={config.routes.login}

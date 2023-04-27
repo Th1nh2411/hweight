@@ -1,11 +1,50 @@
-import { Route, Routes } from 'react-router-dom';
-import { publicRoutes } from './Routes';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { privateRoutes, publicRoutes } from './Routes';
 import DefaultLayout from './layout/DefaultLayout';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Login';
 function App() {
+    // const [isAuthenticated, setIsAuthenticated] = useState(() => localStorage.getItem('token') || false);
+    const isAuthenticated = localStorage.getItem('token') || false;
+    console.log(isAuthenticated);
+    // const setAuth = (value) => {
+    //     setIsAuthenticated(value);
+    //     //alert(value);
+    // };
+
+    // useEffect(() => {
+    //     localStorage.setItem('token', JSON.stringify(isAuthenticated));
+    // }, [isAuthenticated]);
     return (
         <div className="App">
             <Routes>
+                <Route path="/login" element={<Login />} />
+                {privateRoutes.map((route, index) => {
+                    let Layout = DefaultLayout;
+                    if (route.layout) {
+                        Layout = route.layout;
+                    } else if (route.layout === null) {
+                        Layout = Fragment;
+                    }
+                    const Element = route.component;
+                    return (
+                        <Route
+                            exact
+                            key={index}
+                            path={route.path}
+                            element={
+                                isAuthenticated ? (
+                                    <Layout>
+                                        <Element />
+                                    </Layout>
+                                ) : (
+                                    <Navigate to="/login" replace />
+                                )
+                            }
+                        />
+                    );
+                })}
                 {publicRoutes.map((route, index) => {
                     let Layout = DefaultLayout;
                     if (route.layout) {

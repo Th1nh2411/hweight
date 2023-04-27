@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../config';
 import { FaFemale, FaMale } from 'react-icons/fa';
+import * as loginServices from '../../services/loginService';
 import * as registerService from '../../services/registerService';
 import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
@@ -26,6 +27,20 @@ const Register = () => {
             const results = await registerService.register({ username, password, name, gender });
         };
         postApi();
+        const getTokenApi = async () => {
+            const results = await loginServices.getToken();
+
+            if (results.success) {
+                localStorage.setItem('token', results.token);
+                // setAuth(results.token);
+                navigate(config.routes.dairy);
+            } else {
+                setUsername('');
+                setPassword('');
+                setErrorMessage('Password or username is incorrect');
+            }
+        };
+        getTokenApi();
         navigate(config.routes.dairy);
     };
     const handleGenderChange = (event) => {
