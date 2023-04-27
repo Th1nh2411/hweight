@@ -92,3 +92,8 @@
 .over {
     color: var(--primary-color);
 }
+@media (max-width: 767.98px) {
+    .body {
+        padding: 0;
+    }
+}

@@ -60,8 +60,13 @@ function Header() {
     return (
         <header className={cx('wrapper', { changeBg })}>
             {showSidebarMb && (
-                <Modal className={cx('side-mb-wrapper')} handleClickOutside={() => setShowSidebarMb(false)}>
-                    <SideBar />
+                <Modal className={cx('sidebar-mb-wrapper')} handleClickOutside={() => setShowSidebarMb(false)}>
+                    <Link to={config.routes.dairy}>
+                        <div className={cx('logo-wrapper', 'logo-mb')}>
+                            <img src={images.logo} className={cx('logo')} alt="logo" />
+                        </div>
+                    </Link>
+                    <SideBar className={cx('sidebar-mb')} />
                 </Modal>
             )}
             <div className={cx('inner')}>

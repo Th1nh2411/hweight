@@ -13,7 +13,6 @@
     // display: flex;
     // align-items: center;
     padding: 30px;
-    min-width: 900px;
 }
 
 // .detail-body {
@@ -81,6 +80,10 @@
         background-color: #a8a8a8;
     }
 }
+.detail-dateJoin {
+    text-align: center;
+    font-weight: 700;
+}
 body .content-wrapper {
     margin-top: 20px;
 }
@@ -122,5 +125,10 @@ body .content-wrapper {
     }
     100% {
         transform: scale(1);
+    }
+}
+@media (max-width: 767.98px) {
+    .content-list + .content-list {
+        margin: 10px 0 0;
     }
 }

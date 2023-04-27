@@ -74,6 +74,9 @@
     .tab-icon {
         margin-right: 5px;
     }
+    .sub-text {
+        margin-left: 5px;
+    }
 }
 .tab-item.active {
     opacity: 1;
@@ -85,4 +88,22 @@
 }
 .tab-pane.active {
     display: block;
+}
+@media (max-width: 767.98px) {
+    .header {
+        flex-direction: column;
+        align-items: start;
+    }
+    .body {
+        padding: 0px;
+    }
+    .tab-item {
+        padding: 10px 15px;
+    }
+    .tabs-wrapper .line {
+        width: 103px;
+    }
+    .sub-text {
+        display: none;
+    }
 }

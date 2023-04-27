@@ -87,6 +87,7 @@ function Recipe() {
                     edit
                     listData={recipes.filter((recipe) => recipe.type === 2)}
                     title="Lunch"
+                    onClickRecipe={getDetailRecipeData}
                 />
 
                 <RecipeList
@@ -95,6 +96,7 @@ function Recipe() {
                     edit
                     listData={recipes.filter((recipe) => recipe.type === 3)}
                     title="Dinner"
+                    onClickRecipe={getDetailRecipeData}
                 />
             </div>
         </Card>

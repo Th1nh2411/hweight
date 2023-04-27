@@ -23,7 +23,6 @@
     &.active {
         color: var(--primary-color);
         background-color: rgba(147, 111, 84, 0.388);
-        transform: translateX(8px);
         transition: all 0.3s ease-in-out;
     }
     &.active .icon {
@@ -36,7 +35,7 @@
 .menu-item.separate {
     position: absolute;
     bottom: 100px;
-    left: 0;
+    left: 10px;
     width: 100%;
     &::before {
         content: '';
@@ -55,7 +54,7 @@
 .icon {
     display: flex;
     align-items: center;
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 .icon {
     color: rgb(196, 196, 196);

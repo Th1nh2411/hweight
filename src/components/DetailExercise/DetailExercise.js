@@ -97,15 +97,7 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                     <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.likes} people love
                     this
                 </div>
-                {/* <h5 className={cx('detail-title')}>Essential equipments</h5>
-                <div className={cx('equipment-list')}>
-                    {data.equipments.map((equipment, index) => (
-                        <div key={index} className={cx('equipment-item')}>
-                            <Image className={cx('equipment-img')} src={equipment.img} />
-                            <div className={cx('equipment-name')}>{equipment.name}</div>
-                        </div>
-                    ))}
-                </div> */}
+
                 <div className={cx('tabs-wrapper')}>
                     {data.sets.map((set, index) => (
                         <div

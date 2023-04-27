@@ -74,3 +74,16 @@
 
     color: var(--primary-color);
 }
+@media (max-width: 767.98px) {
+    .bg-wrapper {
+        display: none;
+    }
+    .custom-btn {
+        height: 50px;
+        font-size: 2rem;
+    }
+    .login-option,
+    .sign-up {
+        font-size: 1.6rem;
+    }
+}

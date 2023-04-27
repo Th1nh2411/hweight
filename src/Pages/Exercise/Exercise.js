@@ -79,7 +79,7 @@ function Exercise() {
                         className={cx('tab-item', { active: tab === 0 })}
                     >
                         <FaDumbbell className={cx('tab-icon')} />
-                        Light Exercise
+                        Light <span className={cx('sub-text')}> Exercises</span>
                     </div>
 
                     <div
@@ -91,7 +91,7 @@ function Exercise() {
                         className={cx('tab-item', { active: tab === 1 })}
                     >
                         <FaDumbbell className={cx('tab-icon')} />
-                        Moderate Exercises
+                        Moderate <span className={cx('sub-text')}> Exercises</span>
                     </div>
                     <div
                         onClick={(event) => {
@@ -102,7 +102,7 @@ function Exercise() {
                         className={cx('tab-item', { active: tab === 2 })}
                     >
                         <FaDumbbell className={cx('tab-icon')} />
-                        Heavy Exercises
+                        Heavy <span className={cx('sub-text')}> Exercises</span>
                     </div>
                     <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
                 </div>

@@ -39,7 +39,7 @@
 .form-container {
     padding: 50px 40px 25px;
     margin-bottom: 10px;
-    width: 450px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
 }
@@ -79,4 +79,17 @@
     margin-left: 8px;
 
     color: var(--primary-color);
+}
+@media (max-width: 767.98px) {
+    .bg-wrapper {
+        display: none;
+    }
+    .custom-btn {
+        height: 50px;
+        font-size: 2rem;
+    }
+    .forgot-pw,
+    .sign-up {
+        font-size: 1.6rem;
+    }
 }

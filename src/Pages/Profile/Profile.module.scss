@@ -117,3 +117,11 @@
         }
     }
 }
+@media (max-width: 767.98px) {
+    .title {
+        font-size: 2rem;
+    }
+    .card-item + .card-item {
+        margin-top: 20px;
+    }
+}

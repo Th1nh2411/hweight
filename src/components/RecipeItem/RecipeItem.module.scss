@@ -357,3 +357,15 @@
         transform: scale(1);
     }
 }
+@media (max-width: 767.98px) {
+    .more-btn {
+        margin: 0;
+    }
+    .desc {
+        margin-left: 8px;
+    }
+    .img {
+        width: 55px;
+        height: 55px;
+    }
+}

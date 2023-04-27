@@ -73,6 +73,7 @@ function DetailUser({ data = {}, onCloseModal }) {
                         </div>
                     </div>
                 </div>
+                <div className={cx('detail-dateJoin')}>Date Join: {data.dateJoin}</div>
                 <div className={cx('content-wrapper', 'row')}>
                     <div className={cx('content-list', 'col')}>
                         <div className={cx('content-title')}>
