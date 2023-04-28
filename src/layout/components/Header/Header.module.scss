@@ -92,6 +92,11 @@
     cursor: pointer;
     display: flex;
 }
+//Sidebar
+.overlaySideBar,
+.sidebar-mb-wrapper {
+    display: none;
+}
 @keyframes slideIn {
     from {
         transform: translateX(-50px);
@@ -118,11 +123,15 @@
         display: block;
     }
     .sidebar-mb-wrapper {
+        display: block;
         margin: 0;
         animation: slideIn 0.3 ease-in-out;
         background-color: #1b1b1b;
     }
     .sidebar-mb {
         background-color: #1b1b1b;
+    }
+    .overlaySideBar {
+        display: block;
     }
 }

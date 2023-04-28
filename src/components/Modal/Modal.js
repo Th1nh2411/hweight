@@ -5,7 +5,7 @@ import styles from './Modal.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Modal({ className, handleClickOutside = () => {}, children }) {
+function Modal({ className, overlayClass, handleClickOutside = () => {}, children }) {
     const overlayRef = useRef();
     const handleDocumentClick = (event) => {
         if (overlayRef.current && overlayRef.current.contains(event.target)) {
@@ -20,7 +20,7 @@ function Modal({ className, handleClickOutside = () => {}, children }) {
     }, []);
     return (
         <div className={cx('modal')}>
-            <div ref={overlayRef} className={cx('modal__overlay')}></div>
+            <div ref={overlayRef} className={cx('modal__overlay', overlayClass)}></div>
             <div className={cx('modal__body', className)}>{children}</div>
         </div>
     );

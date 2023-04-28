@@ -25,10 +25,7 @@ function List({ data, className, updateCalOut, onClickExercise }) {
     // const [leftLine, setLeftLine] = useState('');
     // const [widthLine, setWidthLine] = useState('');
 
-    const handleClickLike = () => {
-        setIsLiked(!isLiked);
-        const results = exerciseService.updateExercise(data.id, { isLiked: !isLiked });
-    };
+    // const handleClickLike = (event) => {};
     // const handleChangeInput = (e) => {
     //     const searchValue = e.target.value;
     //     if (!searchValue.startsWith(' ')) {
@@ -71,7 +68,11 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                         <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
                             <div className={cx('like-icon-wrapper')}>
                                 <HeartIcon
-                                    onClick={handleClickLike}
+                                    onClick={(event) => {
+                                        setIsLiked(!isLiked);
+                                        const results = exerciseService.updateExercise(data.id, { isLiked: !isLiked });
+                                        event.stopPropagation();
+                                    }}
                                     height="2.8rem"
                                     width="2.8rem"
                                     className={cx('like-icon', { isLiked })}
@@ -98,79 +99,6 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                     </div>
                     <div className={cx('info')}>{data.info}</div>
                 </div>
-                {/* {showDetail && (
-                    <div className={cx('body')}>
-                        <h5 className={cx('body-title')}>Essential equipments</h5>
-                        <div className={cx('equipment-list')}>
-                            {data.equipments.map((equipment, index) => (
-                                <div key={index} className={cx('equipment-item')}>
-                                    <Image className={cx('equipment-img')} src={equipment.img} />
-                                    <div className={cx('equipment-name')}>{equipment.name}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className={cx('tabs-wrapper')}>
-                            {data.sets.map((set, index) => (
-                                <div
-                                    key={index}
-                                    onClick={(event) => {
-                                        setTab(index);
-                                        setLeftLine(event.target.offsetLeft + 'px');
-                                        setWidthLine(event.target.offsetWidth + 'px');
-                                    }}
-                                    className={cx('tab-item', { active: tab === index })}
-                                >
-                                    <IoFitnessSharp className={cx('tab-icon')} />
-                                    Set {index + 1}
-                                </div>
-                            ))}
-                            <div
-                                onClick={(event) => {
-                                    setTab(data.sets.length + 1);
-                                    setLeftLine(event.target.offsetLeft + 'px');
-                                    setWidthLine(event.target.offsetWidth + 'px');
-                                }}
-                                className={cx('tab-item', { active: tab === data.sets.length + 1 })}
-                            >
-                                <EvaluateIcon className={cx('tab-icon')} />
-                                Evaluate recipe
-                            </div>
-                            <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
-                        </div>
-                        <div className={cx('tabs-content')}>
-                            {data.sets.map((set, index) => (
-                                <div className={cx('tab-pane', { active: tab === index })} key={index}>
-                                    {set.map((movement, index) => (
-                                        <ExerciseItem key={index} data={movement} />
-                                    ))}
-                                </div>
-                            ))}
-                            <div className={cx('tab-pane', { active: tab === data.sets.length + 1 })}>
-                                <div className={cx('reviews-wrapper')}>
-                                    {data.comments.map((comment, index) => (
-                                        <div key={index} className={cx('review-item')}>
-                                            <div className={cx('review-name')}>{comment.username}</div>
-                                            <div className={cx('review-content')}>{comment.content}</div>
-                                        </div>
-                                    ))}
-                                    <div className={cx('review-showMore')}>Show more...</div>
-                                </div>
-                                <div className={cx('review')}>
-                                    <input onChange={handleChangeInput} value={review} placeholder="Add a comment..." />
-                                    {review && (
-                                        <button onClick={handleClearReviewValue} className={cx('clear')}>
-                                            <AiFillCloseCircle />
-                                        </button>
-                                    )}
-
-                                    <button className={cx('review-btn')} onMouseDown={(e) => e.preventDefault()}>
-                                        <BiSend />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )} */}
             </div>
         </>
     );

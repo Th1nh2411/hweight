@@ -60,7 +60,11 @@ function Header() {
     return (
         <header className={cx('wrapper', { changeBg })}>
             {showSidebarMb && (
-                <Modal className={cx('sidebar-mb-wrapper')} handleClickOutside={() => setShowSidebarMb(false)}>
+                <Modal
+                    overlayClass={cx('overlaySideBar')}
+                    className={cx('sidebar-mb-wrapper')}
+                    handleClickOutside={() => setShowSidebarMb(false)}
+                >
                     <Link to={config.routes.dairy}>
                         <div className={cx('logo-wrapper', 'logo-mb')}>
                             <img src={images.logo} className={cx('logo')} alt="logo" />
