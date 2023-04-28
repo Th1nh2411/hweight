@@ -93,7 +93,7 @@
     display: flex;
 }
 //Sidebar
-.overlaySideBar,
+.modal-sidebar,
 .sidebar-mb-wrapper {
     display: none;
 }
@@ -131,7 +131,7 @@
     .sidebar-mb {
         background-color: #1b1b1b;
     }
-    .overlaySideBar {
+    .modal-sidebar {
         display: block;
     }
 }

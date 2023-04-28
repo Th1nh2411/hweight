@@ -61,7 +61,7 @@ function Header() {
         <header className={cx('wrapper', { changeBg })}>
             {showSidebarMb && (
                 <Modal
-                    overlayClass={cx('overlaySideBar')}
+                    modalClass={cx('modal-sidebar')}
                     className={cx('sidebar-mb-wrapper')}
                     handleClickOutside={() => setShowSidebarMb(false)}
                 >
