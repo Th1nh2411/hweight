@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/mbi-webapp/static/css/main.f464cb43.css",
-    "main.js": "/mbi-webapp/static/js/main.5608be6f.js",
+    "main.css": "/mbi-webapp/static/css/main.31c1caf7.css",
+    "main.js": "/mbi-webapp/static/js/main.15e6eeea.js",
     "static/js/787.bd71c651.chunk.js": "/mbi-webapp/static/js/787.bd71c651.chunk.js",
     "static/media/BMI1.jpg": "/mbi-webapp/static/media/BMI1.efff4c2efd01b1308947.jpg",
     "static/media/Nunito-Italic-VariableFont_wght.ttf": "/mbi-webapp/static/media/Nunito-Italic-VariableFont_wght.8c3b61b77fee2ba4b6db.ttf",
@@ -11,12 +11,12 @@
     "static/media/logo2.png": "/mbi-webapp/static/media/logo2.bae7cdae474a136a5ddd.png",
     "static/media/mailIcon.svg": "/mbi-webapp/static/media/mailIcon.e0bdfe353ead52caabab0b8b8fe108ac.svg",
     "index.html": "/mbi-webapp/index.html",
-    "main.f464cb43.css.map": "/mbi-webapp/static/css/main.f464cb43.css.map",
-    "main.5608be6f.js.map": "/mbi-webapp/static/js/main.5608be6f.js.map",
+    "main.31c1caf7.css.map": "/mbi-webapp/static/css/main.31c1caf7.css.map",
+    "main.15e6eeea.js.map": "/mbi-webapp/static/js/main.15e6eeea.js.map",
     "787.bd71c651.chunk.js.map": "/mbi-webapp/static/js/787.bd71c651.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f464cb43.css",
-    "static/js/main.5608be6f.js"
+    "static/css/main.31c1caf7.css",
+    "static/js/main.15e6eeea.js"
   ]
 }
