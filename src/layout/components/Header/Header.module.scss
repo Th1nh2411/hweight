@@ -123,14 +123,19 @@
         display: block;
     }
     .sidebar-mb-wrapper {
+        width: 250px;
+        border-radius: 0;
         display: block;
         margin: 0;
         animation: slideIn 0.3 ease-in-out;
         background-color: #1b1b1b;
+        .sidebar-mb {
+            background-color: #1b1b1b;
+            margin: 0;
+            border-radius: 0;
+        }
     }
-    .sidebar-mb {
-        background-color: #1b1b1b;
-    }
+
     .modal-sidebar {
         display: block;
     }
