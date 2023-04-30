@@ -1,7 +1,7 @@
 import styles from './DetailRecipe.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
 import { memo, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
@@ -41,6 +41,7 @@ function DetailRecipe({ data = {}, onCloseModal }) {
         >
             <div className={cx('detail-body')}>
                 <div className={cx('detail-name')}>
+                    <AiOutlineLeft className={cx('back-btn')} onClick={() => onCloseModal()} />
                     {data.name}
                     <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
                         <div className={cx('like-icon-wrapper')}>

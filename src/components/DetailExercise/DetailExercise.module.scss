@@ -32,6 +32,16 @@
     overflow: revert;
     border-radius: 10px;
 }
+.back-btn {
+    display: none;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 2.6rem;
+    margin-right: 10px;
+    &:hover {
+        cursor: pointer;
+    }
+}
 .done-btn {
     // font-size: 1.6rem;
     display: flex;
@@ -326,6 +336,9 @@
     }
 }
 @media (max-width: 767.98px) {
+    .back-btn {
+        display: flex;
+    }
     .detail-wrapper {
         padding: 10px 10px;
         flex-direction: column;

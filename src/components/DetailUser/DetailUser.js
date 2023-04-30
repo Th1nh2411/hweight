@@ -9,6 +9,7 @@ import ListRank from '../ListRank/ListRank';
 import { BsFillBarChartLineFill } from 'react-icons/bs';
 import DetailRecipe from '../DetailRecipe/DetailRecipe';
 import DetailExercise from '../DetailExercise/DetailExercise';
+import { AiOutlineLeft } from 'react-icons/ai';
 const cx = classNames.bind(styles);
 
 function DetailUser({ data = {}, onCloseModal }) {
@@ -38,6 +39,7 @@ function DetailUser({ data = {}, onCloseModal }) {
             {showDetailRecipe && <DetailRecipe data={detailRecipe} onCloseModal={() => setShowDetailRecipe(false)} />}
             {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
             <div className={cx('detail-body')}>
+                <AiOutlineLeft className={cx('back-btn')} onClick={() => onCloseModal()} />
                 <div className={cx('detail-name')}>{data.name}</div>
                 <div className={cx('detail-info')}>
                     <div className={cx('detail-gender')}>
