@@ -4,13 +4,20 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function SearchItem({ data }) {
+function SearchItem({ data, onCheckBoxChange }) {
     const [checked, setChecked] = useState(false);
     return (
         <label className={cx('SearchItem-wrapper', { checked })}>
-            <input type="checkbox" value={checked} onChange={() => setChecked(!checked)} />
+            <input
+                type="checkbox"
+                value={checked}
+                onChange={(e) => {
+                    setChecked(!checked);
+                    onCheckBoxChange(e, data);
+                }}
+            />
             <span className={cx('checkmark')}></span>
-            <p className={cx('title')}>{data}</p>
+            <div className={cx('title')}>{data.name}</div>
         </label>
     );
 }

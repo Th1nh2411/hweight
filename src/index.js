@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import GlobalStyle from './components/GlobalStyles';
 import 'bootstrap/dist/css/bootstrap.css';
+import { StoreProvider } from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     // basename={window.location.pathname || ''}
     >
         <GlobalStyle>
-            <App />
+            <StoreProvider>
+                <App />
+            </StoreProvider>
         </GlobalStyle>
     </HashRouter>,
 );

@@ -1,8 +1,11 @@
 import * as httpRequest from '../utils/httpRequest';
 
-export const getSearchFilter = async (q, type = 'less') => {
+export const getSearchFilter = async (token) => {
+    const config = {
+        headers: { access_token: token },
+    };
     try {
-        const res = await httpRequest.get(`https://mocki.io/v1/cfaaa71f-9c4c-4204-bd0c-75f5d668bdf1`); //ingredients
+        const res = await httpRequest.get(`ingredient`, config); //ingredients
         return res;
     } catch (error) {
         console.log(error);

@@ -9,10 +9,11 @@ import Image from '../../../components/Image';
 import Search from '../Search';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { HiBars4 } from 'react-icons/hi2';
 import Modal from '../../../components/Modal/Modal';
 import SideBar from '../SideBar';
+import UserContext from '../../../store/Context';
 const cx = classNames.bind(styles);
 
 function Header() {
@@ -20,6 +21,7 @@ function Header() {
     const [changeBg, setChangeBg] = useState(false);
     const [showSidebarMb, setShowSidebarMb] = useState(false);
     const currentUser = true;
+    const [state, dispatch] = useContext(UserContext);
     const USER_MENU = [
         {
             icon: <AiOutlineUser />,
@@ -34,7 +36,10 @@ function Header() {
             type: 'logout',
         },
     ];
-
+    const getUserFirstName = (name) => {
+        const nameArray = name.split(' ');
+        return nameArray[nameArray.length - 1];
+    };
     const handleOnchangeMenu = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
@@ -86,7 +91,7 @@ function Header() {
                 {currentUser ? (
                     <div className={cx('actions')}>
                         <div className={cx('welcome-title')}>
-                            Hello <span>Thịnh</span>
+                            Hello <span>{getUserFirstName(state.userinfo.name)}</span>
                         </div>
                         <Menu items={USER_MENU} onChange={handleOnchangeMenu}>
                             <Image className={cx('user-avatar')} alt="Nguyen Van A" />

@@ -10,8 +10,8 @@ import HeaderOnlyLayout from '../layout/HeaderOnlyLayout';
 import HWNet from '../Pages/HWNet/HWNet';
 
 export const publicRoutes = [
-    // { path: config.routes.login, component: Login, layout: null },
-    // { path: config.routes.register, component: Register, layout: null },
+    { path: config.routes.login, component: Login, layout: null },
+    { path: config.routes.register, component: Register, layout: null },
     { path: config.routes.forgot, component: ForgotPw, layout: null },
 ];
 export const privateRoutes = [
@@ -20,5 +20,4 @@ export const privateRoutes = [
     { path: config.routes.profile, component: Profile },
     { path: config.routes.recipe, component: Recipe },
     { path: config.routes.HWNet, component: HWNet },
-    // { path: config.routes.login, component: Login, layout: null },
 ];

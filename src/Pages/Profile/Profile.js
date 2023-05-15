@@ -12,13 +12,13 @@ const cx = classNames.bind(styles);
 
 function Profile() {
     const [profileData, setProfile] = useState({});
-    const [height, setHeight] = useState('');
     const [name, setName] = useState('');
+    const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [gender, setGender] = useState(1);
-    const [currentPassword, setCurrentPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
     const [changePIValue, setChangePIValue] = useState(false);
     const [changeCPValue, setChangeCPValue] = useState();
     const [PISuccess, setPISuccess] = useState();
@@ -27,19 +27,19 @@ function Profile() {
 
     const handleUpdateProfileData = async () => {
         const token = localStorage.getItem('token');
-        const results = await profileService.updateProfile({ name, height, weight, gender }, token);
-        setProfile(results);
+        const results = await profileService.updateProfile({ name, height, weight, gender, isShare: 0 }, token);
+        setProfile({ name, height, weight, gender, isShare: 0 });
         setChangePIValue(false);
     };
     useEffect(() => {
         const getProfileData = async () => {
             const token = localStorage.getItem('token');
             const results = await profileService.getProfile(token);
-            setProfile(results);
-            setHeight(results.height);
-            setWeight(results.weight);
-            setName(results.name);
-            setGender(results.gender);
+            setProfile(results[0]);
+            setHeight(results[0].height);
+            setWeight(results[0].weight);
+            setName(results[0].name);
+            setGender(results[0].gender);
             setGetDataSuccess(true);
         };
         getProfileData();
@@ -51,17 +51,17 @@ function Profile() {
 
     const handleOnchangeWeight = (event) => {
         if (onlyNumber(event.target.value)) {
-            setWeight(event.target.value);
+            setWeight(event.target.value ? parseInt(event.target.value) : '');
         }
     };
     const handleOnchangeHeight = (event) => {
         if (onlyNumber(event.target.value)) {
-            setHeight(event.target.value);
+            setHeight(event.target.value ? parseInt(event.target.value) : '');
         }
     };
     const handleOnChangeGender = (event) => {
         if (event.target.value !== gender) {
-            setGender(event.target.value);
+            setGender(parseInt(event.target.value));
         }
     };
     const handleCancelPI = () => {
@@ -91,12 +91,12 @@ function Profile() {
 
     // Change PW FORM
     useEffect(() => {
-        if (currentPassword || newPassword || confirmPassword) {
+        if (oldPassword || newPassword || repeatPassword) {
             setChangeCPValue(true);
         } else {
             setChangeCPValue(false);
         }
-    }, [currentPassword, newPassword, confirmPassword]);
+    }, [oldPassword, newPassword, repeatPassword]);
     const unaccentedCharacters = (input) => {
         var regex = /^[a-zA-Z0-9]*$/;
         return regex.test(input);
@@ -111,7 +111,7 @@ function Profile() {
     };
     const handleOnChangeConfirmPw = (event) => {
         if (unaccentedCharacters(event.target.value)) {
-            setConfirmPassword(event.target.value);
+            setRepeatPassword(event.target.value);
         }
     };
 
@@ -121,9 +121,9 @@ function Profile() {
         }
     };
     const handleCancelCP = () => {
-        setCurrentPassword('');
+        setOldPassword('');
         setNewPassword('');
-        setConfirmPassword('');
+        setRepeatPassword('');
     };
 
     const handleCPToastClose = () => {};
@@ -132,13 +132,13 @@ function Profile() {
     };
     const handleSubmitCP = async () => {
         const token = localStorage.getItem('token');
-        const results = await profileService.updateProfile({ password: newPassword }, token);
+        const results = await profileService.changePassword({ oldPassword, newPassword, repeatPassword }, token);
 
-        if (false) {
+        if (results.isSuccess) {
             setCPSuccess(1);
-            setCurrentPassword('');
+            setOldPassword('');
             setNewPassword('');
-            setConfirmPassword('');
+            setRepeatPassword('');
         } else {
             setCPSuccess(0);
         }
@@ -164,7 +164,7 @@ function Profile() {
                     <div className={cx('body-index')}>
                         <Input
                             onChange={handleOnchangeHeight}
-                            value={height}
+                            value={height.toString()}
                             title="Your height"
                             type="text"
                             unit="cm"
@@ -172,7 +172,7 @@ function Profile() {
                         />
                         <Input
                             onChange={handleOnchangeWeight}
-                            value={weight}
+                            value={weight.toString()}
                             title="Your weight"
                             type="text"
                             unit="kg"
@@ -180,23 +180,23 @@ function Profile() {
                         />
                     </div>
                     <div className={cx('gender-button-container')}>
-                        <label className={cx('gender-button', gender === '1' && 'selected')}>
+                        <label className={cx('gender-button', gender === 1 && 'selected')}>
                             <FaMale className={cx('gender-icon')} />
                             <input
                                 type="radio"
                                 name="gender"
-                                value={'1'}
+                                value={1}
                                 checked={gender === 1}
                                 onChange={handleOnChangeGender}
                             />
                             Male
                         </label>
-                        <label className={cx('gender-button', gender === '0' && 'selected')}>
+                        <label className={cx('gender-button', gender === 0 && 'selected')}>
                             <FaFemale className={cx('gender-icon')} />
                             <input
                                 type="radio"
                                 name="gender"
-                                value={'0'}
+                                value={0}
                                 checked={gender === 0}
                                 onChange={handleOnChangeGender}
                             />
@@ -230,11 +230,11 @@ function Profile() {
                     <Input
                         onChange={(event) => {
                             if (unaccentedCharacters(event.target.value)) {
-                                setCurrentPassword(event.target.value);
+                                setOldPassword(event.target.value);
                                 setCPSuccess();
                             }
                         }}
-                        value={currentPassword}
+                        value={oldPassword}
                         title="Your current password"
                         type="password"
                         errorCondition={CPSuccess === 0}
@@ -252,10 +252,10 @@ function Profile() {
 
                     <Input
                         onChange={handleOnChangeConfirmPw}
-                        value={confirmPassword}
+                        value={repeatPassword}
                         title="Confirm new password"
                         type="password"
-                        errorCondition={!invalidPassword(newPassword) && invalidConfirmPw(confirmPassword)}
+                        errorCondition={!invalidPassword(newPassword) && invalidConfirmPw(repeatPassword)}
                         errorMessage="Password confirmation does not match"
                     />
                 </div>
@@ -269,10 +269,10 @@ function Profile() {
                         onClick={handleSubmitCP}
                         disable={
                             invalidPassword(newPassword) ||
-                            invalidConfirmPw(confirmPassword) ||
-                            !confirmPassword ||
+                            invalidConfirmPw(repeatPassword) ||
+                            !repeatPassword ||
                             !newPassword ||
-                            !currentPassword
+                            !oldPassword
                         }
                         primary
                         className={cx('custom-btn')}

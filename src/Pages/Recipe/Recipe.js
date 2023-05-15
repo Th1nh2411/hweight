@@ -14,7 +14,6 @@ const cx = classNames.bind(styles);
 function Recipe() {
     const [dayObj, setDayObj] = useState(dayjs());
     const [recipes, setRecipes] = useState([]);
-    const [menu, setMenu] = useState([]);
     const [showDetailRecipe, setShowDetailRecipe] = useState(false);
     const [detailRecipe, setDetailRecipe] = useState({});
 
@@ -23,23 +22,17 @@ function Recipe() {
         const results = await recipeService.getRecipe(day, token);
         setRecipes(results);
     };
-    const getMenuData = async () => {
-        const token = localStorage.getItem('token');
-        const results = await recipeService.getMenu(token);
-        setMenu(results);
-    };
+
     const getDetailRecipeData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getDetailRecipe(id, token);
-        setDetailRecipe(results);
+        setDetailRecipe(results.recipe);
         setShowDetailRecipe(true);
     };
     useEffect(() => {
-        getRecipesData(dayObj.format('DDMMYYYY'));
+        getRecipesData(dayObj.format('YYYY-MM-DD'));
     }, [dayObj]);
-    useEffect(() => {
-        getMenuData();
-    }, []);
+
     const handleSubmitEdit = (type) => async (checkedItems) => {
         const newRecipes = recipes
             .filter((item) => item.type !== type)
@@ -50,7 +43,7 @@ function Recipe() {
             );
         setRecipes(newRecipes);
         const token = localStorage.getItem('token');
-        const results = await recipeService.updateRecipes(newRecipes, dayObj.format('DDMMYYYY'), token);
+        const results = await recipeService.updateRecipes(newRecipes, dayObj.format('YYYY-MM-DD'), token);
     };
     const handleDayChange = (dayChange) => {
         setDayObj(dayChange);
@@ -73,28 +66,25 @@ function Recipe() {
             </div>
             <div className={cx('body')}>
                 <RecipeList
-                    menuData={menu}
                     onEditDone={handleSubmitEdit(1)}
                     edit
-                    listData={recipes.filter((recipe) => recipe.type === 1)}
+                    listData={recipes.breakfast}
                     title="Breakfast"
                     dayObj={dayObj}
                     onClickRecipe={getDetailRecipeData}
                 />
                 <RecipeList
-                    menuData={menu}
                     onEditDone={handleSubmitEdit(2)}
                     edit
-                    listData={recipes.filter((recipe) => recipe.type === 2)}
+                    listData={recipes.lunch}
                     title="Lunch"
                     onClickRecipe={getDetailRecipeData}
                 />
 
                 <RecipeList
-                    menuData={menu}
                     onEditDone={handleSubmitEdit(3)}
                     edit
-                    listData={recipes.filter((recipe) => recipe.type === 3)}
+                    listData={recipes.dinner}
                     title="Dinner"
                     onClickRecipe={getDetailRecipeData}
                 />

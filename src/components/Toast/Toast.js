@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 const Toast = ({ title, content, type, duration = 3000, onClose }) => {
     const [show, setShow] = useState(true);
     const toastRef = useRef(null);
-    console.log(toastRef);
     useEffect(() => {
         const PITimeoutId = setTimeout(() => {
             setShow(false);

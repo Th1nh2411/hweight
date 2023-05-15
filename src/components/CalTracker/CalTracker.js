@@ -27,7 +27,6 @@ const CalTracker = ({ data, className }) => {
         }
     }, [caloriesIn, data.calMin, BMI, caloriesOut]);
 
-    console.log(caloriesIn, caloriesOut);
     return (
         <div className={cx('wrapper', className)}>
             <div className={cx('title')}>

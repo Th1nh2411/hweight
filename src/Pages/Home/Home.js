@@ -8,15 +8,22 @@ import BMICal from '../../components/BMICal/BMICal';
 import WaterIntake from '../../components/WaterIntake/WaterIntake';
 import CalTracker from '../../components/CalTracker';
 import { Col, Row } from 'react-bootstrap';
+import dayjs from 'dayjs';
+import { useNavigate } from 'react-router';
+import config from '../../config';
 
 const cx = classNames.bind(styles);
 
 function Home() {
+    const navigate = useNavigate();
     const [history, setHistory] = useState({});
-
+    const today = dayjs();
     const getHistoryData = async () => {
         const token = localStorage.getItem('token');
-        const results = await profileService.getProfile(token);
+        const results = await profileService.getHistory(today.format('YYYY-MM-DD'), token);
+        if (results.isSuccess === false) {
+            navigate(config.routes.login);
+        }
         setHistory(results);
     };
 

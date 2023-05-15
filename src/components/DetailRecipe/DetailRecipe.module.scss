@@ -187,7 +187,7 @@
 }
 .tab-pane {
     display: none;
-    min-height: 340px;
+    height: 350px;
 }
 .tab-pane.active {
     display: block;
@@ -198,7 +198,6 @@
     // background-color: #4b4b4b;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     overflow-y: scroll;
     height: 80%;
 }
@@ -212,6 +211,12 @@
     color: var(--primary-color);
     font-weight: 800;
     line-height: 1;
+}
+.review-date {
+    color: #adadad;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-left: 8px;
 }
 .review-content {
     // line-height: 1;

@@ -96,26 +96,6 @@
         position: relative;
         transition: 0.2s;
         box-shadow: 1px 1px 10px 0px #ffa63ea6;
-        &::before {
-            content: '';
-            z-index: 1;
-            position: absolute;
-            inset: 0;
-            background-color: var(--hover-color);
-            transform-origin: center right;
-            transform: scaleX(0);
-            transition: transform 0.25s ease-in-out;
-        }
-
-        &:hover {
-            cursor: pointer;
-            color: #fff;
-        }
-
-        &:hover::before {
-            transform-origin: center left;
-            transform: scaleY(1);
-        }
     }
 }
 @media (max-width: 767.98px) {

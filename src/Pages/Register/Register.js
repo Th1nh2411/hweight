@@ -12,46 +12,53 @@ import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
 
 const cx = classNames.bind(styles);
-const Register = ({ setAuth }) => {
+const Register = ({}) => {
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
     const [gender, setGender] = useState('1');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(true);
+    const onlyNumber = (input) => {
+        var regex = /^\d*$/g;
+        return regex.test(input);
+    };
+    const handleOnchangeWeight = (event) => {
+        if (onlyNumber(event.target.value)) {
+            setWeight(event.target.value);
+        }
+    };
+    const handleOnchangeHeight = (event) => {
+        if (onlyNumber(event.target.value)) {
+            setHeight(event.target.value);
+        }
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const postApi = async () => {
-            const results = await registerService.register({ username, password, name, gender });
-        };
-        postApi();
-        const getTokenApi = async () => {
-            const results = await loginServices.getToken();
-
-            if (results.success) {
+        const createAccount = async () => {
+            const results = await registerService.register({ mail, password, name, gender, weight, height });
+            console.log(results);
+            if (results.isSuccess) {
                 localStorage.setItem('token', results.token);
-                setAuth(results.token);
-                navigate(config.routes.dairy);
+                navigate(config.routes.login);
             } else {
-                setUsername('');
                 setPassword('');
-                setErrorMessage('Password or username is incorrect');
+                setHeight('');
+                setWeight('');
+                setName('');
+                setSuccess(false);
             }
         };
-        getTokenApi();
-        navigate(config.routes.dairy);
+        createAccount();
     };
     const handleGenderChange = (event) => {
         setGender(event.target.value);
     };
     const handleOnChangePassword = (event) => {
         setPassword(event.target.value);
-        if (password.length < 6) {
-            setErrorMessage('Password must have at least 6 characters');
-            return;
-        }
     };
     return (
         <div className={cx('wrapper')}>
@@ -75,10 +82,13 @@ const Register = ({ setAuth }) => {
                         <Input
                             title="Your Email"
                             onChange={(event) => {
-                                setUsername(event.target.value);
+                                setMail(event.target.value);
+                                setSuccess(true);
                             }}
-                            value={username}
+                            value={mail}
                             type="email"
+                            errorCondition={!success}
+                            errorMessage="This email has been registered"
                         />
                         <Input
                             title="Password"
@@ -86,9 +96,26 @@ const Register = ({ setAuth }) => {
                             value={password}
                             type="password"
                             errorCondition={password.length < 6 && password.length !== 0}
-                            errorMessage={errorMessage}
+                            errorMessage="Password must have at least 6 characters"
                         />
-
+                        <div className={cx('body-index')}>
+                            <Input
+                                onChange={handleOnchangeHeight}
+                                value={height}
+                                title="Your height"
+                                type="text"
+                                unit="cm"
+                                className={cx('body-index-input')}
+                            />
+                            <Input
+                                onChange={handleOnchangeWeight}
+                                value={weight}
+                                title="Your weight"
+                                type="text"
+                                unit="kg"
+                                className={cx('body-index-input')}
+                            />
+                        </div>
                         <div className={cx('gender-button-container')}>
                             <label className={cx('gender-button', gender === '1' && 'selected')}>
                                 <FaMale className={cx('gender-icon')} />
@@ -101,6 +128,7 @@ const Register = ({ setAuth }) => {
                                 Female
                             </label>
                         </div>
+
                         <Button className={cx('custom-btn')} primary type="submit">
                             Sign Up
                         </Button>

@@ -218,6 +218,16 @@
     position: relative;
     animation: slideIn linear 0.2s;
 }
+.menu-showMore {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
 .menu-btn {
     margin: 30px 10px 10px;
     display: flex;

@@ -2,10 +2,10 @@ import * as httpRequest from '../utils/httpRequest';
 
 export const getProfile = async (token) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`https://mocki.io/v1/750bacd9-b902-4b7c-b3a6-a6eff5d75eee`, config); //profile
+        const res = await httpRequest.get(`user/detail`, config); //profile
         return res;
     } catch (error) {
         console.log(error);
@@ -14,10 +14,34 @@ export const getProfile = async (token) => {
 };
 export const updateProfile = async (data, token) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.patch(`https://mocki.io/v1/750bacd9-b902-4b7c-b3a6-a6eff5d75eee`, data, config); //profile
+        const res = await httpRequest.put(`user/edit/detail`, data, config); //profile
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+export const changePassword = async (data, token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.put(`account/changepassword`, data, config); //profile
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+export const getHistory = async (date, token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.get(`user/history/${date}`, config); //profile
         return res;
     } catch (error) {
         console.log(error);

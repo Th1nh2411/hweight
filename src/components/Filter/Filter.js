@@ -10,34 +10,51 @@ import * as filterService from '../../services/filterService';
 import SearchItem from './SearchItem';
 
 const cx = classNames.bind(styles);
-function Filter({}) {
+function Filter({ onChangeFilter }) {
     const minCalories = 50;
     const maxCalories = 600;
     const [minCaloriesValue, setMinCaloriesValue] = useState(minCalories);
     const [maxCaloriesValue, setMaxCaloriesValue] = useState(maxCalories);
 
-    const [searchFilterResult, setSearchFilterResult] = useState([]);
-    const [searchFilterValue, setFilterSearchValue] = useState('');
+    const [ingredients, setIngredients] = useState([]);
+    const [filteredIngredients, setFilteredIngredients] = useState([]);
+    const [checkedIngredients, setCheckedIngredients] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
     const [showFilterResult, setShowFilterResult] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const debouncedValue = useDebounce(searchFilterValue, 500);
+    const debounceMinCalValue = useDebounce(minCaloriesValue);
+    const debounceMaxCalValue = useDebounce(maxCaloriesValue);
 
     useEffect(() => {
         const fetchFilterApi = async () => {
-            setLoading(true);
-
-            const results = await filterService.getSearchFilter(debouncedValue);
-            setSearchFilterResult(results);
-
-            setLoading(false);
+            const token = localStorage.getItem('token');
+            const results = await filterService.getSearchFilter(token);
+            setIngredients(results);
         };
         fetchFilterApi();
-    }, [debouncedValue]);
-
+    }, []);
+    useEffect(() => {
+        onChangeFilter(checkedIngredients, debounceMinCalValue, debounceMaxCalValue);
+    }, [checkedIngredients, debounceMinCalValue, debounceMaxCalValue]);
+    useEffect(() => {
+        if (ingredients) {
+            const newFilteredIngredients = ingredients.filter((ingredient) =>
+                ingredient.name.toLowerCase().includes(searchValue.toLowerCase()),
+            );
+            setFilteredIngredients(newFilteredIngredients);
+        }
+    }, [searchValue, ingredients]);
     const calcLeftPosition = (value) => (100 / (maxCalories - minCalories)) * (value - minCalories);
+    const onChangeCheckBoxIngredientItem = (e, data) => {
+        if (e.target.checked) {
+            setCheckedIngredients((prev) => [...prev, data]);
+        } else if (!e.target.checked) {
+            const newItems = checkedIngredients.filter((item) => item.idIngredient !== data.idIngredient);
+            setCheckedIngredients(newItems);
+        }
+    };
     const renderFilterIngredients = () => {
         const handleClearSearch = () => {
-            setFilterSearchValue('');
+            setSearchValue('');
             // setSearchFilterResult([]);
         };
         const handleHideResult = () => {
@@ -46,7 +63,7 @@ function Filter({}) {
         const handleChangeInput = (e) => {
             const searchValue = e.target.value;
             if (!searchValue.startsWith(' ')) {
-                setFilterSearchValue(searchValue);
+                setSearchValue(searchValue);
             }
         };
         return (
@@ -55,12 +72,12 @@ function Filter({}) {
                 visible={showFilterResult}
                 onClickOutside={handleHideResult}
                 placement="bottom"
-                offset={[2, 2]}
+                offset={[2, 5]}
                 render={(attrs) => (
                     <div className={cx('search-filter-result')} tabIndex="-1">
                         <PopperWrapper>
-                            {searchFilterResult.map((data, index) => (
-                                <SearchItem key={index} data={data} />
+                            {filteredIngredients.map((data, index) => (
+                                <SearchItem key={index} data={data} onCheckBoxChange={onChangeCheckBoxIngredientItem} />
                             ))}
                         </PopperWrapper>
                     </div>
@@ -69,18 +86,15 @@ function Filter({}) {
                 <div className={cx('search-filter')}>
                     <input
                         onChange={handleChangeInput}
-                        value={searchFilterValue}
+                        value={searchValue}
                         placeholder="Select ingredients to filter"
                         onFocus={() => setShowFilterResult(true)}
                     />
-                    {loading ||
-                        (!!searchFilterValue && (
-                            <button onClick={handleClearSearch} className={cx('clear')}>
-                                <AiFillCloseCircle />
-                            </button>
-                        ))}
-
-                    {loading && <AiOutlineLoading3Quarters className={cx('loading')} />}
+                    {!!searchValue && (
+                        <button onClick={handleClearSearch} className={cx('clear')}>
+                            <AiFillCloseCircle />
+                        </button>
+                    )}
                 </div>
             </HeadlessTippy>
         );
@@ -89,7 +103,7 @@ function Filter({}) {
         <div className={cx('filter-wrapper')}>
             {/* <p className={cx('filter-title')}>Filter </p> */}
             <div className={cx('calories-filter')}>
-                <p className={cx('filter-subtitle')}>Calories : </p>
+                <div className={cx('filter-subtitle')}>Calories : </div>
                 <div className={cx('calories-filter-progressBar')}>
                     <div className={cx('range-slide')}>
                         <div className={cx('slide')}>

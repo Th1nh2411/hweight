@@ -6,20 +6,54 @@ import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { FaUndo } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
+import * as recipeService from '../../services/recipeService';
 
 import Filter from '../Filter/Filter';
 
 const cx = classNames.bind(styles);
-function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onClickRecipe, children, className }) {
+function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickRecipe, children, className }) {
     const [checkedItems, setCheckedItems] = useState([]);
     const [showEdit, setShowEdit] = useState(false);
     const [clear, setClear] = useState(false);
     const [menu, setMenu] = useState([]);
     const [subtitle, setSubtitle] = useState(0);
+    const [pageReview, setPageReview] = useState(1);
+    const [maxPageReview, setMaxPageReview] = useState();
+    const [ingredientsFilter, setIngredientsFilter] = useState('0');
+    const [calFilter, setCalFilter] = useState('0,0');
 
-    const isSelected = (compareItem) => {
-        return listData.some((item) => item.id === compareItem.id);
+    // const isSelected = (compareItem) => {
+    //     console.log(compareItem);
+    //     return listData.some((item) => item.idRecipe === compareItem.idRecipe);
+    // };
+    const getMoreMenuData = async () => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getMenu(token, ingredientsFilter, calFilter, pageReview);
+        const filteredMenu = results.recipeJson;
+        // .filter(
+        //     (menuItem) => !listData.some((recipe) => recipe.idRecipe === menuItem.idRecipe),
+        // );
+        setMenu((prev) => [...prev, ...filteredMenu]);
     };
+    const getFilterMenuData = async () => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getMenu(token, ingredientsFilter, calFilter, 1);
+        setPageReview(1);
+        const filteredMenu = results.recipeJson;
+        // .filter(
+        //     (menuItem) => !listData.some((recipe) => recipe.idRecipe === menuItem.idRecipe),
+        // );
+        setMenu(filteredMenu);
+        setMaxPageReview(results.maxPage);
+    };
+    useEffect(() => {
+        if (pageReview !== 1) {
+            getMoreMenuData();
+        }
+    }, [pageReview]);
+    useEffect(() => {
+        getFilterMenuData();
+    }, [ingredientsFilter, calFilter]);
     useEffect(() => {
         setShowEdit(false);
         setCheckedItems([]);
@@ -27,16 +61,11 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
     const onClickEdit = () => {
         if (!showEdit) {
             setShowEdit(true);
-            const newMenuData = menuData.slice();
-            setMenu(newMenuData);
-            menuData.forEach((item, index) => {
-                if (isSelected(item)) {
-                    newMenuData.splice(0, 0, newMenuData.splice(index, 1)[0]);
-                    setMenu(newMenuData);
-                    setCheckedItems((prev) => [...prev, item]);
-                }
-            });
+            setCheckedItems(listData);
+            // setMenu((prev) => [...listData, ...prev]);
+            getFilterMenuData();
         } else {
+            setMenu([]);
             setShowEdit(false);
             setCheckedItems([]);
             setClear(false);
@@ -51,9 +80,11 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
             setSubtitle(numCalo);
         } else {
             let numCalo = 0;
-            listData.forEach((item) => {
-                numCalo += item.calories;
-            });
+            if (listData) {
+                listData.forEach((item) => {
+                    numCalo += item.calories;
+                });
+            }
             setSubtitle(numCalo);
         }
     }, [showEdit, checkedItems, listData]);
@@ -63,7 +94,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
             setCheckedItems((prev) => [...prev, data]);
             setClear(false);
         } else if (!e.target.checked) {
-            const newItems = checkedItems.filter((item) => item.id !== data.id);
+            const newItems = checkedItems.filter((item) => item.idRecipe !== data.idRecipe);
             setCheckedItems(newItems);
         }
     };
@@ -81,7 +112,12 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
             }
         });
     };
-
+    const handleFilterValue = (ingredients, minCal, maxCal) => {
+        const ingredientString = ingredients.map((ingredient) => ingredient.idIngredient).join(',');
+        const CalFilterString = `${minCal},${maxCal}`;
+        setIngredientsFilter(ingredientString);
+        setCalFilter(CalFilterString);
+    };
     return (
         <div className={cx('wrapper', className)}>
             <div className={cx('header')}>
@@ -124,13 +160,13 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
                     )}
                 </div>
             </div>
-            {showEdit && <Filter />}
+            {showEdit && <Filter onChangeFilter={handleFilterValue} />}
 
             <div className={cx('body')}>
                 {showEdit ? (
                     <div>
                         <div className={cx('menu-list')}>
-                            {menu.map((item, index) => {
+                            {/* {listData.map((item, index) => {
                                 return (
                                     <div key={index}>
                                         <RecipeItem
@@ -139,17 +175,61 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
                                             data={item}
                                             editing
                                             onChangeEditing={handleCheckboxChange}
-                                            selected={isSelected(item)}
+                                            selected
                                             clear={clear}
                                         />
                                     </div>
                                 );
-                            })}
+                            })} */}
+                            {checkedItems
+                                // .filter((item) => !listData.some((recipe) => recipe.idRecipe === item.idRecipe))
+                                .map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <RecipeItem
+                                                onLiked={handleLiked}
+                                                onClickRecipe={onClickRecipe}
+                                                data={item}
+                                                editing
+                                                onChangeEditing={handleCheckboxChange}
+                                                selected
+                                                clear={clear}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            {menu
+                                .filter((menuItem) => !checkedItems.some((item) => item.idRecipe === menuItem.idRecipe))
+                                .map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <RecipeItem
+                                                onLiked={handleLiked}
+                                                onClickRecipe={onClickRecipe}
+                                                data={item}
+                                                editing
+                                                onChangeEditing={handleCheckboxChange}
+                                                clear={clear}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            {pageReview < maxPageReview && (
+                                <div
+                                    onClick={() => {
+                                        setPageReview((prev) => prev + 1);
+                                    }}
+                                    className={cx('menu-showMore')}
+                                >
+                                    Show more...
+                                </div>
+                            )}
                         </div>
                         <div className={cx('menu-btn')}>
                             <Button
                                 onClick={() => {
                                     setShowEdit(false);
+                                    setMenu([]);
                                     setCheckedItems([]);
                                 }}
                                 className={cx('confirm-btn')}
@@ -162,6 +242,7 @@ function List({ title, edit = false, listData, menuData, onEditDone, dayObj, onC
                         </div>
                     </div>
                 ) : (
+                    listData &&
                     listData.map((recipe, index) => (
                         <RecipeItem onClickRecipe={onClickRecipe} key={index} data={recipe} />
                     ))

@@ -3,26 +3,44 @@ import classNames from 'classnames/bind';
 import Image from '../Image';
 import { AiFillCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
-import * as RecipeService from '../../services/recipeService';
+import * as recipeService from '../../services/recipeService';
+import dayjs from 'dayjs';
+import UserContext from '../../store/Context';
 const cx = classNames.bind(styles);
 
 function DetailRecipe({ data = {}, onCloseModal }) {
     const [isLiked, setIsLiked] = useState(data.isLiked);
     const [tab, setTab] = useState(0);
-    const [review, setReviewValue] = useState('');
+    const [reviews, setReviews] = useState([]);
+    const [reviewValue, setReviewValue] = useState('');
     const [leftLine, setLeftLine] = useState('');
     const [widthLine, setWidthLine] = useState('');
-    const [showMoreReview, setShowMoreReview] = useState(false);
-    // useEffect(()=>{},[show])
+    const [pageReview, setPageReview] = useState(1);
+    const [maxPageReview, setMaxPageReview] = useState();
+    const [state, dispatch] = useContext(UserContext);
+    const getCommentData = async () => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getComment(data.idRecipe, token, pageReview);
+        setReviews((prev) => [...prev, ...results.listCMT]);
+        setMaxPageReview(results.maxPage);
+    };
+    useEffect(() => {
+        getCommentData();
+    }, [pageReview]);
+    const postComment = async () => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.postComment(data.idRecipe, reviewValue, token);
+        setReviewValue('');
+        setReviews((prev) => [{ name: state.userinfo.name, cmt: reviewValue, date: dayjs().add(7, 'hours') }, ...prev]);
+    };
     const handleLike = () => {
         setIsLiked(!isLiked);
-        const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
+        const results = recipeService.updateMenuItem(data.id, { isLiked: !isLiked });
     };
-
     const handleChangeInput = (e) => {
         const searchValue = e.target.value;
         if (!searchValue.startsWith(' ')) {
@@ -31,6 +49,20 @@ function DetailRecipe({ data = {}, onCloseModal }) {
     };
     const handleClearReviewValue = () => {
         setReviewValue('');
+    };
+    const timeGap = (date) => {
+        const today = dayjs();
+        const pastDate = dayjs(date).subtract(7, 'hours');
+        const timeDiff = today.diff(pastDate, 'minutes');
+        if (timeDiff < 1) {
+            return 'recently';
+        } else if (timeDiff < 60) {
+            return `${timeDiff} ${timeDiff === 1 ? 'minute' : 'minutes'} ago`;
+        } else if (timeDiff / 60 < 24) {
+            return `${Math.floor(timeDiff / 60)} ${timeDiff / 60 === 1 ? 'hour' : 'hours'} ago`;
+        } else {
+            return `${Math.floor(timeDiff / 60 / 24)} ${timeDiff / 60 / 24 === 1 ? 'day' : 'days'} ago`;
+        }
     };
     return (
         <Modal
@@ -56,7 +88,7 @@ function DetailRecipe({ data = {}, onCloseModal }) {
                 </div>
                 <p className={cx('detail-info')}>{data.info}</p>
                 <div className={cx('likes-num')}>
-                    <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.likes} people love
+                    <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.points} people love
                     this
                 </div>
 
@@ -88,36 +120,52 @@ function DetailRecipe({ data = {}, onCloseModal }) {
                 <div className={cx('tabs-content')}>
                     <div className={cx('tab-pane', { active: tab === 0 })}>
                         <div className={cx('detail-ingredients__list')}>
-                            {data.ingredients.map((ingredient, index) => (
-                                <div key={index} className={cx('detail-ingredients__item')}>
-                                    <Image className={cx('detail-ingredient-img')} src={ingredient.img} />
-                                    <div className={cx('detail-ingredients-name')}>{ingredient.name}</div>
-                                    <div className={cx('detail-ingredients-quantity')}>
-                                        {ingredient.quantity} {ingredient.unit}
+                            {data.Recipe_ingredients &&
+                                data.Recipe_ingredients.map((ingredient, index) => (
+                                    <div key={index} className={cx('detail-ingredients__item')}>
+                                        <Image className={cx('detail-ingredient-img')} src={ingredient.image} />
+                                        <div className={cx('detail-ingredients-name')}>{ingredient.name}</div>
+                                        <div className={cx('detail-ingredients-quantity')}>
+                                            {ingredient.quantity} {ingredient.unitName}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
                     <div className={cx('tab-pane', { active: tab === 1 })}>
                         <div className={cx('reviews-wrapper')}>
-                            {data.comments.map((comment, index) => (
-                                <div key={index} className={cx('review-item')}>
-                                    <div className={cx('review-name')}>{comment.username}</div>
-                                    <div className={cx('review-content')}>{comment.content}</div>
+                            {reviews &&
+                                reviews.map((comment, index) => (
+                                    <div key={index} className={cx('review-item')}>
+                                        <div className={cx('review-name')}>
+                                            {comment.name}
+                                            <span className={cx('review-date')}>{timeGap(comment.date)}</span>
+                                        </div>
+                                        <div className={cx('review-content')}>{comment.cmt}</div>
+                                    </div>
+                                ))}
+                            {pageReview < maxPageReview && (
+                                <div
+                                    onClick={() => setPageReview((prev) => prev + 1)}
+                                    className={cx('review-showMore')}
+                                >
+                                    Show more...
                                 </div>
-                            ))}
-                            <div className={cx('review-showMore')}>Show more...</div>
+                            )}
                         </div>
                         <div className={cx('review')}>
-                            <input onChange={handleChangeInput} value={review} placeholder="Add a comment..." />
-                            {review && (
+                            <input onChange={handleChangeInput} value={reviewValue} placeholder="Add a comment..." />
+                            {reviewValue && (
                                 <button onClick={handleClearReviewValue} className={cx('clear')}>
                                     <AiFillCloseCircle />
                                 </button>
                             )}
 
-                            <button className={cx('review-btn')} onMouseDown={(e) => e.preventDefault()}>
+                            <button
+                                onClick={() => postComment()}
+                                className={cx('review-btn')}
+                                onMouseDown={(e) => e.preventDefault()}
+                            >
                                 <BiSend />
                             </button>
                         </div>
@@ -139,14 +187,14 @@ function DetailRecipe({ data = {}, onCloseModal }) {
                 <div className={cx('detail-nutrition')}>
                     <div className={cx('detail-nutrition__item')}>
                         <FatIcon className={cx('detail-nutrition__icon')} />
-                        {data.fat}g fats
+                        {data.fats}g fats
                     </div>
                     <div className={cx('detail-nutrition__item')}>
                         <RiceBowIcon className={cx('detail-nutrition__icon')} />
                         {data.carbo}g carbo
                     </div>
                 </div>
-                <Image src={data.img} alt={data.name} className={cx('detail-img')} />
+                <Image src={data.image} alt={data.name} className={cx('detail-img')} />
             </div>
         </Modal>
     );

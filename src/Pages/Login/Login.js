@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import images from '../../assets/images';
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
@@ -8,32 +8,29 @@ import config from '../../config';
 import * as loginServices from '../../services/loginService';
 import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
-
+import { actions } from '../../store';
+import UserContext from '../../store/Context';
 const cx = classNames.bind(styles);
 const Login = ({ setAuth }) => {
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    const [state, dispatch] = useContext(UserContext);
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const postApi = async () => {
-            const results = await loginServices.login({ username, password });
-        };
-        postApi();
         const getTokenApi = async () => {
-            const results = await loginServices.getToken();
-
-            if (results.success) {
+            const results = await loginServices.login({ mail, password });
+            if (results.isSuccess) {
                 localStorage.setItem('token', results.token);
-                setAuth(results.token);
+                console.log(results.customer);
+                dispatch(actions.setUserInfo(results.customer));
                 navigate(config.routes.dairy);
             } else {
-                setUsername('');
+                setMail('');
                 setPassword('');
-                setErrorMessage('Password or username is incorrect');
+                setErrorMessage('Password or mail is incorrect');
             }
         };
         getTokenApi();
@@ -52,10 +49,10 @@ const Login = ({ setAuth }) => {
                     <form onSubmit={handleSubmit} className={cx('form-body')}>
                         <Input
                             onChange={(event) => {
-                                setUsername(event.target.value);
+                                setMail(event.target.value);
                                 setErrorMessage('');
                             }}
-                            value={username}
+                            value={mail}
                             title="Your Email"
                             type="email"
                         />
