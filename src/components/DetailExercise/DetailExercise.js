@@ -7,7 +7,6 @@ import { memo, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
-import * as RecipeService from '../../services/recipeService';
 import { IoFitnessSharp } from 'react-icons/io5';
 import ExerciseItem from '../ExerciseItem';
 import Button from '../Button/Button';
@@ -26,7 +25,7 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
     // useEffect(()=>{},[show])
     const handleLike = () => {
         setIsLiked(!isLiked);
-        const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
+        // const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
     };
 
     const handleChangeInput = (e) => {

@@ -17,7 +17,7 @@ export const updateRecipes = async (data, day, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.put(`user/menu/edit/${day}`, { data });
+        const res = await httpRequest.put(`user/menu/edit/${day}`, data, config);
         return res;
     } catch (error) {
         console.log(error);
@@ -83,24 +83,35 @@ export const postComment = async (idRecipe, cmt, token) => {
         return [];
     }
 };
-export const updateMenuItem = async (id, data, token) => {
+export const updateLikedRecipe = async (idRecipe, isLiked, token) => {
     const config = {
         headers: { access_token: token },
+        params: {
+            idRecipe,
+            isLike: isLiked ? 1 : 0,
+        },
     };
     try {
-        const res = await httpRequest.patch(`menu/${id}`, data);
+        const res = await httpRequest.put(`recipe/like`, {}, config);
         return res;
     } catch (error) {
         console.log(error);
         return [];
     }
 };
-export const updateRecipesItem = async (day, id, data, token) => {
+
+export const getMenu1 = async (token, ingredient = '0', calories = '100,500', page = 1, limit = 10) => {
     const config = {
         headers: { access_token: token },
+        params: {
+            ingredient,
+            calories,
+            limit,
+            page,
+        },
     };
     try {
-        const res = await httpRequest.patch(`recipe/${day}/${id}`, data);
+        const res = await httpRequest.get(`recipe/all/filter`, config); //menu
         return res;
     } catch (error) {
         console.log(error);

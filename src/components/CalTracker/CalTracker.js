@@ -9,12 +9,13 @@ const cx = classNames.bind(styles);
 
 const CalTracker = ({ data, className }) => {
     // const caloriesIn
-    const caloriesIn = Number(data.calIn) || 0;
-    const caloriesOut = Number(data.calOut) + Number(data.calMin) || 0;
+    const caloriesMin = 1800;
+    const caloriesIn = Number(data.calories_in) || 0;
+    const caloriesOut = Number(data.calories_out) + caloriesMin || 0;
     const BMI = (data.weight / ((data.height / 100) * (data.height / 100))).toFixed(1);
 
     const suggest = useMemo(() => {
-        if (caloriesIn < data.calMin) {
+        if (caloriesIn < caloriesMin) {
             return 'You should eat more food to reach the required calories for your body';
         } else if (BMI > 25 && caloriesIn > caloriesOut) {
             return 'You should take more exercise to burn more calories and lose weight';
@@ -25,7 +26,7 @@ const CalTracker = ({ data, className }) => {
         } else {
             return 'You are doing great';
         }
-    }, [caloriesIn, data.calMin, BMI, caloriesOut]);
+    }, [caloriesIn, caloriesMin, BMI, caloriesOut]);
 
     return (
         <div className={cx('wrapper', className)}>
@@ -41,23 +42,23 @@ const CalTracker = ({ data, className }) => {
                 <div className={cx('chart-body')}>
                     <RadialChart
                         className={cx('chart')}
-                        progress={(caloriesIn * 100) / (data.calMin * 2)}
+                        progress={(caloriesIn * 100) / (caloriesMin * 2)}
                         color="#6b42d7"
                         strokeWidth={20}
-                        hideTotal={caloriesIn < data.calMin}
+                        hideTotal={caloriesIn < caloriesMin}
                         dimension={205}
                     />
                     <RadialChart
                         progress={50}
-                        className={cx('chart', { under: caloriesIn < data.calMin })}
+                        className={cx('chart', { under: caloriesIn < caloriesMin })}
                         color="#5685df"
                         strokeWidth={20}
-                        hideTotal={caloriesIn > data.calMin}
+                        hideTotal={caloriesIn > caloriesMin}
                         dimension={205}
                     />
                     <RadialChart
                         className={cx('chart')}
-                        progress={(caloriesOut * 100) / (data.calMin * 2)}
+                        progress={(caloriesOut * 100) / (caloriesMin * 2)}
                         color="#d75c42"
                         strokeWidth={20}
                         radius={65}
@@ -98,12 +99,6 @@ const CalTracker = ({ data, className }) => {
                     </div>
                 </div>
             </div>
-            {/* <div className={cx('suggest-list')}>
-                <div className={cx('suggest-title')}>Suggestions</div>
-                <div className={cx('suggest-item')}>
-                    You should take more exercise to burn more calories and reach the amount of calories intake.
-                </div>
-            </div> */}
         </div>
     );
 };

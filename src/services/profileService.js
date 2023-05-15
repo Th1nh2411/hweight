@@ -24,6 +24,18 @@ export const updateProfile = async (data, token) => {
         return [];
     }
 };
+export const updateWaterIntake = async (date, data, token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.put(`user/edit/history/${date}`, data, config); //profile
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const changePassword = async (data, token) => {
     const config = {
         headers: { access_token: token },

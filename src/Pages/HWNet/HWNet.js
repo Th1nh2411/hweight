@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useMemo, useState } from 'react';
 import Card from '../../components/Card/Card';
 import { BsFillBarChartLineFill } from 'react-icons/bs';
+import * as rankingService from '../../services/rankingService';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
 import * as usersService from '../../services/usersService';
@@ -29,8 +30,8 @@ function HWNet() {
     const [showDetailUser, setShowDetailUser] = useState(false);
     const getTopRecipeData = async () => {
         const token = localStorage.getItem('token');
-        const results = await recipeService.getMenu(token);
-        setTopRecipe(results);
+        const results = await rankingService.getRankRecipe(token);
+        setTopRecipe(results.recipeRank);
     };
     const getTopExerciseData = async () => {
         const token = localStorage.getItem('token');

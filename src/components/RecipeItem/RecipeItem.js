@@ -46,7 +46,7 @@ function Item({
     };
     const handleLike = () => {
         setIsLiked(!isLiked);
-        const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
+        const results = RecipeService.updateLikedRecipe(data.id, { isLiked: !isLiked });
         onLiked(data.id, !isLiked);
     };
 
@@ -81,6 +81,7 @@ function Item({
                     {editing && (
                         <Tippy
                             delay={[0, 0]}
+                            duration={0}
                             offset={[0, -4]}
                             placement="bottom"
                             content={checked ? 'Remove from meal' : 'Add to meal'}

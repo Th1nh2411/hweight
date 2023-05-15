@@ -8,12 +8,13 @@ import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
 import * as recipeService from '../../services/recipeService';
+import * as rankingService from '../../services/rankingService';
 import dayjs from 'dayjs';
 import UserContext from '../../store/Context';
 const cx = classNames.bind(styles);
 
 function DetailRecipe({ data = {}, onCloseModal }) {
-    const [isLiked, setIsLiked] = useState(data.isLiked);
+    const [isLiked, setIsLiked] = useState(data.isLike);
     const [tab, setTab] = useState(0);
     const [reviews, setReviews] = useState([]);
     const [reviewValue, setReviewValue] = useState('');
@@ -37,9 +38,12 @@ function DetailRecipe({ data = {}, onCloseModal }) {
         setReviewValue('');
         setReviews((prev) => [{ name: state.userinfo.name, cmt: reviewValue, date: dayjs().add(7, 'hours') }, ...prev]);
     };
-    const handleLike = () => {
+    const handleLike = async () => {
         setIsLiked(!isLiked);
-        const results = recipeService.updateMenuItem(data.id, { isLiked: !isLiked });
+        !isLiked ? (data.points = data.points + 1) : (data.points = data.points - 1);
+        const token = localStorage.getItem('token');
+        await recipeService.updateLikedRecipe(data.idRecipe, !isLiked, token);
+        await rankingService.updateRankRecipe(token);
     };
     const handleChangeInput = (e) => {
         const searchValue = e.target.value;

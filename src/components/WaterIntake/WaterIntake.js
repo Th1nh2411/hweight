@@ -6,22 +6,24 @@ import { WaterPlusIcon } from '../Icons';
 import { IoWaterSharp } from 'react-icons/io5';
 import * as profileService from '../../services/profileService';
 import Tippy from '@tippyjs/react';
+import dayjs from 'dayjs';
+import audios from '../../assets/audios';
 const cx = classNames.bind(styles);
 
 const WaterIntake = ({ data, className }) => {
-    const maxWater = 3700;
-    const [water, setWater] = useState(parseInt(data.water) || 0);
+    const maxWater = data.weight * 30;
+    // const [water, setWater] = useState(parseInt(data.water));
     const [showOptions, setShowOptions] = useState(false);
     const optionsRef = useRef(null);
     const addBtnRef = useRef(null);
     const updateWaterData = async (data) => {
         const token = localStorage.getItem('token');
-        const results = await profileService.updateProfile(data, token);
+        const results = await profileService.updateWaterIntake(dayjs().format('YYYY-MM-DD'), data, token);
     };
-    useEffect(() => {
-        setWater(parseInt(data.water));
-    }, [data]);
-    const waterUI = useMemo(() => 125 - (water / maxWater) * 125, [water]);
+    // useEffect(() => {
+    //     setWater(parseInt(data.water));
+    // }, [data]);
+    const waterUI = useMemo(() => 160 - (data.water / maxWater) * 160, [data.water, maxWater]);
     const handleClickAddBtn = () => {
         setShowOptions(!showOptions);
     };
@@ -35,8 +37,10 @@ const WaterIntake = ({ data, className }) => {
         }
     };
     const handleAddWater = (extraWater) => {
-        setWater((prev) => prev + extraWater);
-        updateWaterData({ water: water + extraWater });
+        // setWater((prev) => prev + extraWater);
+        new Audio(audios.drinkSound).play();
+        updateWaterData({ water: data.water + extraWater });
+        data.water = data.water + extraWater;
     };
     useEffect(() => {
         document.addEventListener('click', handleDocumentClick);
@@ -51,13 +55,13 @@ const WaterIntake = ({ data, className }) => {
                 <Tippy
                     placement="bottom"
                     content={
-                        water < maxWater
+                        data.water < maxWater
                             ? 'You should drink enough the recommended amount of daily water.'
                             : 'You have drunk the recommended amount of daily water.'
                     }
                 >
                     <div className={cx('current-water')}>
-                        <IoWaterSharp className={cx('icon')} /> {water} ml
+                        <IoWaterSharp className={cx('icon')} /> {data.water} ml
                     </div>
                 </Tippy>
 

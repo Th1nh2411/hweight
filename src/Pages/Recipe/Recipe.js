@@ -29,21 +29,24 @@ function Recipe() {
         setDetailRecipe(results.recipe);
         setShowDetailRecipe(true);
     };
+    const updateRecipesData = async (newRecipes) => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.updateRecipes(newRecipes, dayObj.format('YYYY-MM-DD'), token);
+    };
     useEffect(() => {
         getRecipesData(dayObj.format('YYYY-MM-DD'));
     }, [dayObj]);
 
     const handleSubmitEdit = (type) => async (checkedItems) => {
-        const newRecipes = recipes
-            .filter((item) => item.type !== type)
-            .concat(
-                checkedItems.map((recipe) => {
-                    return { ...recipe, type: type };
-                }),
-            );
-        setRecipes(newRecipes);
-        const token = localStorage.getItem('token');
-        const results = await recipeService.updateRecipes(newRecipes, dayObj.format('YYYY-MM-DD'), token);
+        const idListRecipe = { ...recipes };
+        Object.keys(idListRecipe).forEach((key) => {
+            // Thay đổi giá trị của key
+            idListRecipe[key] = idListRecipe[key].map((recipe) => recipe.idRecipe).join(',');
+        });
+
+        const newRecipes = { ...idListRecipe, [type]: checkedItems.map((item) => item.idRecipe).join(',') };
+        setRecipes((prev) => ({ ...prev, [type]: checkedItems }));
+        updateRecipesData(newRecipes);
     };
     const handleDayChange = (dayChange) => {
         setDayObj(dayChange);
@@ -66,7 +69,7 @@ function Recipe() {
             </div>
             <div className={cx('body')}>
                 <RecipeList
-                    onEditDone={handleSubmitEdit(1)}
+                    onEditDone={handleSubmitEdit('breakfast')}
                     edit
                     listData={recipes.breakfast}
                     title="Breakfast"
@@ -74,7 +77,7 @@ function Recipe() {
                     onClickRecipe={getDetailRecipeData}
                 />
                 <RecipeList
-                    onEditDone={handleSubmitEdit(2)}
+                    onEditDone={handleSubmitEdit('lunch')}
                     edit
                     listData={recipes.lunch}
                     title="Lunch"
@@ -82,7 +85,7 @@ function Recipe() {
                 />
 
                 <RecipeList
-                    onEditDone={handleSubmitEdit(3)}
+                    onEditDone={handleSubmitEdit('dinner')}
                     edit
                     listData={recipes.dinner}
                     title="Dinner"

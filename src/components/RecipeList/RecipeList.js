@@ -22,17 +22,11 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
     const [ingredientsFilter, setIngredientsFilter] = useState('0');
     const [calFilter, setCalFilter] = useState('0,0');
 
-    // const isSelected = (compareItem) => {
-    //     console.log(compareItem);
-    //     return listData.some((item) => item.idRecipe === compareItem.idRecipe);
-    // };
     const getMoreMenuData = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getMenu(token, ingredientsFilter, calFilter, pageReview);
         const filteredMenu = results.recipeJson;
-        // .filter(
-        //     (menuItem) => !listData.some((recipe) => recipe.idRecipe === menuItem.idRecipe),
-        // );
+
         setMenu((prev) => [...prev, ...filteredMenu]);
     };
     const getFilterMenuData = async () => {
@@ -40,9 +34,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
         const results = await recipeService.getMenu(token, ingredientsFilter, calFilter, 1);
         setPageReview(1);
         const filteredMenu = results.recipeJson;
-        // .filter(
-        //     (menuItem) => !listData.some((recipe) => recipe.idRecipe === menuItem.idRecipe),
-        // );
+
         setMenu(filteredMenu);
         setMaxPageReview(results.maxPage);
     };
@@ -62,7 +54,6 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
         if (!showEdit) {
             setShowEdit(true);
             setCheckedItems(listData);
-            // setMenu((prev) => [...listData, ...prev]);
             getFilterMenuData();
         } else {
             setMenu([]);
@@ -166,7 +157,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
                 {showEdit ? (
                     <div>
                         <div className={cx('menu-list')}>
-                            {/* {listData.map((item, index) => {
+                            {checkedItems.map((item, index) => {
                                 return (
                                     <div key={index}>
                                         <RecipeItem
@@ -180,24 +171,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
                                         />
                                     </div>
                                 );
-                            })} */}
-                            {checkedItems
-                                // .filter((item) => !listData.some((recipe) => recipe.idRecipe === item.idRecipe))
-                                .map((item, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <RecipeItem
-                                                onLiked={handleLiked}
-                                                onClickRecipe={onClickRecipe}
-                                                data={item}
-                                                editing
-                                                onChangeEditing={handleCheckboxChange}
-                                                selected
-                                                clear={clear}
-                                            />
-                                        </div>
-                                    );
-                                })}
+                            })}
                             {menu
                                 .filter((menuItem) => !checkedItems.some((item) => item.idRecipe === menuItem.idRecipe))
                                 .map((item, index) => {

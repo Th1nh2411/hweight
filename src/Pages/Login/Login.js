@@ -24,7 +24,6 @@ const Login = ({ setAuth }) => {
             const results = await loginServices.login({ mail, password });
             if (results.isSuccess) {
                 localStorage.setItem('token', results.token);
-                console.log(results.customer);
                 dispatch(actions.setUserInfo(results.customer));
                 navigate(config.routes.dairy);
             } else {

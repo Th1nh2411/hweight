@@ -9,7 +9,11 @@ const ListRank = ({ listData = [], onClickItem }) => {
     return (
         <div className={cx('wrapper')}>
             {listData.map((item, index) => (
-                <div onClick={() => onClickItem(item.id)} className={cx('item', { even: index % 2 === 1 })} key={index}>
+                <div
+                    onClick={() => onClickItem(item.idRecipe)}
+                    className={cx('item', { even: index % 2 === 1 })}
+                    key={index}
+                >
                     <div className={cx('item-name')}>
                         {index === 0 ? (
                             <Top1Icon className={cx('item-order')} />
@@ -20,11 +24,11 @@ const ListRank = ({ listData = [], onClickItem }) => {
                         ) : (
                             <div className={cx('item-order')}>{index + 1}</div>
                         )}
-                        <Image src={item.img} className={cx('item-img')} />
+                        <Image src={item.image} className={cx('item-img')} />
                         {item.name}
                     </div>
                     <div className={cx('likes-num')}>
-                        {item.likes}
+                        {item.points}
                         <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" />
                     </div>
                 </div>
