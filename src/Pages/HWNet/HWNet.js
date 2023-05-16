@@ -15,6 +15,7 @@ import DetailUser from '../../components/DetailUser';
 import { Col, Row } from 'react-bootstrap';
 import Image from '../../components/Image/Image';
 import images from '../../assets/images';
+import UserFilter from '../../components/UserFilter/UserFilter';
 
 const cx = classNames.bind(styles);
 
@@ -30,6 +31,9 @@ function HWNet() {
     const [showDetailUser, setShowDetailUser] = useState(false);
     const [pageReview, setPageReview] = useState(1);
     const [maxPageReview, setMaxPageReview] = useState(1);
+
+    const [minBMIValue, setMinBMIValue] = useState(0);
+    const [maxBMIValue, setMaxBMIValue] = useState(40);
     const getTopRecipeData = async () => {
         const token = localStorage.getItem('token');
         const results = await rankingService.getRankRecipe(token);
@@ -42,9 +46,20 @@ function HWNet() {
     };
     const getMoreUsersData = async () => {
         const token = localStorage.getItem('token');
-        const results = await rankingService.getUsers(token, 0, 33, pageReview);
+        const results = await rankingService.getUsers(token, minBMIValue, maxBMIValue, pageReview);
         if (results.isSuccess) {
             setUsers([...users, ...results.users]);
+            setMaxPageReview(results.maxPage);
+        }
+    };
+    const getFilterUsersData = async (minBMI = 0, maxBMI = 40) => {
+        const token = localStorage.getItem('token');
+        const results = await rankingService.getUsers(token, minBMI, maxBMI, 1);
+        setPageReview(1);
+        setMinBMIValue(minBMI);
+        setMaxBMIValue(maxBMI);
+        if (results.isSuccess) {
+            setUsers(results.users);
             setMaxPageReview(results.maxPage);
         }
     };
@@ -56,7 +71,7 @@ function HWNet() {
     useEffect(() => {
         getTopRecipeData();
         getTopExerciseData();
-        getMoreUsersData();
+        getFilterUsersData();
     }, []);
 
     const getDetailRecipeData = async (id) => {
@@ -77,6 +92,7 @@ function HWNet() {
         setDetailUser(results);
         setShowDetailUser(true);
     };
+
     return (
         <Card className={cx('wrapper')}>
             {showDetailRecipe && detailRecipe && (
@@ -141,7 +157,7 @@ function HWNet() {
                                     <HiUserGroup />
                                 </div>
                             </div>
-                            {/* <UserFilter /> */}
+                            <UserFilter onChangeFilter={(minBMI, maxBMI) => getFilterUsersData(minBMI, maxBMI)} />
                             <Row className={cx('content-body')}>
                                 {users &&
                                     users.map((user, index) => (

@@ -3,14 +3,14 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 
 import { useDebounce } from '../../hooks';
-import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import PopperWrapper from '../Popper';
 import * as recipeService from '../../services/recipeService';
 import SearchItem from './SearchItem';
 
 const cx = classNames.bind(styles);
-function Filter({ onChangeFilter }) {
+function RecipeFilter({ onChangeFilter }) {
     const minCalories = 50;
     const maxCalories = 600;
     const [minCaloriesValue, setMinCaloriesValue] = useState(minCalories);
@@ -162,4 +162,4 @@ function Filter({ onChangeFilter }) {
     );
 }
 
-export default Filter;
+export default RecipeFilter;

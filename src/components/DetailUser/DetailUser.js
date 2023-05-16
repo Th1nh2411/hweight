@@ -4,9 +4,8 @@ import { memo, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
-import { FaFemale, FaMale } from 'react-icons/fa';
 import ListRank from '../ListRank/ListRank';
-import { BsFillBarChartLineFill } from 'react-icons/bs';
+import { BiBookmarkHeart } from 'react-icons/bi';
 import DetailRecipe from '../DetailRecipe/DetailRecipe';
 import DetailExercise from '../DetailExercise/DetailExercise';
 import { AiOutlineLeft } from 'react-icons/ai';
@@ -93,11 +92,12 @@ function DetailUser({ data = {}, onCloseModal }) {
                             <div className={cx('content-title')}>
                                 Favorite recipes{' '}
                                 <div className={cx('icon')}>
-                                    <BsFillBarChartLineFill />
+                                    <BiBookmarkHeart />
                                 </div>
                             </div>
                             <div className={cx('content-body')}>
                                 <ListRank
+                                    ranking={false}
                                     listData={userFavRecipes}
                                     onClickItem={(id) => {
                                         getDetailRecipeData(id);
@@ -111,7 +111,7 @@ function DetailUser({ data = {}, onCloseModal }) {
                             <div className={cx('content-title')}>
                                 Favorite exercises{' '}
                                 <div className={cx('icon')}>
-                                    <BsFillBarChartLineFill />
+                                    <BiBookmarkHeart />
                                 </div>
                             </div>
                             <div className={cx('content-body')}>

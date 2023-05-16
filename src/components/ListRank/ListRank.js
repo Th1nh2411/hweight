@@ -5,7 +5,7 @@ import Image from '../Image';
 import { HeartIcon, Top1Icon, Top2Icon, Top3Icon } from '../Icons';
 const cx = classNames.bind(styles);
 
-const ListRank = ({ listData = [], onClickItem }) => {
+const ListRank = ({ listData = [], onClickItem, ranking = true }) => {
     return (
         <div className={cx('wrapper')}>
             {listData.map((item, index) => (
@@ -15,15 +15,16 @@ const ListRank = ({ listData = [], onClickItem }) => {
                     key={index}
                 >
                     <div className={cx('item-name')}>
-                        {index === 0 ? (
-                            <Top1Icon className={cx('item-order')} />
-                        ) : index === 1 ? (
-                            <Top2Icon className={cx('item-order')} />
-                        ) : index === 2 ? (
-                            <Top3Icon className={cx('item-order')} />
-                        ) : (
-                            <div className={cx('item-order')}>{index + 1}</div>
-                        )}
+                        {ranking &&
+                            (index === 0 ? (
+                                <Top1Icon className={cx('item-order')} />
+                            ) : index === 1 ? (
+                                <Top2Icon className={cx('item-order')} />
+                            ) : index === 2 ? (
+                                <Top3Icon className={cx('item-order')} />
+                            ) : (
+                                <div className={cx('item-order')}>{index + 1}</div>
+                            ))}
                         <Image src={item.image} className={cx('item-img')} />
                         {item.name}
                     </div>

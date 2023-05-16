@@ -1,0 +1,115 @@
+// Filter
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    // padding: 10px 20px;
+    // border-radius: 12px;
+    // background-color: #464646;
+    // border: 1px #b8b8b838 solid;
+}
+.filter-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.calories-filter {
+    display: flex;
+    align-items: center;
+}
+.filter-subtitle {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.calories-filter-progressBar {
+    margin: 0px 12px -25px;
+    .range-slide {
+        position: relative;
+        height: 4px;
+        width: 200px;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        height: 2px;
+        background: #606060;
+        left: 12px;
+        right: 6px;
+        border-radius: 4px;
+    }
+
+    .line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+    }
+
+    .thumb {
+        position: absolute;
+        z-index: 2;
+        text-align: left;
+        border: 1px solid var(--primary-color);
+        background-color: #b8b8b8;
+        border-radius: 50%;
+        outline: none;
+        top: -4px;
+        height: 10px;
+        width: 10px;
+        margin-left: -9px;
+    }
+
+    input {
+        -webkit-appearance: none;
+        appearance: none;
+        position: absolute;
+        pointer-events: none;
+        z-index: 3;
+        height: 3px;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        margin: 0;
+    }
+
+    input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        pointer-events: all;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.calories-display {
+    margin-top: 5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    color: #60ab00;
+    padding: 0 3px;
+    .under {
+        color: #0093d2;
+    }
+    .over {
+        color: var(--primary-color);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .filter-wrapper {
+        flex-direction: column;
+    }
+    .calories-filter {
+        margin-bottom: 15px;
+    }
+}
