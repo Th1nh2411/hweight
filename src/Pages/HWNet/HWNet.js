@@ -6,7 +6,6 @@ import { BsFillBarChartLineFill } from 'react-icons/bs';
 import * as rankingService from '../../services/rankingService';
 import * as recipeService from '../../services/recipeService';
 import * as exerciseService from '../../services/exerciseService';
-import * as usersService from '../../services/usersService';
 import ListRank from '../../components/ListRank/ListRank';
 import { ConnectIcon } from '../../components/Icons';
 import { HiUserGroup } from 'react-icons/hi2';
@@ -40,7 +39,7 @@ function HWNet() {
     };
     const getUsersData = async () => {
         const token = localStorage.getItem('token');
-        const results = await usersService.getUsers(token);
+        const results = await rankingService.getUsers(token);
         setUsers(results);
     };
     useEffect(() => {
@@ -63,7 +62,7 @@ function HWNet() {
     };
     const getDetailUserData = async (id) => {
         const token = localStorage.getItem('token');
-        const results = await usersService.getDetailUser(id, token);
+        const results = await rankingService.getDetailUser(id, token);
         setDetailUser(results);
         setShowDetailUser(true);
     };

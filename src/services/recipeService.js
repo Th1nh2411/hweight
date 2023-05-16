@@ -54,6 +54,19 @@ export const getMenu = async (token, ingredient = '0', calories = '100,500', pag
         return [];
     }
 };
+export const getIngredients = async (token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.get(`ingredient`, config); //ingredients
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+
 export const getComment = async (idRecipe, token, page = 1, limit = 5) => {
     const config = {
         headers: { access_token: token },
@@ -93,25 +106,6 @@ export const updateLikedRecipe = async (idRecipe, isLiked, token) => {
     };
     try {
         const res = await httpRequest.put(`recipe/like`, {}, config);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return [];
-    }
-};
-
-export const getMenu1 = async (token, ingredient = '0', calories = '100,500', page = 1, limit = 10) => {
-    const config = {
-        headers: { access_token: token },
-        params: {
-            ingredient,
-            calories,
-            limit,
-            page,
-        },
-    };
-    try {
-        const res = await httpRequest.get(`recipe/all/filter`, config); //menu
         return res;
     } catch (error) {
         console.log(error);

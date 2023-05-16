@@ -29,9 +29,9 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
 
         setMenu((prev) => [...prev, ...filteredMenu]);
     };
-    const getFilterMenuData = async () => {
+    const getFilterMenuData = async (ingredientString = '0', CalFilterString = '0,0') => {
         const token = localStorage.getItem('token');
-        const results = await recipeService.getMenu(token, ingredientsFilter, calFilter, 1);
+        const results = await recipeService.getMenu(token, ingredientString, CalFilterString, 1);
         setPageReview(1);
         const filteredMenu = results.recipeJson;
 
@@ -43,9 +43,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
             getMoreMenuData();
         }
     }, [pageReview]);
-    useEffect(() => {
-        getFilterMenuData();
-    }, [ingredientsFilter, calFilter]);
+    // useEffect(() => {}, [ingredientsFilter, calFilter]);
     useEffect(() => {
         setShowEdit(false);
         setCheckedItems([]);
@@ -108,6 +106,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
         const CalFilterString = `${minCal},${maxCal}`;
         setIngredientsFilter(ingredientString);
         setCalFilter(CalFilterString);
+        getFilterMenuData(ingredientString, CalFilterString);
     };
     return (
         <div className={cx('wrapper', className)}>

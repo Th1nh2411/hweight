@@ -6,7 +6,7 @@ import { useDebounce } from '../../hooks';
 import { AiFillCloseCircle, AiOutlineLoading3Quarters } from 'react-icons/ai';
 import HeadlessTippy from '@tippyjs/react/headless';
 import PopperWrapper from '../Popper';
-import * as filterService from '../../services/filterService';
+import * as recipeService from '../../services/recipeService';
 import SearchItem from './SearchItem';
 
 const cx = classNames.bind(styles);
@@ -27,7 +27,7 @@ function Filter({ onChangeFilter }) {
     useEffect(() => {
         const fetchFilterApi = async () => {
             const token = localStorage.getItem('token');
-            const results = await filterService.getSearchFilter(token);
+            const results = await recipeService.getIngredients(token);
             setIngredients(results);
         };
         fetchFilterApi();

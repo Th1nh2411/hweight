@@ -23,16 +23,8 @@ function Item({
     className,
 }) {
     const [checked, setChecked] = useState(selected);
-    // const [showModalDetail, setShowModalDetail] = useState();
-    const [isLiked, setIsLiked] = useState(data.isLiked);
-    const [tab, setTab] = useState(0);
-    const [review, setReviewValue] = useState('');
-    const [leftLine, setLeftLine] = useState('');
-    const [widthLine, setWidthLine] = useState('');
-    const [showMoreReview, setShowMoreReview] = useState(false);
 
     const handleChange = (event) => {
-        // setChecked(event.target.checked);
         onChangeEditing(event, data);
     };
     useEffect(() => {
@@ -44,21 +36,7 @@ function Item({
     const handleClickRecipe = () => {
         onClickRecipe(data.idRecipe);
     };
-    const handleLike = () => {
-        setIsLiked(!isLiked);
-        const results = RecipeService.updateLikedRecipe(data.id, { isLiked: !isLiked });
-        onLiked(data.id, !isLiked);
-    };
 
-    const handleChangeInput = (e) => {
-        const searchValue = e.target.value;
-        if (!searchValue.startsWith(' ')) {
-            setReviewValue(searchValue);
-        }
-    };
-    const handleClearReviewValue = () => {
-        setReviewValue('');
-    };
     return (
         <div>
             <div onClick={handleClickRecipe} className={cx('wrapper', className, { selected: checked, disableInput })}>

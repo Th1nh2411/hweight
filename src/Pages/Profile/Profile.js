@@ -16,6 +16,7 @@ function Profile() {
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [gender, setGender] = useState(1);
+    const [isShare, setIsShare] = useState(0);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
@@ -27,8 +28,8 @@ function Profile() {
 
     const handleUpdateProfileData = async () => {
         const token = localStorage.getItem('token');
-        const results = await profileService.updateProfile({ name, height, weight, gender, isShare: 0 }, token);
-        setProfile({ name, height, weight, gender, isShare: 0 });
+        const results = await profileService.updateProfile({ name, height, weight, gender, isShare }, token);
+        setProfile({ name, height, weight, gender, isShare });
         setChangePIValue(false);
     };
     useEffect(() => {
@@ -40,6 +41,7 @@ function Profile() {
             setWeight(results[0].weight);
             setName(results[0].name);
             setGender(results[0].gender);
+            setIsShare(results[0].isShare);
             setGetDataSuccess(true);
         };
         getProfileData();
@@ -69,7 +71,9 @@ function Profile() {
         setWeight(profileData.weight);
         setName(profileData.name);
         setGender(profileData.gender);
+        setIsShare(profileData.isShare);
     };
+
     const handleSubmitUpdatePI = () => {
         handleUpdateProfileData();
         setPISuccess(true);
@@ -80,14 +84,15 @@ function Profile() {
                 profileData.name !== name ||
                 profileData.height !== height ||
                 profileData.weight !== weight ||
-                profileData.gender !== gender
+                profileData.gender !== gender ||
+                profileData.isShare !== isShare
             ) {
                 setChangePIValue(true);
             } else {
                 setChangePIValue(false);
             }
         }
-    }, [name, height, weight, gender]);
+    }, [name, height, weight, gender, isShare]);
 
     // Change PW FORM
     useEffect(() => {
@@ -143,6 +148,9 @@ function Profile() {
             setCPSuccess(0);
         }
     };
+    const handleChangeShareAccount = () => {
+        setIsShare((prev) => (prev === 1 ? 0 : 1));
+    };
     return (
         <div className={cx('wrapper')}>
             <Card className={cx('card-item')}>
@@ -150,6 +158,16 @@ function Profile() {
                     <div className={cx('title')}>
                         Personal Information <FaRegUserCircle className={cx('title-icon')} />
                     </div>
+                    <label className={cx('subtitle')}>
+                        <input
+                            type="checkbox"
+                            value={isShare === 1 ? true : false}
+                            checked={isShare === 1 ? true : false}
+                            onChange={handleChangeShareAccount}
+                        />
+                        <span className={cx('checkmark')}></span>
+                        Public your info
+                    </label>
                 </div>
                 <div className={cx('card-body')}>
                     <Input

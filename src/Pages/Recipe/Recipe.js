@@ -33,9 +33,7 @@ function Recipe() {
         const token = localStorage.getItem('token');
         const results = await recipeService.updateRecipes(newRecipes, dayObj.format('YYYY-MM-DD'), token);
     };
-    useEffect(() => {
-        getRecipesData(dayObj.format('YYYY-MM-DD'));
-    }, [dayObj]);
+    // useEffect(() => {}, [dayObj]);
 
     const handleSubmitEdit = (type) => async (checkedItems) => {
         const idListRecipe = { ...recipes };
@@ -50,6 +48,7 @@ function Recipe() {
     };
     const handleDayChange = (dayChange) => {
         setDayObj(dayChange);
+        getRecipesData(dayChange.format('YYYY-MM-DD'));
     };
 
     return (
@@ -81,6 +80,7 @@ function Recipe() {
                     edit
                     listData={recipes.lunch}
                     title="Lunch"
+                    dayObj={dayObj}
                     onClickRecipe={getDetailRecipeData}
                 />
 
@@ -89,6 +89,7 @@ function Recipe() {
                     edit
                     listData={recipes.dinner}
                     title="Dinner"
+                    dayObj={dayObj}
                     onClickRecipe={getDetailRecipeData}
                 />
             </div>
