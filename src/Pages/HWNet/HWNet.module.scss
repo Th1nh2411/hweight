@@ -92,6 +92,16 @@
 .over {
     color: var(--primary-color);
 }
+.user-showMore {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
 @media (max-width: 767.98px) {
     .body {
         padding: 0;

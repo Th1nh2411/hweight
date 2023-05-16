@@ -7,8 +7,7 @@ import Button from '../Button/Button';
 import { FaUndo } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
 import * as recipeService from '../../services/recipeService';
-
-import Filter from '../Filter/Filter';
+import Filter from '../RecipeFilter';
 
 const cx = classNames.bind(styles);
 function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickRecipe, children, className }) {

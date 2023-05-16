@@ -14,6 +14,7 @@ import DetailExercise from '../../components/DetailExercise';
 import DetailUser from '../../components/DetailUser';
 import { Col, Row } from 'react-bootstrap';
 import Image from '../../components/Image/Image';
+import images from '../../assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +28,8 @@ function HWNet() {
     const [showDetailEx, setShowDetailEx] = useState(false);
     const [detailUser, setDetailUser] = useState({});
     const [showDetailUser, setShowDetailUser] = useState(false);
+    const [pageReview, setPageReview] = useState(1);
+    const [maxPageReview, setMaxPageReview] = useState(1);
     const getTopRecipeData = async () => {
         const token = localStorage.getItem('token');
         const results = await rankingService.getRankRecipe(token);
@@ -37,21 +40,29 @@ function HWNet() {
         const results = await exerciseService.getExercise(token);
         setTopExercise(results);
     };
-    const getUsersData = async () => {
+    const getMoreUsersData = async () => {
         const token = localStorage.getItem('token');
-        const results = await rankingService.getUsers(token);
-        setUsers(results);
+        const results = await rankingService.getUsers(token, 0, 33, pageReview);
+        if (results.isSuccess) {
+            setUsers([...users, ...results.users]);
+            setMaxPageReview(results.maxPage);
+        }
     };
+    useEffect(() => {
+        if (pageReview !== 1) {
+            getMoreUsersData();
+        }
+    }, [pageReview]);
     useEffect(() => {
         getTopRecipeData();
         getTopExerciseData();
-        getUsersData();
+        getMoreUsersData();
     }, []);
 
     const getDetailRecipeData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getDetailRecipe(id, token);
-        setDetailRecipe(results);
+        setDetailRecipe(results.recipe);
         setShowDetailRecipe(true);
     };
     const getDetailExerciseData = async (id) => {
@@ -68,9 +79,15 @@ function HWNet() {
     };
     return (
         <Card className={cx('wrapper')}>
-            {showDetailRecipe && <DetailRecipe data={detailRecipe} onCloseModal={() => setShowDetailRecipe(false)} />}
-            {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
-            {showDetailUser && <DetailUser data={detailUser} onCloseModal={() => setShowDetailUser(false)} />}
+            {showDetailRecipe && detailRecipe && (
+                <DetailRecipe data={detailRecipe} onCloseModal={() => setShowDetailRecipe(false)} />
+            )}
+            {showDetailEx && detailExercise && (
+                <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />
+            )}
+            {showDetailUser && detailUser && (
+                <DetailUser data={detailUser} onCloseModal={() => setShowDetailUser(false)} />
+            )}
             <div className={cx('header')}>
                 <div className={cx('title')}>
                     HWNet
@@ -79,7 +96,7 @@ function HWNet() {
             </div>
             <div className={cx('body')}>
                 <Row>
-                    <Col sm={'12'} md={'6'}>
+                    <Col md={'6'}>
                         <div className={cx('content-wrapper')}>
                             <div className={cx('content-title')}>
                                 Top 30 Recipe{' '}
@@ -97,7 +114,7 @@ function HWNet() {
                             </div>
                         </div>
                     </Col>
-                    <Col sm={'12'} md={'6'}>
+                    <Col md={'6'}>
                         <div className={cx('content-wrapper')}>
                             <div className={cx('content-title')}>
                                 Top 10 Exercise{' '}
@@ -124,28 +141,43 @@ function HWNet() {
                                     <HiUserGroup />
                                 </div>
                             </div>
+                            {/* <UserFilter /> */}
                             <Row className={cx('content-body')}>
-                                {users.map((user, index) => (
-                                    <Col
-                                        md="4"
-                                        key={index}
-                                        className={cx('user-wrapper')}
-                                        onClick={() => getDetailUserData(user.id)}
-                                    >
-                                        <Image className={cx('user-img')} />
-                                        <div className={cx('user-info')}>
-                                            <div className={cx('user-name')}>{user.name}</div>
-                                            <div
-                                                className={cx('user-bmi', {
-                                                    under: user.BMI < 18.5,
-                                                    over: user.BMI > 25,
-                                                })}
-                                            >
-                                                {user.BMI} BMI
+                                {users &&
+                                    users.map((user, index) => (
+                                        <Col
+                                            md="4"
+                                            key={index}
+                                            className={cx('user-wrapper')}
+                                            onClick={() => getDetailUserData(user.idUser)}
+                                        >
+                                            <Image
+                                                src={user.gender === 1 ? images.manAvatar : images.womanAvatar}
+                                                className={cx('user-img')}
+                                            />
+                                            <div className={cx('user-info')}>
+                                                <div className={cx('user-name')}>{user.name}</div>
+                                                <div
+                                                    className={cx('user-bmi', {
+                                                        under: parseFloat(user.bmi).toFixed(1) < 18.5,
+                                                        over: parseFloat(user.bmi).toFixed(1) > 25,
+                                                    })}
+                                                >
+                                                    {parseFloat(user.bmi).toFixed(1)} BMI
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Col>
-                                ))}
+                                        </Col>
+                                    ))}
+                                {pageReview < maxPageReview && (
+                                    <div
+                                        onClick={() => {
+                                            setPageReview((prev) => prev + 1);
+                                        }}
+                                        className={cx('user-showMore')}
+                                    >
+                                        Show more...
+                                    </div>
+                                )}
                             </Row>
                         </div>
                     </Col>

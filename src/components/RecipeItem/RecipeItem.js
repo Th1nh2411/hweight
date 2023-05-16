@@ -1,14 +1,11 @@
 import styles from './RecipeItem.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
-import { Link } from 'react-router-dom';
-import { AiFillCloseCircle, AiOutlineRightCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-import { BiSend } from 'react-icons/bi';
-import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import Modal from '../Modal/Modal';
-import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
+import { AiOutlineRightCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import {} from 'react-icons/bi';
+import { memo, useEffect, useState } from 'react';
+import { HeartIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
-import * as RecipeService from '../../services/recipeService';
 const cx = classNames.bind(styles);
 
 function Item({

@@ -10,6 +10,10 @@ import { BsFillBarChartLineFill } from 'react-icons/bs';
 import DetailRecipe from '../DetailRecipe/DetailRecipe';
 import DetailExercise from '../DetailExercise/DetailExercise';
 import { AiOutlineLeft } from 'react-icons/ai';
+import Image from '../Image/Image';
+import images from '../../assets/images';
+import { Col, Row } from 'react-bootstrap';
+import dayjs from 'dayjs';
 const cx = classNames.bind(styles);
 
 function DetailUser({ data = {}, onCloseModal }) {
@@ -17,10 +21,13 @@ function DetailUser({ data = {}, onCloseModal }) {
     const [showDetailRecipe, setShowDetailRecipe] = useState(false);
     const [detailExercise, setDetailExercise] = useState({});
     const [showDetailEx, setShowDetailEx] = useState(false);
+    const userData = data.user;
+    const userFavExs = data.user_ex;
+    const userFavRecipes = data.user_recipe;
     const getDetailRecipeData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getDetailRecipe(id, token);
-        setDetailRecipe(results);
+        setDetailRecipe(results.recipe);
         setShowDetailRecipe(true);
     };
     const getDetailExerciseData = async (id) => {
@@ -40,76 +47,84 @@ function DetailUser({ data = {}, onCloseModal }) {
             {showDetailEx && <DetailExercise data={detailExercise} onCloseModal={() => setShowDetailEx(false)} />}
             <div className={cx('detail-body')}>
                 <AiOutlineLeft className={cx('back-btn')} onClick={() => onCloseModal()} />
-                <div className={cx('detail-name')}>{data.name}</div>
-                <div className={cx('detail-info')}>
-                    <div className={cx('detail-gender')}>
-                        {data.gender === 1 ? (
-                            <>
-                                <FaMale className={cx('icon')} /> Male
-                            </>
-                        ) : (
-                            <>
-                                <FaFemale className={cx('icon')} /> Female
-                            </>
-                        )}
-                    </div>
-                    <div className={cx('detail-bmi')}>
+                <Image className={cx('user-img')} src={userData.gender === 1 ? images.manAvatar : images.womanAvatar} />
+                <div className={cx('detail-name')}>{userData.name}</div>
+                <div className={cx('detail-dateJoin')}>Date Join: {dayjs(userData.date).format('DD - MM - YYYY')}</div>
+                <Row className={cx('detail-info')}>
+                    <Col sm="4" className={cx('info-index')}>
+                        <div className={cx('info-title')}>Weight (kg)</div>
                         <div
                             className={cx('num', {
-                                under: data.BMI < 18.5,
-                                over: data.BMI > 25,
+                                under: userData.bmi < 18.5,
+                                over: userData.bmi > 25,
                             })}
                         >
-                            {data.BMI}
+                            {userData.weight}
                         </div>
-                        <div className={cx('subtitle')}>
-                            <div className={cx('BMI')}>BMI</div>
-                            <div
-                                className={cx('status', {
-                                    under: data.BMI < 18.5,
-                                    over: data.BMI > 25,
-                                })}
-                            >
-                                {data.BMI < 18.5 ? 'UnderWeight' : data.BMI > 25 ? 'Overweight' : 'Normal'}
+                    </Col>
+                    <Col sm="4" className={cx('info-index')}>
+                        <div className={cx('info-title')}>Height (cm)</div>
+                        <div
+                            className={cx('num', {
+                                under: userData.bmi < 18.5,
+                                over: userData.bmi > 25,
+                            })}
+                        >
+                            {userData.height}
+                        </div>
+                    </Col>
+                    <Col sm="4" className={cx('info-index')}>
+                        <div className={cx('info-title')}>
+                            BMI - {userData.bmi > 25 ? 'Overweight' : userData.bmi < 18.5 ? 'Underweight' : 'Normal'}
+                        </div>
+                        <div
+                            className={cx('num', {
+                                under: userData.bmi < 18.5,
+                                over: userData.bmi > 25,
+                            })}
+                        >
+                            {Math.floor(userData.bmi)}
+                        </div>
+                    </Col>
+                </Row>
+                <Row className={cx('content-wrapper')}>
+                    <Col md={'6'}>
+                        <div className={cx('content-list')}>
+                            <div className={cx('content-title')}>
+                                Favorite recipes{' '}
+                                <div className={cx('icon')}>
+                                    <BsFillBarChartLineFill />
+                                </div>
+                            </div>
+                            <div className={cx('content-body')}>
+                                <ListRank
+                                    listData={userFavRecipes}
+                                    onClickItem={(id) => {
+                                        getDetailRecipeData(id);
+                                    }}
+                                />
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className={cx('detail-dateJoin')}>Date Join: {data.dateJoin}</div>
-                <div className={cx('content-wrapper', 'row')}>
-                    <div className={cx('content-list', 'col')}>
-                        <div className={cx('content-title')}>
-                            Favorite recipes{' '}
-                            <div className={cx('icon')}>
-                                <BsFillBarChartLineFill />
+                    </Col>
+                    <Col md={'6'}>
+                        <div className={cx('content-list')}>
+                            <div className={cx('content-title')}>
+                                Favorite exercises{' '}
+                                <div className={cx('icon')}>
+                                    <BsFillBarChartLineFill />
+                                </div>
+                            </div>
+                            <div className={cx('content-body')}>
+                                <ListRank
+                                    listData={userFavExs}
+                                    onClickItem={(id) => {
+                                        getDetailExerciseData(id);
+                                    }}
+                                />
                             </div>
                         </div>
-                        <div className={cx('content-body')}>
-                            <ListRank
-                                listData={data.recipes}
-                                onClickItem={(id) => {
-                                    getDetailRecipeData(id);
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('content-list', 'col')}>
-                        <div className={cx('content-title')}>
-                            Favorite exercises{' '}
-                            <div className={cx('icon')}>
-                                <BsFillBarChartLineFill />
-                            </div>
-                        </div>
-                        <div className={cx('content-body')}>
-                            <ListRank
-                                listData={data.exercises}
-                                onClickItem={(id) => {
-                                    getDetailExerciseData(id);
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </div>
         </Modal>
     );

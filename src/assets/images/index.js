@@ -6,5 +6,7 @@ const images = {
     account: require('./account.png'),
     mainBg: require('./BMI1.jpg'),
     waterWave: require('./waterWave.png'),
+    manAvatar: require('./man.png'),
+    womanAvatar: require('./woman.png'),
 };
 export default images;

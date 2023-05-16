@@ -10,20 +10,36 @@
     }
 }
 .detail-wrapper {
-    // display: flex;
-    // align-items: center;
     padding: 30px;
+    min-width: 750px;
 }
 
-// .detail-body {
-//     flex: 1;
-// }
+.detail-body {
+    display: flex;
+    flex-direction: column;
+}
 .detail-name {
     font-size: 3.2rem;
     color: var(--primary-color);
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
+    margin-top: 15px;
+    line-height: 1;
+}
+.detail-dateJoin {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+.user-img {
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: revert;
 }
 .back-btn {
     display: none;
@@ -36,25 +52,19 @@
     }
 }
 .detail-info {
+}
+.info-title {
+    color: #ccc;
+    letter-spacing: 1px;
+}
+
+.info-index {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-}
-.detail-gender {
-    display: flex;
-    align-items: center;
-    font-size: 2.4rem;
-    .icon {
-        font-size: 2rem;
-        margin-right: 5px;
-    }
-}
-.detail-bmi {
-    margin-left: 40px;
-    display: flex;
-    align-items: center;
-    position: relative;
     .num {
-        font-size: 3.4rem;
+        font-size: 2.4rem;
         font-weight: 800;
         margin-right: 4px;
         letter-spacing: 2px;
@@ -71,6 +81,7 @@
         font-size: 1.2rem;
         line-height: 1;
         margin-left: 1.5px;
+        color: #60ab00;
     }
     .under {
         color: #0093d2;
@@ -78,22 +89,8 @@
     .over {
         color: var(--primary-color);
     }
-    &::before {
-        content: '';
-        width: 1px;
-        border-radius: 1px;
-        height: 70%;
-        position: absolute;
-        left: -20px;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #a8a8a8;
-    }
 }
-.detail-dateJoin {
-    text-align: center;
-    font-weight: 700;
-}
+
 body .content-wrapper {
     margin-top: 20px;
 }
@@ -141,7 +138,10 @@ body .content-wrapper {
     .back-btn {
         display: flex;
     }
-    .content-list + .content-list {
+    .content-list {
         margin: 10px 0 0;
+    }
+    .detail-wrapper {
+        min-width: 0;
     }
 }

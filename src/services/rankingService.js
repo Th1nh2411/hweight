@@ -24,12 +24,18 @@ export const updateRankRecipe = async (token) => {
         return [];
     }
 };
-export const getUsers = async (token) => {
+export const getUsers = async (token, min = 0, max = 33, page = 1, limit = 9) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { access_token: token },
+        params: {
+            limit,
+            page,
+            min,
+            max,
+        },
     };
     try {
-        const res = await httpRequest.get(`https://mocki.io/v1/e53ea8b6-23b9-4fe1-96d3-c91cd44cf252`, config); //users
+        const res = await httpRequest.get(`user/hwnet/list`, config); //users
         return res;
     } catch (error) {
         console.log(error);
@@ -38,10 +44,10 @@ export const getUsers = async (token) => {
 };
 export const getDetailUser = async (id, token) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`https://mocki.io/v1/df9f697c-a214-4d85-b4e8-9e6bd0ec4091`, config); //detailUsers/${id}
+        const res = await httpRequest.get(`user/detail/${id}`, config); //detailUsers/${id}
         return res;
     } catch (error) {
         console.log(error);

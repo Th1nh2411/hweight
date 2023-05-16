@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import UserContext from '../../store/Context';
 const cx = classNames.bind(styles);
 
-function DetailRecipe({ data = {}, onCloseModal }) {
+function DetailRecipe({ data = {}, onCloseModal, onLike }) {
     const [isLiked, setIsLiked] = useState(data.isLike);
     const [tab, setTab] = useState(0);
     const [reviews, setReviews] = useState([]);
