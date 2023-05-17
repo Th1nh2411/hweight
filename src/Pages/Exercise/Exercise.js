@@ -18,9 +18,9 @@ function Exercise() {
     const [widthLine, setWidthLine] = useState('');
     const [detailExercise, setDetailExercise] = useState({});
     const [showDetailEx, setShowDetailEx] = useState(false);
-    const getExerciseData = async () => {
+    const getExerciseData = async (level) => {
         const token = localStorage.getItem('token');
-        const results = await exerciseService.getExercise(token);
+        const results = await exerciseService.getExercise(level, token);
         setExercises(results);
     };
     const getHistoryData = async () => {
@@ -40,7 +40,7 @@ function Exercise() {
         setShowDetailEx(true);
     };
     useEffect(() => {
-        getExerciseData();
+        getExerciseData(1);
         getHistoryData();
     }, []);
     const handleUpdateCalOut = (cal) => {
@@ -73,6 +73,8 @@ function Exercise() {
                     <div
                         onClick={(event) => {
                             setTab(0);
+                            getExerciseData(1);
+                            console.log(event.target.offsetLeft, event.target.offsetWidth);
                             setLeftLine(event.target.offsetLeft + 'px');
                             setWidthLine(event.target.offsetWidth + 'px');
                         }}
@@ -85,6 +87,8 @@ function Exercise() {
                     <div
                         onClick={(event) => {
                             setTab(1);
+                            getExerciseData(2);
+                            console.log(event.target.offsetLeft, event.target.offsetWidth);
                             setLeftLine(event.target.offsetLeft + 'px');
                             setWidthLine(event.target.offsetWidth + 'px');
                         }}
@@ -96,6 +100,8 @@ function Exercise() {
                     <div
                         onClick={(event) => {
                             setTab(2);
+                            getExerciseData(3);
+                            console.log(event.target.offsetLeft, event.target.offsetWidth);
                             setLeftLine(event.target.offsetLeft + 'px');
                             setWidthLine(event.target.offsetWidth + 'px');
                         }}

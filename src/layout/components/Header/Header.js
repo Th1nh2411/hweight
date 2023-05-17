@@ -37,8 +37,11 @@ function Header() {
         },
     ];
     const getUserFirstName = (name) => {
-        const nameArray = name.split(' ');
-        return nameArray[nameArray.length - 1];
+        if (name) {
+            const nameArray = name.split(' ');
+            return nameArray[nameArray.length - 1];
+        }
+        return '';
     };
     const handleOnchangeMenu = (menuItem) => {
         switch (menuItem.type) {

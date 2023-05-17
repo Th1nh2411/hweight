@@ -54,18 +54,19 @@ function Profile() {
         getProfileData();
     }, []);
     const onlyNumber = (input) => {
-        var regex = /^\d*$/g;
+        console.log(input);
+        var regex = /^(\d+(\.\d*)?|)$/;
         return regex.test(input);
     };
 
     const handleOnchangeWeight = (event) => {
         if (onlyNumber(event.target.value)) {
-            setWeight(event.target.value ? parseInt(event.target.value) : '');
+            setWeight(event.target.value);
         }
     };
     const handleOnchangeHeight = (event) => {
         if (onlyNumber(event.target.value)) {
-            setHeight(event.target.value ? parseInt(event.target.value) : '');
+            setHeight(event.target.value);
         }
     };
     const handleOnChangeGender = (event) => {
@@ -73,6 +74,7 @@ function Profile() {
             setGender(parseInt(event.target.value));
         }
     };
+
     const handleCancelPI = () => {
         setHeight(profileData.height);
         setWeight(profileData.weight);

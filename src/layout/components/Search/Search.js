@@ -28,9 +28,9 @@ function Search() {
         }
         const fetchApi = async () => {
             setLoading(true);
-
-            const results = await searchServices.search(debouncedValue);
-            setSearchResult(results);
+            const token = localStorage.getItem('token');
+            const results = await searchServices.search(debouncedValue, token);
+            setSearchResult(results.recipeJson);
 
             setLoading(false);
         };
@@ -53,7 +53,7 @@ function Search() {
     const getDetailRecipeData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getDetailRecipe(id, token);
-        setDetailRecipe(results);
+        setDetailRecipe(results.recipe);
         setShowDetailRecipe(true);
     };
     const handleSubmit = (e) => {};
@@ -68,18 +68,21 @@ function Search() {
                 />
             )}
             <HeadlessTippy
+                offset={[0, 5]}
                 interactive
-                visible={showResult && searchResult.length > 0}
+                visible={showResult && searchResult && searchResult.length > 0}
                 onClickOutside={handleHideResult}
                 render={(attrs) => (
-                    <PopperWrapper>
-                        <div className={cx('search-result')} tabIndex="-1">
-                            <h4 className={cx('search-title')}>Recipes</h4>
-                            {searchResult.map((data) => (
-                                <RecipeItem onClickRecipe={getDetailRecipeData} key={data.id} data={data} />
-                            ))}
-                        </div>
-                    </PopperWrapper>
+                    <>
+                        <PopperWrapper>
+                            <div className={cx('search-result')} tabIndex="-1">
+                                <h4 className={cx('search-title')}>Recipes</h4>
+                                {searchResult.map((data) => (
+                                    <RecipeItem onClickRecipe={getDetailRecipeData} key={data.id} data={data} />
+                                ))}
+                            </div>
+                        </PopperWrapper>
+                    </>
                 )}
             >
                 <div className={cx('search')}>
@@ -99,7 +102,11 @@ function Search() {
 
                     {loading && <AiOutlineLoading3Quarters className={cx('loading')} />}
 
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                    <button
+                        onClick={() => setShowResult(true)}
+                        className={cx('search-btn')}
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
                         <IoSearch />
                     </button>
                 </div>
