@@ -24,12 +24,12 @@ export const getDetailExercise = async (id, token) => {
         return [];
     }
 };
-export const updateExercise = async (id, data, token) => {
+export const completeExercise = async (id, token) => {
     const config = {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.patch(`exercise/${id}`, data, token);
+        const res = await httpRequest.put(`exercise/check/${id}`, {}, config);
         return res;
     } catch (error) {
         console.log(error);

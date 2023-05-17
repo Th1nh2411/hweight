@@ -31,7 +31,7 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                         <Button
                             onClick={() => {
                                 setShowConfirm(false);
-                                updateCalOut(data.calories);
+                                updateCalOut(data.idExercise);
                             }}
                             primary
                         >
@@ -50,7 +50,9 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                                 <HeartIcon
                                     onClick={(event) => {
                                         setIsLiked(!isLiked);
-                                        const results = exerciseService.updateExercise(data.id, { isLiked: !isLiked });
+                                        const results = exerciseService.completeExercise(data.id, {
+                                            isLiked: !isLiked,
+                                        });
                                         event.stopPropagation();
                                     }}
                                     height="2.8rem"

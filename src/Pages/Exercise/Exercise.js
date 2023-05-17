@@ -28,9 +28,10 @@ function Exercise() {
         const results = await profileService.getProfile(token);
         setHistory(results);
     };
-    const updateHistoryData = async (data) => {
+    const completeExerciseData = async (id) => {
+        console.log(id);
         const token = localStorage.getItem('token');
-        const results = await profileService.updateProfile(data, token);
+        const results = await exerciseService.completeExercise(id, token);
         setHistory(results);
     };
     const getDetailExerciseData = async (id) => {
@@ -43,8 +44,8 @@ function Exercise() {
         getExerciseData(1);
         getHistoryData();
     }, []);
-    const handleUpdateCalOut = (cal) => {
-        updateHistoryData({ calOut: Number(history.calOut) + Number(cal) });
+    const handleUpdateCalOut = (id) => {
+        completeExerciseData(id);
         getHistoryData();
         if (showDetailEx) {
             setShowDetailEx(false);

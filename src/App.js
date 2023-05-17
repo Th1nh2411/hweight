@@ -2,10 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './Routes';
 import DefaultLayout from './layout/DefaultLayout';
 import { Fragment, useEffect, useState } from 'react';
-import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
-import Register from './Pages/Register/Register';
-import config from './config';
+
 function App() {
     return (
         <div className="App">
