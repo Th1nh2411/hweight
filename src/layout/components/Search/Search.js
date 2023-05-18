@@ -67,50 +67,52 @@ function Search() {
                     onCloseModal={() => setShowDetailRecipe(false)}
                 />
             )}
-            <HeadlessTippy
-                offset={[0, 5]}
-                interactive
-                visible={showResult && searchResult && searchResult.length > 0}
-                onClickOutside={handleHideResult}
-                render={(attrs) => (
-                    <>
-                        <PopperWrapper>
-                            <div className={cx('search-result')} tabIndex="-1">
-                                <h4 className={cx('search-title')}>Recipes</h4>
-                                {searchResult.map((data) => (
-                                    <RecipeItem onClickRecipe={getDetailRecipeData} key={data.id} data={data} />
-                                ))}
-                            </div>
-                        </PopperWrapper>
-                    </>
-                )}
-            >
-                <div className={cx('search')}>
-                    <input
-                        ref={inputRef}
-                        onChange={handleChangeInput}
-                        value={searchValue}
-                        placeholder="Search recipes"
-                        onFocus={() => setShowResult(true)}
-                    />
-                    {loading ||
-                        (!!searchValue && (
-                            <button onClick={handleClearSearch} className={cx('clear')}>
-                                <AiFillCloseCircle />
-                            </button>
-                        ))}
+            <>
+                <HeadlessTippy
+                    offset={[0, 5]}
+                    interactive
+                    visible={showResult && searchResult && searchResult.length > 0}
+                    onClickOutside={handleHideResult}
+                    render={(attrs) => (
+                        <>
+                            <PopperWrapper>
+                                <div className={cx('search-result')} tabIndex="-1">
+                                    <h4 className={cx('search-title')}>Recipes</h4>
+                                    {searchResult.map((data) => (
+                                        <RecipeItem onClickRecipe={getDetailRecipeData} key={data.id} data={data} />
+                                    ))}
+                                </div>
+                            </PopperWrapper>
+                        </>
+                    )}
+                >
+                    <div className={cx('search')}>
+                        <input
+                            ref={inputRef}
+                            onChange={handleChangeInput}
+                            value={searchValue}
+                            placeholder="Search recipes"
+                            onFocus={() => setShowResult(true)}
+                        />
+                        {loading ||
+                            (!!searchValue && (
+                                <button onClick={handleClearSearch} className={cx('clear')}>
+                                    <AiFillCloseCircle />
+                                </button>
+                            ))}
 
-                    {loading && <AiOutlineLoading3Quarters className={cx('loading')} />}
+                        {loading && <AiOutlineLoading3Quarters className={cx('loading')} />}
 
-                    <button
-                        onClick={() => setShowResult(true)}
-                        className={cx('search-btn')}
-                        onMouseDown={(e) => e.preventDefault()}
-                    >
-                        <IoSearch />
-                    </button>
-                </div>
-            </HeadlessTippy>
+                        <button
+                            onClick={() => setShowResult(true)}
+                            className={cx('search-btn')}
+                            onMouseDown={(e) => e.preventDefault()}
+                        >
+                            <IoSearch />
+                        </button>
+                    </div>
+                </HeadlessTippy>
+            </>
         </>
     );
 }

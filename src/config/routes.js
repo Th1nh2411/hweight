@@ -5,7 +5,6 @@ const routes = {
     profile: '/@/:nickname',
     HWNet: '/HWNet',
     login: '/login',
-    search: '/search',
     forgot: '/forgot',
     register: '/register',
 };

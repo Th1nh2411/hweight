@@ -48,7 +48,7 @@ function Item({ data }) {
             )}
             <div onClick={handleClickRecipe} className={cx('wrapper')}>
                 <div className={cx('info')}>
-                    <Image src={data.img} alt={data.name} className={cx('img')} />
+                    <Image src={data.image} alt={data.name} className={cx('img')} />
                     <div className={cx('desc')}>
                         <h4 id="name" className={cx('name')}>
                             {data.name}

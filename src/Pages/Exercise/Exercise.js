@@ -56,7 +56,7 @@ function Exercise() {
             {showDetailEx && (
                 <DetailExercise
                     updateCalOut={handleUpdateCalOut}
-                    data={detailExercise}
+                    data={detailExercise.details}
                     onCloseModal={() => setShowDetailEx(false)}
                 />
             )}

@@ -23,16 +23,16 @@ function DetailRecipe({ data = {}, onCloseModal, onLike }) {
     const [pageReview, setPageReview] = useState(1);
     const [maxPageReview, setMaxPageReview] = useState();
     const [state, dispatch] = useContext(UserContext);
-    const getCommentData = async () => {
+    const getReviewsData = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getComment(data.idRecipe, token, pageReview);
         setReviews((prev) => [...prev, ...results.listCMT]);
         setMaxPageReview(results.maxPage);
     };
     useEffect(() => {
-        getCommentData();
+        getReviewsData();
     }, [pageReview]);
-    const postComment = async () => {
+    const postReview = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.postComment(data.idRecipe, reviewValue, token);
         setReviewValue('');
@@ -166,7 +166,7 @@ function DetailRecipe({ data = {}, onCloseModal, onLike }) {
                             )}
 
                             <button
-                                onClick={() => postComment()}
+                                onClick={() => postReview()}
                                 className={cx('review-btn')}
                                 onMouseDown={(e) => e.preventDefault()}
                             >

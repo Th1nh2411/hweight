@@ -1,9 +1,23 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './Routes';
 import DefaultLayout from './layout/DefaultLayout';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
+import config from './config';
 
 function App() {
+    const titles = {
+        [config.routes.login]: 'HWeight - Login',
+        [config.routes.register]: 'HWeight - Register',
+        [config.routes.forgot]: 'HWeight - Forgot Password',
+        [config.routes.profile]: 'HWeight - Profile',
+        [config.routes.HWNet]: 'HWeight - HWNet',
+    };
+    const location = useLocation();
+    useEffect(() => {
+        localStorage.getItem('token');
+        document.title = titles[location.pathname] ?? 'HWeight';
+    }, [location]);
+
     return (
         <div className="App">
             <Routes>
@@ -21,9 +35,13 @@ function App() {
                             key={index}
                             path={route.path}
                             element={
-                                <Layout>
-                                    <Element />
-                                </Layout>
+                                localStorage.getItem('token') ? (
+                                    <Layout>
+                                        <Element />
+                                    </Layout>
+                                ) : (
+                                    <Navigate to={config.routes.login} replace />
+                                )
                             }
                         />
                     );
