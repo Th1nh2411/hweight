@@ -41,8 +41,8 @@ function HWNet() {
     };
     const getTopExerciseData = async () => {
         const token = localStorage.getItem('token');
-        const results = await exerciseService.getExercise(token);
-        setTopExercise(results);
+        const results = await rankingService.getRankExercise(token);
+        setTopExercise(results.exerciseRank);
     };
     const getMoreUsersData = async () => {
         const token = localStorage.getItem('token');
@@ -83,7 +83,7 @@ function HWNet() {
     const getDetailExerciseData = async (id) => {
         const token = localStorage.getItem('token');
         const results = await exerciseService.getDetailExercise(id, token);
-        setDetailExercise(results);
+        setDetailExercise(results.details);
         setShowDetailEx(true);
     };
     const getDetailUserData = async (id) => {

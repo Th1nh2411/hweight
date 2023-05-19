@@ -3,40 +3,47 @@ import classNames from 'classnames/bind';
 import Image from '../Image';
 import { AiFillCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
-import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
+import { EvaluateIcon, HeartIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
 import { IoFitnessSharp } from 'react-icons/io5';
 import ExerciseItem from '../ExerciseItem';
 import Button from '../Button/Button';
 import images from '../../assets/images';
 import { HiClipboardDocumentCheck } from 'react-icons/hi2';
-import UserContext from '../../store/Context';
+import * as exerciseService from '../../services/exerciseService';
+import * as rankingService from '../../services/rankingService';
+import dayjs from 'dayjs';
 const cx = classNames.bind(styles);
 
 function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
     const [showConfirm, setShowConfirm] = useState(false);
-    const [isLiked, setIsLiked] = useState(data.isLiked);
+    const [isLiked, setIsLiked] = useState(data.isLike);
     const [tab, setTab] = useState(0);
     const [reviews, setReviews] = useState([]);
     const [reviewValue, setReviewValue] = useState('');
     const [leftLine, setLeftLine] = useState('');
     const [widthLine, setWidthLine] = useState('');
-    const [showMoreReview, setShowMoreReview] = useState(false);
     const [pageReview, setPageReview] = useState(1);
     const [maxPageReview, setMaxPageReview] = useState();
-    const [state, dispatch] = useContext(UserContext);
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
     const getReviewData = async () => {
-        // const token = localStorage.getItem('token');
-        // const results = await recipeService.getComment(data.idRecipe, token, pageReview);
-        // setReviews((prev) => [...prev, ...results.listCMT]);
-        // setMaxPageReview(results.maxPage);
+        const token = localStorage.getItem('token');
+        const results = await exerciseService.getComment(data.idExercise, token, pageReview);
+        setReviews((prev) => [...prev, ...results.listCmt]);
+        setMaxPageReview(results.maxPage);
     };
     useEffect(() => {
         getReviewData();
     }, [pageReview]);
-    // useEffect(()=>{},[show])
+    const postReview = async () => {
+        const token = localStorage.getItem('token');
+        const results = await exerciseService.postComment(data.idExercise, reviewValue, token);
+        setReviewValue('');
+        setReviews((prev) => [{ name: userInfo.name, cmt: reviewValue, date: dayjs().add(7, 'hours') }, ...prev]);
+    };
     const handleLike = () => {
         setIsLiked(!isLiked);
         // const results = RecipeService.updateMenuItem(data.id, { isLiked: !isLiked });
@@ -50,6 +57,20 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
     };
     const handleClearReviewValue = () => {
         setReviewValue('');
+    };
+    const timeGap = (date) => {
+        const today = dayjs();
+        const pastDate = dayjs(date).subtract(7, 'hours');
+        const timeDiff = today.diff(pastDate, 'minutes');
+        if (timeDiff < 1) {
+            return 'recently';
+        } else if (timeDiff < 60) {
+            return `${timeDiff} ${timeDiff === 1 ? 'minute' : 'minutes'} ago`;
+        } else if (timeDiff / 60 < 24) {
+            return `${Math.floor(timeDiff / 60)} ${timeDiff / 60 === 1 ? 'hour' : 'hours'} ago`;
+        } else {
+            return `${Math.floor(timeDiff / 60 / 24)} ${timeDiff / 60 / 24 === 1 ? 'day' : 'days'} ago`;
+        }
     };
     return (
         <Modal
@@ -108,7 +129,7 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                 </div>
                 <p className={cx('detail-info')}>{data.info}</p>
                 <div className={cx('likes-num')}>
-                    <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.likes} people love
+                    <HeartIcon className={cx('likes-icon')} height="1.6rem" width="1.6rem" /> {data.points} people love
                     this
                 </div>
 
@@ -130,14 +151,14 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                         ))}
                     <div
                         onClick={(event) => {
-                            setTab(data.sets.length + 1);
+                            setTab(data.Sets.length + 1);
                             setLeftLine(event.target.offsetLeft + 'px');
                             setWidthLine(event.target.offsetWidth + 'px');
                         }}
                         className={cx('tab-item', { active: tab === data.Sets.length + 1 })}
                     >
                         <EvaluateIcon className={cx('tab-icon')} />
-                        Evaluate recipe
+                        Evaluate exercise
                     </div>
                     <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
                 </div>
@@ -153,13 +174,24 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                     ))}
                     <div className={cx('tab-pane', { active: tab === data.Sets.length + 1 })}>
                         <div className={cx('reviews-wrapper')}>
-                            {reviews.map((comment, index) => (
-                                <div key={index} className={cx('review-item')}>
-                                    <div className={cx('review-name')}>{comment.username}</div>
-                                    <div className={cx('review-content')}>{comment.content}</div>
+                            {reviews &&
+                                reviews.map((comment, index) => (
+                                    <div key={index} className={cx('review-item')}>
+                                        <div className={cx('review-name')}>
+                                            {comment.name}
+                                            <span className={cx('review-date')}>{timeGap(comment.date)}</span>
+                                        </div>
+                                        <div className={cx('review-content')}>{comment.cmt}</div>
+                                    </div>
+                                ))}
+                            {pageReview < maxPageReview && (
+                                <div
+                                    onClick={() => setPageReview((prev) => prev + 1)}
+                                    className={cx('review-showMore')}
+                                >
+                                    Show more...
                                 </div>
-                            ))}
-                            <div className={cx('review-showMore')}>Show more...</div>
+                            )}
                         </div>
                         <div className={cx('review')}>
                             <input onChange={handleChangeInput} value={reviewValue} placeholder="Add a comment..." />
@@ -169,7 +201,11 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                                 </button>
                             )}
 
-                            <button className={cx('review-btn')} onMouseDown={(e) => e.preventDefault()}>
+                            <button
+                                onClick={() => postReview()}
+                                className={cx('review-btn')}
+                                onMouseDown={(e) => e.preventDefault()}
+                            >
                                 <BiSend />
                             </button>
                         </div>

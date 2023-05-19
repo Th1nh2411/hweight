@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaFemale, FaMale, FaRegUserCircle } from 'react-icons/fa';
 import * as profileService from '../../services/profileService';
 import styles from './Profile.module.scss';
@@ -13,8 +13,6 @@ import { actions } from '../../store';
 const cx = classNames.bind(styles);
 
 function Profile() {
-    const [state, dispatch] = useContext(UserContext);
-
     const [profileData, setProfile] = useState({});
     const [name, setName] = useState('');
     const [height, setHeight] = useState('');
@@ -34,7 +32,7 @@ function Profile() {
         const token = localStorage.getItem('token');
         const results = await profileService.updateProfile({ name, height, weight, gender, isShare }, token);
         setProfile({ name, height, weight, gender, isShare });
-        dispatch(actions.setUserInfo({ name, height, weight, gender, isShare }));
+        localStorage.setItem('userInfo', JSON.stringify({ name, height, weight, gender, isShare }));
         setChangePIValue(false);
     };
     useEffect(() => {

@@ -7,7 +7,7 @@ import { useDebounce } from '../../hooks';
 const cx = classNames.bind(styles);
 function UserFilter({ onChangeFilter = () => {} }) {
     const minBMI = 0;
-    const maxBMI = 40;
+    const maxBMI = 60;
     const [minBMIValue, setMinBMIValue] = useState(minBMI);
     const [maxBMIValue, setMaxBMIValue] = useState(maxBMI);
 

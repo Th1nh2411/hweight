@@ -3,14 +3,13 @@ import classNames from 'classnames/bind';
 import Image from '../Image';
 import { AiFillCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import { DairyIcon, EvaluateIcon, FatIcon, FireIcon, HeartIcon, MeatIcon, RiceBowIcon } from '../Icons/Icons';
 import Tippy from '@tippyjs/react';
 import * as recipeService from '../../services/recipeService';
 import * as rankingService from '../../services/rankingService';
 import dayjs from 'dayjs';
-import UserContext from '../../store/Context';
 const cx = classNames.bind(styles);
 
 function DetailRecipe({ data = {}, onCloseModal, onLike }) {
@@ -22,7 +21,7 @@ function DetailRecipe({ data = {}, onCloseModal, onLike }) {
     const [widthLine, setWidthLine] = useState('');
     const [pageReview, setPageReview] = useState(1);
     const [maxPageReview, setMaxPageReview] = useState();
-    const [state, dispatch] = useContext(UserContext);
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const getReviewsData = async () => {
         const token = localStorage.getItem('token');
         const results = await recipeService.getComment(data.idRecipe, token, pageReview);
@@ -36,7 +35,7 @@ function DetailRecipe({ data = {}, onCloseModal, onLike }) {
         const token = localStorage.getItem('token');
         const results = await recipeService.postComment(data.idRecipe, reviewValue, token);
         setReviewValue('');
-        setReviews((prev) => [{ name: state.userinfo.name, cmt: reviewValue, date: dayjs().add(7, 'hours') }, ...prev]);
+        setReviews((prev) => [{ name: userInfo.name, cmt: reviewValue, date: dayjs().add(7, 'hours') }, ...prev]);
     };
     const handleLike = async () => {
         setIsLiked(!isLiked);

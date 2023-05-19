@@ -1,8 +1,9 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './Routes';
 import DefaultLayout from './layout/DefaultLayout';
 import { Fragment, useEffect } from 'react';
 import config from './config';
+import dayjs from 'dayjs';
 
 function App() {
     const titles = {
@@ -13,7 +14,14 @@ function App() {
         [config.routes.HWNet]: 'HWeight - HWNet',
     };
     const location = useLocation();
+    const navigate = useNavigate();
     useEffect(() => {
+        const expireDate = dayjs(localStorage.getItem('expireDate'));
+        if (dayjs().isAfter(expireDate)) {
+            localStorage.clear();
+            alert('The login session has expired. Please log in again.');
+            navigate(config.routes.login);
+        }
         localStorage.getItem('token');
         document.title = titles[location.pathname] ?? 'HWeight';
     }, [location]);

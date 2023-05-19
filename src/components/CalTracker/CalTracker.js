@@ -1,6 +1,6 @@
 import styles from './CalTracker.module.scss';
 import classNames from 'classnames/bind';
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import Tippy from '@tippyjs/react';
 import RadialChart from '../RadialChart';
@@ -10,8 +10,8 @@ const cx = classNames.bind(styles);
 
 const CalTracker = ({ data, className }) => {
     // const caloriesIn
-    const [state, dispatch] = useContext(UserContext);
-    const caloriesMin = state.userinfo.gender === 1 ? 2500 : 2000;
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const caloriesMin = userInfo.gender === 1 ? 2500 : 2000;
     const caloriesIn = Number(data.calories_in) || 0;
     const caloriesOut = Number(data.calories_out) + caloriesMin || 0;
     const BMI = (data.weight / ((data.height / 100) * (data.height / 100))).toFixed(1);

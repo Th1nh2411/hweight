@@ -24,6 +24,18 @@ export const updateRankRecipe = async (token) => {
         return [];
     }
 };
+export const getRankExercise = async (token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.get(`exercise/rank`, config); //recipe/${day}
+        return res; //only res
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const getUsers = async (token, min = 0, max = 33, page = 1, limit = 9) => {
     const config = {
         headers: { access_token: token },

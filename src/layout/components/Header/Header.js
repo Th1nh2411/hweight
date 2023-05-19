@@ -9,7 +9,7 @@ import Image from '../../../components/Image';
 import Search from '../Search';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { HiBars4 } from 'react-icons/hi2';
 import Modal from '../../../components/Modal/Modal';
 import SideBar from '../SideBar';
@@ -20,8 +20,8 @@ function Header() {
     const navigate = useNavigate();
     const [changeBg, setChangeBg] = useState(false);
     const [showSidebarMb, setShowSidebarMb] = useState(false);
-    const currentUser = true;
-    const [state, dispatch] = useContext(UserContext);
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+    console.log(userInfo);
     const USER_MENU = [
         {
             icon: <AiOutlineUser />,
@@ -51,7 +51,7 @@ function Header() {
                 break;
             case 'logout':
                 navigate(config.routes.login);
-                localStorage.removeItem('token');
+                localStorage.clear();
                 break;
             default:
                 console.log('default');
@@ -91,25 +91,14 @@ function Header() {
                 {/* Search */}
                 <Search />
 
-                {currentUser ? (
-                    <div className={cx('actions')}>
-                        <div className={cx('welcome-title')}>
-                            Hello <span>{getUserFirstName(state.userinfo.name)}</span>
-                        </div>
-                        <Menu items={USER_MENU} onChange={handleOnchangeMenu}>
-                            <Image className={cx('user-avatar')} alt="Nguyen Van A" />
-                        </Menu>
+                <div className={cx('actions')}>
+                    <div className={cx('welcome-title')}>
+                        Hello <span>{getUserFirstName(userInfo.name || '')}</span>
                     </div>
-                ) : (
-                    <div className={cx('actions')}>
-                        <Button className={cx('custom-btn')} target="_blank">
-                            Sign In
-                        </Button>
-                        <Button primary target="_blank">
-                            Sign Up
-                        </Button>
-                    </div>
-                )}
+                    <Menu items={USER_MENU} onChange={handleOnchangeMenu}>
+                        <Image className={cx('user-avatar')} alt="Nguyen Van A" />
+                    </Menu>
+                </div>
             </div>
         </header>
     );

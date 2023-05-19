@@ -17,14 +17,19 @@ const cx = classNames.bind(styles);
 function Home() {
     const navigate = useNavigate();
     const [history, setHistory] = useState({});
+    const [loading, setLoading] = useState({});
     const today = dayjs();
     const getHistoryData = async () => {
+        setLoading(true);
         const token = localStorage.getItem('token');
         const results = await profileService.getHistory(today.format('YYYY-MM-DD'), token);
         if (results.isSuccess === false) {
             navigate(config.routes.login);
         }
         setHistory(results);
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        localStorage.setItem('userInfo', JSON.stringify({ ...userInfo, calories_out: results.calories_out }));
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -39,6 +44,11 @@ function Home() {
                     <HomeActiveIcon height="3.6rem" width="3.6rem" className={cx('title-icon')} />
                 </div>
             </div>
+            {loading && (
+                <div className={cx('loader-container')}>
+                    <div className={cx('spinner')}></div>
+                </div>
+            )}
             <div className={cx('body')}>
                 <Row>
                     <Col>

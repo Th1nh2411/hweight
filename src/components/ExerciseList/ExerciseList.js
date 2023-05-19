@@ -30,6 +30,14 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                         <Button onClick={() => setShowConfirm(false)}>Cancel</Button>
                         <Button
                             onClick={() => {
+                                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                                localStorage.setItem(
+                                    'userInfo',
+                                    JSON.stringify({
+                                        ...userInfo,
+                                        calories_out: userInfo.calories_out + data.calories,
+                                    }),
+                                );
                                 setShowConfirm(false);
                                 updateCalOut(data.idExercise);
                             }}
@@ -45,14 +53,17 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                 <div className={cx('detail')}>
                     <h5 className={cx('header-title')}>
                         {data.name}
-                        <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
+                        {/* <Tippy placement="bottom" content={isLiked ? 'Remove from favorites' : 'Add to favorites'}>
                             <div className={cx('like-icon-wrapper')}>
                                 <HeartIcon
                                     onClick={(event) => {
                                         setIsLiked(!isLiked);
-                                        const results = exerciseService.completeExercise(data.id, {
-                                            isLiked: !isLiked,
-                                        });
+                                        const token = localStorage.getItem('token');
+                                        const results = exerciseService.putIsLiked(
+                                            data.idExercise,
+                                            !isLiked ? 1 : 0,
+                                            token,
+                                        );
                                         event.stopPropagation();
                                     }}
                                     height="2.8rem"
@@ -60,7 +71,7 @@ function List({ data, className, updateCalOut, onClickExercise }) {
                                     className={cx('like-icon', { isLiked })}
                                 />
                             </div>
-                        </Tippy>
+                        </Tippy> */}
                     </h5>
                     <div
                         className={cx('done-btn')}

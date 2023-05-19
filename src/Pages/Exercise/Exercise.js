@@ -8,31 +8,27 @@ import * as profileService from '../../services/profileService';
 import { useEffect, useState } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
 import DetailExercise from '../../components/DetailExercise/DetailExercise';
+import dayjs from 'dayjs';
 
 const cx = classNames.bind(styles);
 function Exercise() {
     const [exercises, setExercises] = useState([]);
-    const [history, setHistory] = useState([]);
     const [tab, setTab] = useState(0);
     const [leftLine, setLeftLine] = useState('');
     const [widthLine, setWidthLine] = useState('');
     const [detailExercise, setDetailExercise] = useState({});
     const [showDetailEx, setShowDetailEx] = useState(false);
+    const [caloriesOut, setCaloriesOut] = useState(JSON.parse(localStorage.getItem('userInfo')).calories_out);
     const getExerciseData = async (level) => {
         const token = localStorage.getItem('token');
         const results = await exerciseService.getExercise(level, token);
         setExercises(results);
     };
-    const getHistoryData = async () => {
-        const token = localStorage.getItem('token');
-        const results = await profileService.getProfile(token);
-        setHistory(results);
-    };
+
     const completeExerciseData = async (id) => {
-        console.log(id);
         const token = localStorage.getItem('token');
         const results = await exerciseService.completeExercise(id, token);
-        setHistory(results);
+        setCaloriesOut(results.user_his.calories_out);
     };
     const getDetailExerciseData = async (id) => {
         const token = localStorage.getItem('token');
@@ -42,11 +38,10 @@ function Exercise() {
     };
     useEffect(() => {
         getExerciseData(1);
-        getHistoryData();
     }, []);
     const handleUpdateCalOut = (id) => {
         completeExerciseData(id);
-        getHistoryData();
+        localStorage.getItem('userInfo');
         if (showDetailEx) {
             setShowDetailEx(false);
         }
@@ -66,7 +61,7 @@ function Exercise() {
                     <JumpRopeIcon height="28px" width="28px" className={cx('title-icon')} />
                 </div>
                 <div className={cx('subtitle')}>
-                    <FireIcon className={cx('subtitle-icon')} /> Calories out today: {history.calOut}
+                    <FireIcon className={cx('subtitle-icon')} /> Calories out today: {caloriesOut}
                 </div>
             </div>
             <div className={cx('body')}>

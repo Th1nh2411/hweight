@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import images from '../../assets/images';
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
@@ -10,21 +10,23 @@ import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
 import { actions } from '../../store';
 import UserContext from '../../store/Context';
+import dayjs from 'dayjs';
 const cx = classNames.bind(styles);
 const Login = ({ setAuth }) => {
     const navigate = useNavigate();
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [state, dispatch] = useContext(UserContext);
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const getTokenApi = async () => {
             const results = await loginServices.login({ mail, password });
             if (results.isSuccess) {
+                const expirationDate = dayjs().add(results.expirationDate, 'second');
                 localStorage.setItem('token', results.token);
-                dispatch(actions.setUserInfo(results.customer));
+                localStorage.setItem('expireDate', expirationDate.format());
+                localStorage.setItem('userInfo', JSON.stringify(results.customer));
                 navigate(config.routes.dairy);
             } else {
                 setMail('');

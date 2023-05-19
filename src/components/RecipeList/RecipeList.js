@@ -32,7 +32,7 @@ function List({ title, edit = false, listData = [], onEditDone, dayObj, onClickR
         const token = localStorage.getItem('token');
         const results = await recipeService.getMenu(token, ingredientString, CalFilterString, 1);
         setPageReview(1);
-        const filteredMenu = results.recipeJson;
+        const filteredMenu = results.recipeJson || [];
 
         setMenu(filteredMenu);
         setMaxPageReview(results.maxPage);

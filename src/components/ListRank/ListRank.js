@@ -10,7 +10,7 @@ const ListRank = ({ listData = [], onClickItem, ranking = true }) => {
         <div className={cx('wrapper')}>
             {listData.map((item, index) => (
                 <div
-                    onClick={() => onClickItem(item.idRecipe)}
+                    onClick={() => onClickItem(item.idRecipe ? item.idRecipe : item.idExercise)}
                     className={cx('item', { even: index % 2 === 1 })}
                     key={index}
                 >
