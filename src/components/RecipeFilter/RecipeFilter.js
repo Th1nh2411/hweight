@@ -1,4 +1,4 @@
-import styles from './Filter.module.scss';
+import styles from './RecipeFilter.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 

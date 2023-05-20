@@ -28,7 +28,7 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
     const [pageReview, setPageReview] = useState(1);
     const [maxPageReview, setMaxPageReview] = useState();
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
+    console.log(data);
     const getReviewData = async () => {
         const token = localStorage.getItem('token');
         const results = await exerciseService.getComment(data.idExercise, token, pageReview);
@@ -215,7 +215,7 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
             <div className={cx('detail-img-wrapper')}>
                 <h5 className={cx('detail-title')}>Essential equipments</h5>
                 <div className={cx('equipment-list')}>
-                    {data.equipments.map((equipment, index) => (
+                    {data.Equipments.map((equipment, index) => (
                         <div key={index} className={cx('equipment-item')}>
                             <Image className={cx('equipment-img')} src={equipment.image} />
                             <div className={cx('equipment-name')}>{equipment.name}</div>

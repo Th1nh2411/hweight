@@ -1,16 +1,12 @@
 import styles from './ExerciseItem.module.scss';
 import classNames from 'classnames/bind';
 import Image from '../Image';
-import { Link } from 'react-router-dom';
 import { AiOutlineRightCircle } from 'react-icons/ai';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import { MdFitnessCenter } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
-import { ClockIcon } from '../Icons';
 import Tippy from '@tippyjs/react';
-import * as RecipeService from '../../services/recipeService';
 import ReactPlayer from 'react-player';
-import dayjs from 'dayjs';
 const cx = classNames.bind(styles);
 
 function Item({ data }) {
@@ -18,17 +14,6 @@ function Item({ data }) {
     const handleClickRecipe = () => {
         setShowModalDetail(true);
     };
-    function secondsToHms(d) {
-        d = Number(d);
-        var h = Math.floor(d / 3600);
-        var m = Math.floor((d % 3600) / 60);
-        var s = Math.floor((d % 3600) % 60);
-
-        var hDisplay = h > 0 ? h + ':' : '';
-        var mDisplay = m > 0 ? m + ':' : '';
-        var sDisplay = s > 0 ? s + 's' : '00s';
-        return hDisplay + mDisplay + sDisplay;
-    }
 
     return (
         <div>
@@ -36,9 +21,8 @@ function Item({ data }) {
                 <Modal className={cx('detail-wrapper')} handleClickOutside={() => setShowModalDetail(false)}>
                     <div className={cx('detail-body__name')}>{data.name}</div>
                     <div className={cx('detail-body__info')}>
-                        Execution time <ClockIcon width="2.4rem" height="2.4rem" className={cx('clock-icon')} /> -
-                        {'      '}
-                        {secondsToHms(data.time)}
+                        <MdFitnessCenter width="2.4rem" height="2.4rem" className={cx('clock-icon')} />
+                        {data.time} reps
                     </div>
 
                     <div className={cx('detail-video')}>
@@ -54,7 +38,7 @@ function Item({ data }) {
                             {data.name}
                         </h4>
                         <h5 id="time-eat" className={cx('time')}>
-                            {data.index} reps
+                            Rep {data.index}
                         </h5>
                     </div>
                 </div>
