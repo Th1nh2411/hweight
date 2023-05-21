@@ -54,9 +54,13 @@ export const getMenu = async (token, ingredient = '0', calories = '100,500', pag
         return [];
     }
 };
-export const getIngredients = async (token) => {
+export const getIngredients = async (token, page = 1, limit = 5) => {
     const config = {
         headers: { access_token: token },
+        params: {
+            limit,
+            page,
+        },
     };
     try {
         const res = await httpRequest.get(`ingredient`, config); //ingredients

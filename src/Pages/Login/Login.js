@@ -23,7 +23,7 @@ const Login = ({ setAuth }) => {
         const getTokenApi = async () => {
             const results = await loginServices.login({ mail, password });
             if (results.isSuccess) {
-                const expirationDate = dayjs().add(results.expirationDate, 'second');
+                const expirationDate = dayjs().add(results.expireTime, 'second');
                 localStorage.setItem('token', results.token);
                 localStorage.setItem('expireDate', expirationDate.format());
                 localStorage.setItem('userInfo', JSON.stringify(results.customer));

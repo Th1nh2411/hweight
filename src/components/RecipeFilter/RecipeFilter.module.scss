@@ -222,6 +222,16 @@
 .SearchItem-wrapper.checked {
     color: var(--primary-color);
 }
+.ingredients-showMore {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
 @keyframes spinner {
     from {
         transform: translateY(-50%) rotate(0);

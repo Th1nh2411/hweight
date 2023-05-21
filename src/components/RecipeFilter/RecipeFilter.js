@@ -21,17 +21,19 @@ function RecipeFilter({ onChangeFilter }) {
     const [checkedIngredients, setCheckedIngredients] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [showFilterResult, setShowFilterResult] = useState(false);
+    const [pageIngredients, setPageIngredients] = useState(1);
+    const [maxPageIngredients, setMaxPageIngredients] = useState(1);
     const debounceMinCalValue = useDebounce(minCaloriesValue);
     const debounceMaxCalValue = useDebounce(maxCaloriesValue);
-
+    const getIngredient = async () => {
+        const token = localStorage.getItem('token');
+        const results = await recipeService.getIngredients(token, pageIngredients);
+        setIngredients([...ingredients, ...results.listIngredient]);
+        setMaxPageIngredients(results.maxPage);
+    };
     useEffect(() => {
-        const fetchFilterApi = async () => {
-            const token = localStorage.getItem('token');
-            const results = await recipeService.getIngredients(token);
-            setIngredients(results);
-        };
-        fetchFilterApi();
-    }, []);
+        getIngredient();
+    }, [pageIngredients]);
     useEffect(() => {
         onChangeFilter(checkedIngredients, debounceMinCalValue, debounceMaxCalValue);
     }, [checkedIngredients, debounceMinCalValue, debounceMaxCalValue]);
@@ -79,6 +81,14 @@ function RecipeFilter({ onChangeFilter }) {
                             {filteredIngredients.map((data, index) => (
                                 <SearchItem key={index} data={data} onCheckBoxChange={onChangeCheckBoxIngredientItem} />
                             ))}
+                            {pageIngredients < maxPageIngredients && (
+                                <div
+                                    onClick={() => setPageIngredients((prev) => prev + 1)}
+                                    className={cx('ingredients-showMore')}
+                                >
+                                    Show more...
+                                </div>
+                            )}
                         </PopperWrapper>
                     </div>
                 )}
