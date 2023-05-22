@@ -11,6 +11,7 @@ import { Col, Row } from 'react-bootstrap';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router';
 import config from '../../config';
+import WeightTracker from '../../components/WeightTracker/WeightTracker';
 
 const cx = classNames.bind(styles);
 
@@ -61,6 +62,11 @@ function Home() {
                     </Col>
                     <Col>
                         <CalTracker className={cx('content-wrapper')} data={history} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <WeightTracker className={cx('content-wrapper')} />
                     </Col>
                 </Row>
             </div>

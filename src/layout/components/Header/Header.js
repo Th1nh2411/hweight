@@ -21,7 +21,6 @@ function Header() {
     const [changeBg, setChangeBg] = useState(false);
     const [showSidebarMb, setShowSidebarMb] = useState(false);
     const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
-    console.log(userInfo);
     const USER_MENU = [
         {
             icon: <AiOutlineUser />,

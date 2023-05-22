@@ -8,8 +8,6 @@ import config from '../../config';
 import * as loginServices from '../../services/loginService';
 import Input from '../../components/Input/Input';
 import Card from '../../components/Card/Card';
-import { actions } from '../../store';
-import UserContext from '../../store/Context';
 import dayjs from 'dayjs';
 const cx = classNames.bind(styles);
 const Login = ({ setAuth }) => {

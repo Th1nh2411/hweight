@@ -12,7 +12,18 @@ export const getHistory = async (date, token) => {
         return [];
     }
 };
-
+export const getAllHistory = async (token) => {
+    const config = {
+        headers: { access_token: token },
+    };
+    try {
+        const res = await httpRequest.get(`user/history`, config); //profile
+        return res;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
 export const updateWaterIntake = async (date, data, token) => {
     const config = {
         headers: { access_token: token },

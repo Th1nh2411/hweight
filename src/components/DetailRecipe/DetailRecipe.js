@@ -55,7 +55,7 @@ function DetailRecipe({ data = {}, onCloseModal, onLike }) {
     };
     const timeGap = (date) => {
         const today = dayjs();
-        const pastDate = dayjs(date).subtract(7, 'hours');
+        const pastDate = dayjs(date);
         const timeDiff = today.diff(pastDate, 'minutes');
         if (timeDiff < 1) {
             return 'recently';

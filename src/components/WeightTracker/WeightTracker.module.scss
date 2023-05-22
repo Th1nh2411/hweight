@@ -1,0 +1,24 @@
+.wrapper {
+    // flex: 1;
+    // background: linear-gradient(#333333, #211e1f);
+    // border-radius: 10px;
+    position: relative;
+    // padding: 25px 15px;
+}
+.title {
+    font-size: 3rem;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .warning-detail-icon {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+    }
+}
+.chart {
+    width: 100%;
+}
