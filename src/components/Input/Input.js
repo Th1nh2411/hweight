@@ -5,7 +5,17 @@ import styles from './Input.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Input({ errorMessage, errorCondition, value, onChange, title, type = 'text', unit, className }) {
+function Input({
+    required = true,
+    errorMessage,
+    errorCondition,
+    value,
+    onChange,
+    title,
+    type = 'text',
+    unit,
+    className,
+}) {
     return (
         <div className={cx('input-container', { error: errorCondition }, className)}>
             <input
@@ -15,6 +25,7 @@ function Input({ errorMessage, errorCondition, value, onChange, title, type = 't
                 type={type}
                 value={value}
                 onChange={onChange}
+                required={required}
             />
             <p>{title}</p>
             <div className={cx('unit')}>{unit}</div>

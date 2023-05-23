@@ -40,15 +40,10 @@ const Register = ({}) => {
 
         const createAccount = async () => {
             const results = await registerService.register({ mail, password, name, gender, weight, height });
-            console.log(results);
             if (results.isSuccess) {
                 localStorage.setItem('token', results.token);
                 navigate(config.routes.login);
             } else {
-                setPassword('');
-                setHeight('');
-                setWeight('');
-                setName('');
                 setSuccess(false);
             }
         };
@@ -129,7 +124,12 @@ const Register = ({}) => {
                             </label>
                         </div>
 
-                        <Button className={cx('custom-btn')} primary type="submit">
+                        <Button
+                            disable={!password || !name || !height || !weight}
+                            className={cx('custom-btn')}
+                            primary
+                            type="submit"
+                        >
                             Sign Up
                         </Button>
                     </form>
