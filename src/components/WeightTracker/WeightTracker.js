@@ -20,7 +20,15 @@ const WeightTracker = ({ className }) => {
         getAllHistory();
     }, []);
     const labels = useMemo(() => {
-        const listMonths = allHistory && allHistory.map((item) => dayjs(item.date).format('MMM'));
+        const listMonths =
+            allHistory &&
+            allHistory.map((item, index) => {
+                if (item) {
+                    return dayjs(item.date).format('MMM');
+                } else {
+                    return dayjs(allHistory[index - 1].date).format('MMM');
+                }
+            });
         listMonths.splice(0, 1, 'Join');
         listMonths.splice(listMonths.length - 1, 1, 'Now');
         return listMonths;
@@ -32,7 +40,15 @@ const WeightTracker = ({ className }) => {
             {
                 fill: true,
                 label: 'Weight',
-                data: allHistory && allHistory.map((item) => item.weight),
+                data:
+                    allHistory &&
+                    allHistory.map((item, index) => {
+                        if (item) {
+                            return item.weight;
+                        } else {
+                            return allHistory[index - 1].weight;
+                        }
+                    }),
                 borderColor: '#f8a647',
                 backgroundColor: '#f8a64780',
                 color: 'white',

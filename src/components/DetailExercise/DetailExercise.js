@@ -149,17 +149,19 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                                 Set {index + 1}
                             </div>
                         ))}
-                    <div
-                        onClick={(event) => {
-                            setTab(data.Sets.length + 1);
-                            setLeftLine(event.target.offsetLeft + 'px');
-                            setWidthLine(event.target.offsetWidth + 'px');
-                        }}
-                        className={cx('tab-item', { active: tab === data.Sets.length + 1 })}
-                    >
-                        <EvaluateIcon className={cx('tab-icon')} />
-                        Evaluate exercise
-                    </div>
+                    {data.Sets && (
+                        <div
+                            onClick={(event) => {
+                                setTab(data.Sets.length + 1);
+                                setLeftLine(event.target.offsetLeft + 'px');
+                                setWidthLine(event.target.offsetWidth + 'px');
+                            }}
+                            className={cx('tab-item', { active: tab === data.Sets.length + 1 })}
+                        >
+                            <EvaluateIcon className={cx('tab-icon')} />
+                            Evaluate exercise
+                        </div>
+                    )}
                     <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
                 </div>
                 <div className={cx('tabs-content')}>
