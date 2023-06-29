@@ -1,10 +1,8 @@
-A Web Aplication allows users to manage health information, water intake, suggests dishes and calorie-burning exercises .
+A flexible app that lets users customize their exercises and menus according to their preferences and personal goals. It provides information on nutrition, menus, and cooking recipes, helping users easily track and adjust their daily eating habits for optimal health. Users can control their weight, improve their overall well-being and physical condition using the BMI index, without having to spend too much time and effort organizing their diet and workout routines. This promotes health awareness and offers a convenient and personalized solution.
 Link website : https://th1nh2411.github.io/mbi-webapp/
 - Giao diện đăng nhập
 
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/3884d60e-7528-4ddb-9dbf-d511852fb797)
-
-
 
 - Giao diện quên mật khẩu (3 step)
 
@@ -29,7 +27,7 @@ Link website : https://th1nh2411.github.io/mbi-webapp/
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/78f448f0-649d-48cd-a50f-eb6570687cc3)
 
 
--Xác nhận tập bài tập
+- Xác nhận tập bài tập
 
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/d6be2ba4-9f22-4820-ac75-f9e998f0d328)
 
@@ -41,7 +39,7 @@ Link website : https://th1nh2411.github.io/mbi-webapp/
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/80ea3eb4-c04b-4636-9bfa-a30a6c88ff7b)
 
 
--Video các bài tập
+- Video các bài tập
 
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/4eaea9eb-b55e-44b2-91a9-788fd4ecf1b3)
 
