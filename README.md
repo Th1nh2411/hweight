@@ -1,5 +1,7 @@
 A flexible app that lets users customize their exercises and menus according to their preferences and personal goals. It provides information on nutrition, menus, and cooking recipes, helping users easily track and adjust their daily eating habits for optimal health. Users can control their weight, improve their overall well-being and physical condition using the BMI index, without having to spend too much time and effort organizing their diet and workout routines. This promotes health awareness and offers a convenient and personalized solution.
+
 ===> Link website : https://th1nh2411.github.io/mbi-webapp/
+
 - Giao diện đăng nhập
 
 ![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/3884d60e-7528-4ddb-9dbf-d511852fb797)
