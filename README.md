@@ -2,16 +2,17 @@ A Web Aplication allows users to manage health information, water intake, sugges
 Link website : https://th1nh2411.github.io/mbi-webapp/
 - Giao diện đăng nhập
 
-![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/8920ab63-090c-4c99-9e5b-5c87b49e16dd)
+![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/3884d60e-7528-4ddb-9dbf-d511852fb797)
+
 
 
 - Giao diện quên mật khẩu (3 step)
 
-![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/e2e35301-16b7-434b-a907-429f89af8536)
+![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/1e70cdae-a5ad-41b3-802a-5f6cdac1b537)
 
-![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/2fdb313d-e81e-43e9-9cda-49f96f4c9754)
+![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/312add6d-5429-480d-9002-86c3de72a602)
 
-![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/504ea7eb-0a44-4e0b-908f-6dcd3483a9dd)
+![image](https://github.com/Th1nh2411/mbi-webapp/assets/108245770/5eb5cf9b-1928-4243-a587-d5dcf8f1b8be)
 
 - Giao diện đăng ký
 
