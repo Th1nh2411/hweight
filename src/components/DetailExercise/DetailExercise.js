@@ -165,15 +165,16 @@ function DetailExercise({ data = {}, onCloseModal, updateCalOut }) {
                     <div className={cx('line')} style={{ left: leftLine, width: widthLine }}></div>
                 </div>
                 <div className={cx('tabs-content')}>
-                    {data.Sets.map((set, index) => (
-                        <div className={cx('tab-pane', { active: tab === index })} key={index}>
-                            <div className={cx('exercises-list')}>
-                                {set.Menus.map((movement, index) => (
-                                    <ExerciseItem key={index} data={movement} />
-                                ))}
+                    {data &&
+                        data.Sets.map((set, index) => (
+                            <div className={cx('tab-pane', { active: tab === index })} key={index}>
+                                <div className={cx('exercises-list')}>
+                                    {set.Menus.map((movement, index) => (
+                                        <ExerciseItem key={index} data={movement} />
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                     <div className={cx('tab-pane', { active: tab === data.Sets.length + 1 })}>
                         <div className={cx('reviews-wrapper')}>
                             {reviews &&

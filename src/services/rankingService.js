@@ -5,8 +5,8 @@ export const getRankRecipe = async (token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`recipe/rank`, config); //recipe/${day}
-        return res; //only res
+        const res = await httpRequest.get(`de86566e-7ff1-42d1-b07f-d6b50bf60e1e`, config); //recipe/${day}
+        return res.data; //only res
     } catch (error) {
         console.log(error);
         return [];
@@ -29,8 +29,8 @@ export const getRankExercise = async (token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`exercise/rank`, config); //recipe/${day}
-        return res; //only res
+        const res = await httpRequest.get(`8c444728-a8da-4bbb-881e-408ed6c3bc34`, config); //recipe/${day}
+        return res.data; //only res
     } catch (error) {
         console.log(error);
         return [];
@@ -47,8 +47,8 @@ export const getUsers = async (token, min = 0, max = 33, page = 1, limit = 9) =>
         },
     };
     try {
-        const res = await httpRequest.get(`user/hwnet/list`, config); //users
-        return res;
+        const res = await httpRequest.get(`25cd5c19-11f0-4d49-904e-c1c5e02e36b1`, config); //users
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];

@@ -5,8 +5,8 @@ export const getRecipe = async (day, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`user/menu/${day}`, config); //recipe/${day}
-        return res; //only res
+        const res = await httpRequest.get(`4e93ac25-5ce0-4a4a-98ff-e2d53a17c51e`, config); //recipe/${day}
+        return res.data; //only res
     } catch (error) {
         console.log(error);
         return [];
@@ -29,8 +29,8 @@ export const getDetailRecipe = async (id, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`recipe/info/${id}`, config); //menu/${id}
-        return res;
+        const res = await httpRequest.get(`73f981f0-1ba4-4f2a-ad4f-8453c7ce5282`, config); //menu/${id}
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -47,8 +47,8 @@ export const getMenu = async (token, ingredient = '0', calories = '100,500', pag
         },
     };
     try {
-        const res = await httpRequest.get(`recipe/all/filter`, config); //menu
-        return res;
+        const res = await httpRequest.get(`5c7f2d94-d0cf-4e2e-8c1b-54854ee3a2c5`, config); //menu
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -63,8 +63,8 @@ export const getIngredients = async (token, page = 1, limit = 5) => {
         },
     };
     try {
-        const res = await httpRequest.get(`ingredient`, config); //ingredients
-        return res;
+        const res = await httpRequest.get(`d3189d8f-3d76-454a-a080-847508cd36db`, config); //ingredients
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -81,8 +81,8 @@ export const getComment = async (idRecipe, token, page = 1, limit = 5) => {
         },
     };
     try {
-        const res = await httpRequest.get(`recipe/cmt`, config); //menu
-        return res;
+        const res = await httpRequest.get(`345caaf8-0e0c-4847-9dd9-d05a3c0a0286`, config); //menu
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];

@@ -110,34 +110,37 @@ function Exercise() {
                 </div>
                 <div className={cx('tabs-content')}>
                     <div className={cx('tab-pane', { active: tab === 0 })}>
-                        {exercises.map((exercise, index) => (
-                            <ExerciseList
-                                updateCalOut={handleUpdateCalOut}
-                                key={index}
-                                data={exercise}
-                                onClickExercise={(id) => getDetailExerciseData(id)}
-                            />
-                        ))}
+                        {exercises &&
+                            exercises.map((exercise, index) => (
+                                <ExerciseList
+                                    updateCalOut={handleUpdateCalOut}
+                                    key={index}
+                                    data={exercise}
+                                    onClickExercise={(id) => getDetailExerciseData(id)}
+                                />
+                            ))}
                     </div>
                     <div className={cx('tab-pane', { active: tab === 1 })}>
-                        {exercises.map((exercise, index) => (
-                            <ExerciseList
-                                updateCalOut={handleUpdateCalOut}
-                                key={index}
-                                data={exercise}
-                                onClickExercise={(id) => getDetailExerciseData(id)}
-                            />
-                        ))}
+                        {exercises &&
+                            exercises.map((exercise, index) => (
+                                <ExerciseList
+                                    updateCalOut={handleUpdateCalOut}
+                                    key={index}
+                                    data={exercise}
+                                    onClickExercise={(id) => getDetailExerciseData(id)}
+                                />
+                            ))}
                     </div>
                     <div className={cx('tab-pane', { active: tab === 2 })}>
-                        {exercises.map((exercise, index) => (
-                            <ExerciseList
-                                updateCalOut={handleUpdateCalOut}
-                                key={index}
-                                data={exercise}
-                                onClickExercise={(id) => getDetailExerciseData(id)}
-                            />
-                        ))}
+                        {exercises &&
+                            exercises.map((exercise, index) => (
+                                <ExerciseList
+                                    updateCalOut={handleUpdateCalOut}
+                                    key={index}
+                                    data={exercise}
+                                    onClickExercise={(id) => getDetailExerciseData(id)}
+                                />
+                            ))}
                     </div>
                 </div>
             </div>

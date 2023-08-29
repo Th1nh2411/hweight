@@ -5,8 +5,8 @@ export const getHistory = async (date, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`user/history/${date}`, config); //profile
-        return res;
+        const res = await httpRequest.get(`109d193c-35c8-4224-9ea6-107c079538ea`, config); //profile
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -17,8 +17,8 @@ export const getAllHistory = async (token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`user/history`, config); //profile
-        return res;
+        const res = await httpRequest.get(`326eacc1-c10b-4cbe-a134-7c52fd476dd7`, config); //profile
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -41,8 +41,8 @@ export const getProfile = async (token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`user/detail`, config); //profile
-        return res;
+        const res = await httpRequest.get(`ded93f42-7bbb-42b0-a256-351e02ec8f7b`, config); //profile
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];

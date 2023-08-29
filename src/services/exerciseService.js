@@ -5,8 +5,8 @@ export const getExercise = async (level, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`exercise/page/${level}`, config); // exercise
-        return res;
+        const res = await httpRequest.get(`edc71770-305c-4bec-872c-4d3180ac035e`, config); // exercise
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -17,8 +17,8 @@ export const getDetailExercise = async (id, token) => {
         headers: { access_token: token },
     };
     try {
-        const res = await httpRequest.get(`exercise/detail/${id}`, config); //exercise/${id}
-        return res;
+        const res = await httpRequest.get(`b5b7bd02-42a1-4ce1-9441-288d7270dbb2`, config); //exercise/${id}
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -46,8 +46,8 @@ export const getComment = async (id_exercise, token, page = 1, limit = 5) => {
         },
     };
     try {
-        const res = await httpRequest.get(`exercise/cmt`, config); //menu
-        return res;
+        const res = await httpRequest.get(`9e43ceaf-0df6-4730-bf5a-030103aeb3f1`, config); //menu
+        return res.data;
     } catch (error) {
         console.log(error);
         return [];
